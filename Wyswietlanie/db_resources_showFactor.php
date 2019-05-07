@@ -49,6 +49,18 @@ echo "</table>";
 close_database();
 
 ?>
-
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_resources_updateFactor.php">
+	ID Surowca: <input type="number"  name="ResourceID" class="form-control" />
+	<br>
+	ID Współczynika: <input type="number"  name="FactorID" class="form-control" />
+	<br>
+	ID Jednostki Surowca 1: <input type="number"  name="ResourceUnit1ID" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
 </body>
 </html>

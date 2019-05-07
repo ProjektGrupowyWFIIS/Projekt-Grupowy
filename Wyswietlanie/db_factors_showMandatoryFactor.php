@@ -35,6 +35,16 @@ echo "</table>";
 close_database();
 
 ?>
-
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_factors_updateMandatoryFactor.php">
+	ID Kategorii: <input type="number"  name="CatID" class="form-control" />
+	<br>
+	ID Współczynnika: <input type="number"  name="FactorID" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
 </body>
 </html>

@@ -16,7 +16,7 @@ $atr = read_table("attributes.mandatory_attributes");
 	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
 
 	echo "<tr>";
-	echo "<th> Cat ID: </th>";
+	echo "<th> Kategoria ID: </th>";
 	echo "<th> Atrybut ID:</th>";
 	echo "</tr>";
 	
@@ -33,6 +33,18 @@ echo "</table>";
 close_database();
 
 ?>
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_attributes_updateMandatoryAttribute.php">
+	ID Kategorii: <input type="number"  name="CatID" class="form-control" />
+	<br>
+	ID Atrybutu: <input type="number"  name="AttributeID" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
+
 
 </body>
 </html>

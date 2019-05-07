@@ -41,7 +41,15 @@ echo "</table>";
 close_database();
 
 ?>
-
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_resources_updateResource.php">
+	ID Surowca: <input type="number"  name="ResourceID" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
 
 </body>
 </html>

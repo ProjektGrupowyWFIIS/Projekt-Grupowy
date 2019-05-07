@@ -41,6 +41,14 @@ echo "</table>";
 close_database();
 
 ?>
-
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_files_updateFolder.php">
+	ID Folderu: <input type="number"  name="FolderID" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
 </body>
 </html>

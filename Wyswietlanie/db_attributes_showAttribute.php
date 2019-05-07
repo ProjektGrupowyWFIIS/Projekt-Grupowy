@@ -30,7 +30,7 @@ foreach($atr as $row_number => $row)
   
 	echo "<tr>";
 	echo '<th>'.$row['attribute_id'].'</th>';
-  echo '<th>'.$row['type_id'].'</th>';
+	echo '<th>'.$row['type_id'].'</th>';
 	echo '<th>'.$row['attribute_name_pl'].'</th>';
 	echo '<th>'.$row['attribute_name_eng'].'</th>';
 	echo '<th>'.$row['attribute_description_pl'].'</th>';
@@ -45,7 +45,16 @@ close_database();
 
 ?>
 
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_attributes_updateAttribute.php">
+	ID Atrybutu: <input type="number"  name="AttributeID" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
 
-		
+
 </body>
 </html>

@@ -1,20 +1,12 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Możliwe wartości atrybutu wyliczeniowego</title>
+  <title>Pokaż możliwe wartości atrybutu wyliczeniowego</title>
 </head>
 <body>
 
-<h3></h3>
+<h3>Pokaż możliwe wartości atrybutu wyliczeniowego</h3>
 
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <title>Pokaż atrybut</title>
-</head>
-<body>
-
-<h3>Atrybuty</h3>
 
 
 <?php
@@ -51,11 +43,18 @@ echo "</table>";
 close_database();
 
 ?>
+<br>
+<br>
+Edycja
+<br>
+<form method="post" action="db_attributes_updateAttributeEnum.php">
+	ID Atrybutu: <input type="number"  name="AttributeID" class="form-control" />
+	<br>
+	Wartość Atrybutu: <input type="text"  name="AttributeValuePl" class="form-control" />
+	<br>
+	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+</form>
 
-
-		
-</body>
-</html>
 
 </body>
 </html>
