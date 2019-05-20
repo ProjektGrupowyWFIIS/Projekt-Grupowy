@@ -22,6 +22,10 @@ include("navbar.php");
 ?>
 <h3 class="text-white text-center mt-3">Pokaż zasób energetyczny (nośnik energii)</h3>
 
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-4"></div>
+<div class="col-md-4">
 
 <?php
 
@@ -33,7 +37,7 @@ $atr = read_table("energy_resources.energy_resources");
 
 	echo "<tr>";
 	echo "<th style='color: white'> ID: </th>";
-	echo "<th style='color: white'> Nazwa:: </th>";
+	echo "<th style='color: white'> Nazwa: </th>";
 	echo "<th style='color: white'> Name: </th>";
 	echo "<th style='color: white'> GUS ID: </th>";
 	echo "<th style='color: white'> Opis: </th>";
@@ -61,6 +65,10 @@ echo "</table>";
 close_database();
 
 ?>
+</div>
+<div class="col-md-4"></div>
+</div>
+</div>
 <br>
 
 </body>

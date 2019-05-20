@@ -22,6 +22,10 @@ include("navbar.php");
 ?>
 <h3 class="text-white text-center mt-3">Pokaż jednostki dodatkowe</h3>
 
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-4"></div>
+<div class="col-md-4">
 <?php
 
 require "db_functions.php";
@@ -60,6 +64,10 @@ echo "</table>";
 close_database();
 
 ?>
+</div>
+<div class="col-md-4"></div>
+</div>
+</div>
 <br>
 
 </body>
