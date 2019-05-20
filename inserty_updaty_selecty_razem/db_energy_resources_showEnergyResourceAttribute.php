@@ -34,6 +34,7 @@ $atr = read_table("energy_resources.resources_attributes");
 	echo "<th style='color: white'> ID: </th>";
 	echo "<th style='color: white'> Atrybut ID: </th>";
 	echo "<th style='color: white'> Wartość Atrybutu: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -43,6 +44,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value'].'</th>';
+	echo '<th>'.'<a href=db_attributes_updateAttributeEnum.php?ResourceID='.$row["resource_id"].'&AttributeID='.$row["attribute_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -53,15 +55,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_energy_resources_updateEnergyResourceAttribute.php">
-<label class="text-white">ID Surowca:</label> <input type="number"  name="ResourceID" class="form-control" />
-	<br>
-	<label class="text-white">	ID Atrybutu:</label> <input type="number"  name="AttributeID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

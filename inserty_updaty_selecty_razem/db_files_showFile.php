@@ -36,6 +36,7 @@ $atr = read_table("files.files");
 	echo "<th style='color: white'> Typ: </th>";
 	echo "<th style='color: white'> Ścieżka: </th>";
 	echo "<th style='color: white'> Folder ID: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -47,6 +48,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['file_type'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['hdd_file_path'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['folder_id'].'</th>';
+	echo '<th>'.'<a href=db_files_updateFile.php?FileID='.$row["file_id"].'&TempFolderID='.$row["folder_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -57,15 +59,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_files_updateFile.php">
-	<label class="text-white">ID Pliku: </label><input type="number"  name="FileID" class="form-control" />
-	<br>
-    <label class="text-white">ID Folderu: </label><input type="number"  name="TempFolderID" class="form-control" />
-    <br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

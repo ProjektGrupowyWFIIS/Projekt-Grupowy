@@ -41,6 +41,7 @@ $atr = read_table("resources.factors");
 	echo "<th style='color: white'> Jednostka Factor: </th>";
 	echo "<th style='color: white'> Factor: </th>";
 	echo "<th style='color: white'> Uncertainty: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -55,6 +56,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['factor_unit_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['uncertainty'].'</th>';
+	echo '<th>'.'<a href=db_resources_updateFactor.php?ResourceID='.$row["resource_id"].'&FactorID='.$row["factor_id"].'&TempSourceID='.$row["source_id"].'&ResourceUnit1ID='.$row["resource_unit_1_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -65,19 +67,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_resources_updateFactor.php">
-	<label class="text-white">ID Surowca: </label><input type="number"  name="ResourceID" class="form-control" />
-	<br>
-	<label class="text-white">ID Współczynika: </label><input type="text"  name="FactorID" class="form-control" />
-	<br>
-    <label class="text-white">ID Źródła: </label> <input type="number"  name="TempSourceID" class="form-control" />
-	<br>
-    <label class="text-white">ID Jednostki Surowca 1:</label> <input type="number"  name="ResourceUnit1ID" class="form-control" />
-    <br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

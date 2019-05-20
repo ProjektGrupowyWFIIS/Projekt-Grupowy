@@ -38,6 +38,7 @@ $atr = read_table("attributes.attribute_enums");
 	echo "<th style='color: white'> Value: </th>";
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Description: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -49,7 +50,8 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['attribute_value_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value_description_eng'].'</th>';
-  echo "</tr>";
+	echo '<th>'.'<a href=db_attributes_updateAttributeEnum.php?AttributeID='.$row["attribute_id"].'&AttributeValuePL='.$row["attribute_value_pl"].'>Edycja</a>'.'</td>';
+	echo "</tr>";
  
 }
 
@@ -60,15 +62,7 @@ close_database();
 ?>
 <br>
 <br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_attributes_updateAttributeEnum.php">
-	<label class="text-white">ID Atrybutu: </label><input type="number"  name="AttributeID" class="form-control" />
-	<br>
-	<label class="text-white">Wartość Atrybutu:</label> <input type="text"  name="AttributeValuePL" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 
 
 </body>

@@ -36,6 +36,7 @@ $atr = read_table("resources.resources");
 	echo "<th style='color: white'> Name: </th>";
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Description: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -47,6 +48,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['resource_name_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['resource_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['resource_description_eng'].'</th>';
+	echo '<th>'.'<a href=db_resources_updateResource.php?ResourceID='.$row["resource_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -57,14 +59,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_resources_updateResource.php">
-	<label class="text-white">ID Surowca:</label> <input type="number"  name="ResourceID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
 
 </body>
 </html>

@@ -42,6 +42,7 @@ $atr2 = read_table("units.units");
 	echo "<th style='color: white'> Jednostka: </th>";
 	echo "<th style='color: white'> Nazwa: </th>";
 	echo "<th style='color: white'> Name: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 foreach($atr2 as $row_number => $row2)
 {
@@ -56,6 +57,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row2['unit'].'</th>';
 	echo '<th style=\'color: white\'>'.$row2['unit_full_name_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row2['unit_full_name_eng'].'</th>';
+	echo '<th>'.'<a href=db_units_updateQuantityAndBaseUnit.php?QuantityID='.$row["quantity_id"].'&UnitID='.$row["unit_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -65,18 +67,6 @@ echo "</table>";
 close_database();
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_units_updateQuantityAndBaseUnit.php">
-    <label class="text-white">ID Jednostki:</label><input type="number"  name="QuantityID" class="form-control" />
-	<br>
-    <label class="text-white">ID Nazwy Fiz:</label><input type="number"  name="UnitID" class="form-control" />
-	<br>
-	<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
-</form>
-
-
 
 </body>
 </html>

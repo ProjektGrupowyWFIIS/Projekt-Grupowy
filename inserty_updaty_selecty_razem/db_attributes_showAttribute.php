@@ -40,6 +40,7 @@ $atr = read_table("attributes.attributes");
 	echo "<th style='color: white'> Attribute name: </th>";
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Description: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -52,6 +53,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['attribute_name_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_description_eng'].'</th>';
+	echo '<th>'.'<a href=db_attributes_updateAttribute.php?AttributeID='.$row["attribute_id"].'>Edit</a>'.'</td>';
   echo "</tr>";
  
 }
@@ -65,14 +67,7 @@ close_database();
 </div>
 </div>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_attributes_updateAttribute.php">
-	<label class="text-white">ID Atrybutu: </label><input type="number"  name="AttributeID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 
 
 </body>

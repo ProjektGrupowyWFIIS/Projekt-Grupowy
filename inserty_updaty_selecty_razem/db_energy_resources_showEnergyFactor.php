@@ -38,6 +38,7 @@ $atr = read_table("energy_resources.factors");
 	echo "<th style='color: white'> Factor unit ID: </th>";
 	echo "<th style='color: white'> Factor: </th>";
 	echo "<th style='color: white'> Uncertainty: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -51,6 +52,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['factor_unit_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['uncertainty'].'</th>';
+	echo '<th>'.'<a href=db_energy_resources_updateEnergyFactor.php?ResourceID='.$row["resource_id"].'&FactorID='.$row["factor_id"].'&TempSourceID='.$row["source_id"].'&ResourceUnitID='.$row["resource_unit_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -61,19 +63,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_energy_resources_updateEnergyFactor.php">
-	<label class="text-white">ID Surowca:</label> <input type="number"  name="ResourceID" class="form-control" />
-	<br>
-	<label class="text-white">ID Współczynika:</label> <input type="text"  name="FactorID" class="form-control" />
-	<br>
-    <label class="text-white">ID Źródła: </label>	<input type="number"  name="TempSourceID" class="form-control" />
-	<br>
-    <label class="text-white">ID Jednostki Surowca: </label>	<input type="number"  name="ResourceUnitID" class="form-control" />
-    <br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

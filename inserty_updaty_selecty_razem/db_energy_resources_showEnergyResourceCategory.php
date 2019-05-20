@@ -33,6 +33,7 @@ $atr = read_table("energy_resources.resources_categories");
 	echo "<tr>";
 	echo "<th style='color: white'> ID surowca: </th>";
 	echo "<th style='color: white'> ID kategorii: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -40,7 +41,8 @@ foreach($atr as $row_number => $row)
   
 	echo "<tr>";
 	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';	
+	echo '<th>'.'<a href=db_energy_resources_updateEnergyResourceCategory.php?ResourceID='.$row["resource_id"].'&CatID='.$row["cat_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -51,15 +53,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_energy_resources_updateEnergyResourceCategory.php">
-	<label class="text-white">ID Surowca: </label><input type="number"  name="ResourceID" class="form-control" />
-	<br>
-<label class="text-white">ID Kategorii: </label>	<input type="number"  name="CatID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

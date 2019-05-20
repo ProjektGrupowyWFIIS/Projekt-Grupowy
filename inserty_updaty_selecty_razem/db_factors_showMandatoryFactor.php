@@ -33,6 +33,7 @@ $atr = read_table("factors.mandatory_factors");
 	echo "<tr>";
 	echo "<th style='color: white'> ID: </th>";
 	echo "<th style='color: white'> Fabryka ID: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -41,6 +42,7 @@ foreach($atr as $row_number => $row)
 	echo "<tr>";
 	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor_id'].'</th>';
+	echo '<th>'.'<a href=db_factors_updateMandatoryFactor.php?CatID='.$row["cat_id"].'&FactorID='.$row["factor_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -51,15 +53,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_factors_updateMandatoryFactor.php">
-	<label class="text-white">ID Kategorii: </label><input type="number"  name="CatID" class="form-control" />
-	<br>
-	<label class="text-white">ID Współczynnika: </label><input type="text"  name="FactorID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

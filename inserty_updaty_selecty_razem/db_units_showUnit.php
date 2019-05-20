@@ -37,6 +37,7 @@ $atr = read_table("units.units");
     echo "<th style='color: white'> unit_full_name_eng: </th>";
     echo "<th style='color: white'> ratio: </th>";
     echo "<th style='color: white'> quantity_id: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
     echo "</tr>";
 
 foreach($atr as $row_number => $row)
@@ -49,6 +50,7 @@ foreach($atr as $row_number => $row)
     echo '<th style=\'color: white\'>'.$row['unit_full_name_eng'].'</th>';
     echo '<th style=\'color: white\'>'.$row['ratio'].'</th>';
     echo '<th style=\'color: white\'>'.$row['quantity_id'].'</th>';
+	echo '<th>'.'<a href=db_units_updateUnit.php?UnitID='.$row["unit_id"].'&TempQuantityID='.$row["quantity_id"].'>Edycja</a>'.'</td>';
     echo "</tr>";
 
 }
@@ -59,15 +61,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_units_updateUnit.php">
-	<label class="text-white">ID Jednostki:</label> <input type="number"  name="UnitID" class="form-control" />
-	<br>
-    <label class="text-white">ID Ilości:</label> <input type="number"  name="TempQuantityID" class="form-control" />
-    <br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

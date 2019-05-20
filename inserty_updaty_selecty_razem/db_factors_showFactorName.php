@@ -36,6 +36,7 @@ $atr = read_table("factors.factor_names");
 	echo "<th style='color: white'> Name: </th>";
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Description: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -47,6 +48,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['factor_name_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor_description_pl'].'</th>';
+	echo '<th>'.'<a href=db_factors_updateFactorName.php?FactorID='.$row["factor_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -57,13 +59,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_factors_updateFactorName.php">
-	<label class="text-white">ID współczynnika: </label><input type="text"  name="FactorID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

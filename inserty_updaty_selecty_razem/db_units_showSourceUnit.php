@@ -33,6 +33,7 @@ $atr = read_table("units.source_unit_names");
     echo "<tr>";
     echo "<th style='color: white'> unit_variant: </th>";
     echo "<th style='color: white'> unit_canonical_id: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
     echo "</tr>";
 
 foreach($atr as $row_number => $row)
@@ -41,6 +42,7 @@ foreach($atr as $row_number => $row)
     echo "<tr>";
     echo '<th style=\'color: white\'>'.$row['unit_variant'].'</th>';
     echo '<th style=\'color: white\'>'.$row['unit_canonical_id'].'</th>';
+	echo '<th>'.'<a href=db_units_updateSourceUnit.php?UnitVariant='.$row["unit_variant"].'&TempCanonicalUnitID='.$row["unit_canonical_id"].'>Edycja</a>'.'</td>';
     echo "</tr>";
 
 }
@@ -51,15 +53,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_units_updateSourceUnit.php">
-    <label class="text-white">ID Jednostki: </label><input type="text"  name="UnitVariant" class="form-control" />
-	<br>
-    <label class="text-white">unit canonical id: </label><input type="text"  name="TempCanonicalUnitID" class="form-control" />
-    <br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>

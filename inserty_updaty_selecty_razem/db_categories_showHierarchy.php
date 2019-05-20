@@ -37,6 +37,7 @@ $atr = read_table("categories.hierarchy_of_categories");
 	echo "<tr>";
 	echo "<th style='color: white'> Cat ID: </th>";
 	echo "<th style='color: white'> Rodzic ID: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -45,6 +46,7 @@ foreach($atr as $row_number => $row)
 	echo "<tr>";
 	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['parent_id'].'</th>';
+	echo '<th>'.'<a href=db_categories_updateHierarchy.php?CatID='.$row["cat_id"].'&ParentID='.$row["parent_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -55,16 +57,7 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_categories_updateHierarchy.php">
-	<label class="text-white">ID Kategorii: </label><input type="number"  name="CatID" class="form-control" />
-	<br>
-	<label class="text-white">ID Rodzica: </label><input type="number"  name="ParentID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>
 

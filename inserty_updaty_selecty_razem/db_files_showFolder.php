@@ -36,6 +36,7 @@ $atr = read_table("files.folders");
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Description: </th>";
 	echo "<th style='color: white'> Rodzic ID: </th>";
+	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
 foreach($atr as $row_number => $row)
@@ -47,6 +48,7 @@ foreach($atr as $row_number => $row)
 	echo '<th style=\'color: white\'>'.$row['folder_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['folder_description_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['parent_folder_id'].'</th>';
+	echo '<th>'.'<a href=db_files_updateFolder.php?FolderID='.$row["folder_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
 }
@@ -57,13 +59,6 @@ close_database();
 
 ?>
 <br>
-<br>
-<p class="text-white text-center h6">Edycja</p>
-<br>
-<form method="get" action="db_files_updateFolder.php">
-	<label class="text-white">ID Folderu:</label> <input type="number"  name="FolderID" class="form-control" />
-	<br>
-	<input type="submit" value="Edytuj" class="btn btn-block btn-secondary mt-5">
-</form>
+
 </body>
 </html>
