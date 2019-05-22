@@ -1,0 +1,135 @@
+{
+    "energy_resources": [
+        {
+            "gus": "060",
+            "name": "Węgiel kamienny energetyczny z wyłączeniem brykietów",
+            "unit": "tona",
+            "ammount": 1234.2
+        },
+        {
+            "gus": "088",
+            "name": "benzyna silnikowa bezołowiowa",
+            "unit": "tona",
+            "ammount": 3214.2
+        },
+        {
+            "gus": "064",
+            "name": "oleje napędowe do silników (Diesla)",
+            "unit": "tona",
+            "ammount": 2314.2
+        },
+        {
+            "gus": "012",
+            "name": "gaz skroplony LPG",
+            "unit": "tona",
+            "ammount": 2231.4
+        },
+        {
+            "gus": "024",
+            "name": "energia elektryczna",
+            "unit": "MWh",
+            "ammount": 3122.4
+        },
+        {
+            "gus": "023",
+            "name": "ciepło w parze wodnej i gorącej wodzie",
+            "unit": "GJ",
+            "ammount": 4212.3
+        }
+    ],
+    "resources": [
+        {
+            "res_id": 1,
+            "name": "WATER",
+            "unit": "m3",
+            "ammount": 255255
+        },
+        {
+            "res_id": 14,
+            "name": "BROKUŁ RÓŻA JESIENNY",
+            "unit": "kg",
+            "ammount": 1093508
+        },
+        {
+            "res_id": 18,
+            "name": "GROSZEK",
+            "unit": "kg",
+            "ammount": 1011485
+        }
+    ],
+    "products": [
+        {
+            "prod_id": 11,
+            "name": "Mrożony groszek",
+            "unit": "kg",
+            "ammount": 981100,
+            "total_eqco2": "...",
+            "eqco2_per_unit": "...",
+            "resources": [
+                {
+                    "res_id": 18,
+                    "unit": "kg",
+                    "ammount": 1011485,
+                    "eqco2": "..."
+                },
+                {
+                    "res_id": 1,
+                    "unit": "m3",
+                    "ammount": 206587.11,
+                    "eqco2": 0
+                }
+            ],
+            "energy_resources": [
+                {
+                    "gus": "024",
+                    "unit": "MWh",
+                    "ammount": 2527.07,
+                    "eqco2": "..."
+                }
+            ]
+        },
+        {
+            "prod_id": 32,
+            "name": "Mrożony brokuł",
+            "unit": "kg",
+            "ammount": 231128,
+            "total_eqco2": "...",
+            "eqco2_per_unit": "...",
+            "resources": [
+                {
+                    "res_id": 14,
+                    "unit": "kg",
+                    "ammount": 1093508,
+                    "eqco2": "..."
+                },
+                {
+                    "res_id": 1,
+                    "unit": "m3",
+                    "ammount": 48667.89,
+                    "eqco2": "..."
+                }
+            ],
+            "energy_resources": [
+                {
+                    "gus": "024",
+                    "unit": "MWh",
+                    "ammount": 595.33
+                    ,
+                    "eqco2": "..."
+                },
+                {
+                    "gus": "088",
+                    "unit": "tona",
+                    "ammount": 3214.2,
+                    "eqco2": "..."
+                },
+                {
+                    "gus": "060",
+                    "unit": "tona",
+                    "ammount": 1234.2,
+                    "eqco2": "..."
+                }
+            ]
+        }
+    ]
+}
