@@ -32,74 +32,86 @@ include ('navbar.php');
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white">
                         Nazwa PL:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input type="text"  name="NamePL" class="form-control" value="<?=$cat_name_pl?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white">
                         Nazwa ENG:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input type="text"  name="NameENG" class="form-control" value="<?=$cat_name_eng?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white">
                         Opis PL:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+         
+                <div class="col-md-3">
                     <input type="text"  name="DescPL" class="form-control" value="<?=$cat_description_pl?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white">
                         Opis ENG:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+         
+                <div class="col-md-3">
                     <input type="text"  name="DescENG" class="form-control" value="<?=$cat_description_eng?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
     <div class="container">
         <a href="db_categories_showCategory.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

@@ -43,82 +43,94 @@
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white" >
                         Nazwa PL:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input type="text"  name="NamePL" class="form-control" value="<?=$resource_name_pl?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white" >
                         Nazwa ENG:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            
+                <div class="col-md-3">
                     <input type="text"  name="NameENG" class="form-control" value="<?=$resource_name_eng?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white" >
                         GUS:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+               
+                <div class="col-md-3">
                     <input type="text"  name="GUS" class="form-control" value="<?=$gus_id?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white" >
                         Opis PL:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            
+                <div class="col-md-3">
                     <input type="text"  name="DescPL" class="form-control" value="<?=$resource_description_pl?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white" >
                         Opis ENG:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            
+                <div class="col-md-3">
                     <input type="text"  name="DescENG" class="form-control" value="<?=$resource_description_eng?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
@@ -126,9 +138,11 @@
     <div class="container">
         <a href="db_energy_resources_showEnergyResource.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

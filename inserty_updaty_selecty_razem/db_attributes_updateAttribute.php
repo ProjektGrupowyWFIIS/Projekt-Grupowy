@@ -47,11 +47,12 @@
                     $type_id = "wyliczeniowy";
             ?>
             <div class="row mt-5">
-                <div class="col-md-4">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Wybierz typ</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+               
+                <div class="col-md-3">
                     <select name="Type" class="form-control">
                         <option selected="selected"><?=$type_id?></option>
                         <?php if($type_id =="wyliczeniowy")
@@ -66,11 +67,12 @@
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+        <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Nazwa PL</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+         
+            <div class="col-md-3">
                 <input name="NamePL" type="text" class="form-control" value="<?=$attribute_name_pl?>"/>
             </div>
         </div>
@@ -78,11 +80,12 @@
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white">Nazwa ENG</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+          
+            <div class="col-md-3">
                 <input type="text" name="NameENG" class="form-control" value="<?=$attribute_name_eng?>"/>
             </div>
         </div>
@@ -90,11 +93,12 @@
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Opis PL</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+        
+            <div class="col-md-3">
                 <input type="text" name="DescPL" class="form-control" value="<?=$attribute_description_pl?>"/>
             </div>
         </div>
@@ -102,11 +106,12 @@
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Opis ENG</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+        
+            <div class="col-md-3">
                 <input type="text" name="DescENG" class="form-control" value="<?=$attribute_description_eng?>"/>
             </div>
         </div>
@@ -114,9 +119,11 @@
 
     <div class="container">
             <div class="row mt-5">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success">
                 </div>
+                <div class="col-md-3"></div>
             </div>
     </div>
 
@@ -124,9 +131,11 @@
     <div class="container">
         <a href="db_attributes_showAttribute.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

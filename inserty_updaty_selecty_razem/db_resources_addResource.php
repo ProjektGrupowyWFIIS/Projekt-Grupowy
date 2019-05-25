@@ -23,20 +23,21 @@
   include ('navbar.php');
   ?>
 <h3 class="text-white text-center mt-3">Dodaj zasób (surowiec)</h3>
-
+<div class="text-center">
 <form method="post" action="">
 
   <div class="container">
     <div class="row mt-5">
-   
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white ">Nazwa PL</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+      
+      <div class="col-md-3">
         <input name="NamePL" type="text" class="form-control"/>
           
       </div>
+      <div class="col-md-3"></div>
       
     </div>
 </div>
@@ -44,51 +45,58 @@
 
 <div class="container">
   <div class="row mt-5">
-      <div class="col-md-4">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white">Nazwa ENG</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+     
+      <div class="col-md-3">
         <input type="text" name="NameENG" class="form-control" />
       </div>
+      <div class="col-md-3"></div>
     </div>
 </div>
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
     <label class="text-white ">Opis PL</label>
   </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
+ 
+  <div class="col-md-3">
     <input type="text" name="DescPL" class="form-control" />
   </div>
+  <div class="col-md-3"></div>
   </div>
 </div>
 
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
     <label class="text-white ">Opis ENG</label>
   </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
+
+  <div class="col-md-3">
     <input type="text" name="DescENG" class="form-control"/>
   </div>
-
+  <div class="col-md-3"></div>
   </div>
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-              <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+      <div class="col-md-3"></div>
+    <div class="col-md-6">
+              <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
             </div>
+            <div class="col-md-3"></div>
             </div>
             </div>
 
 </form>
-
+<div class="col-md-3"></div>
 
 <?php
 

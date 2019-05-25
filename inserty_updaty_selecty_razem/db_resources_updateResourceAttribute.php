@@ -39,16 +39,18 @@
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Zasób (surowiec):
                     </label>
                 </div>
-                <div class="col-sm-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input class="form-control" type="text" name="ResourceID2" value="<?=$resource_name_pl?>" disabled/>
                     <input class="form-control" type="hidden" name="ResourceID2" value="<?=$resource_id?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -57,16 +59,18 @@
         </p>
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Atrybut:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input class="form-control" type="text" name="AttributeID2" value="<?=$attribute_name_pl?>" disabled/>
                     <input class="form-control" type="hidden" name="AttributeID2" value="<?=$attribute_id?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
         <p class="text-white-50 font-italic text-center mt-5">
@@ -77,23 +81,27 @@
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Wartość:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input type="text"  name="Value" class="form-control" value="<?=$attribute_value?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
@@ -101,8 +109,9 @@
     <div class="container">
         <a href="db_resources_showResourceAttribute.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
             </div>
         </a>

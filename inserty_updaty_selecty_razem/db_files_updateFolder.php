@@ -43,50 +43,57 @@ include ('navbar.php');
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Nazwa </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+               
+                <div class="col-md-3">
                     <input name="Name" type="text" class="form-control" value="<?=$folder_name?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Opis PL</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            
+                <div class="col-md-3">
                     <input name="DescPL" type="text" class="form-control" value="<?=$folder_description_pl?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Opis ENG</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+        
+                <div class="col-md-3">
                     <input name="DescENG" type="text" class="form-control" value="<?=$folder_description_eng?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Katalog nadrzędny (jeśli istnieje):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+      
+                <div class="col-md-3">
                     <select name="ParentID" class="form-control">
                         <option value="0">(nie dotyczy)</option>
                         <?php
@@ -105,14 +112,17 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
@@ -120,9 +130,11 @@ include ('navbar.php');
     <div class="container">
         <a href="db_files_showFolder.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

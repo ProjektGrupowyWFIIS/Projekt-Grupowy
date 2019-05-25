@@ -29,13 +29,14 @@ close_database();
 ?>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label class="text-white mt-5">
 Kategoria: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="CategoryID" class="form-control mt-5">
 <?php
 foreach($category as $row_number => $row){
@@ -46,19 +47,21 @@ foreach($category as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label class="text-white mt-5">
 Obowiązkowy atrybut dla powyższej kategorii: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="AttributeID" class="form-control mt-5">
 <?php
 foreach($attribute as $row_number => $row){
@@ -69,14 +72,17 @@ foreach($attribute as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-12">
-<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+      <div class="col-md-3"></div>
+    <div class="col-md-6">
+<input type="submit" value="Zapisz" class="btn btn-block btn-success">
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 </form>
@@ -94,7 +100,7 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać obowiązkowego atrybutu!';
+    echo '<p style="color:white">Nie mogę zapisać obowiązkowego atrybutu!</p>';
   else
     echo '<br><hr>Obowiązkowy atrybut zapisany!';
 }

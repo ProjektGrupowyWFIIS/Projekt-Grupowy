@@ -36,13 +36,14 @@ close_database();
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Zasób energetyczny (nośnik energii): 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="ResourceID" class="form-control">
 <?php
 foreach($resource as $row_number => $row){
@@ -53,18 +54,20 @@ foreach($resource as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Kategoria: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="CategoryID" class="form-control">
 <?php
 foreach($category as $row_number => $row){
@@ -75,15 +78,18 @@ foreach($category as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-12">
-        <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <input type="submit" value="Zapisz" class="btn btn-block btn-success">
       </div> 
+      <div class="col-md-3"></div>
     </div>
     </div>
 

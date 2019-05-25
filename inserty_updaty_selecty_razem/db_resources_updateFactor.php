@@ -47,13 +47,14 @@ include ('navbar.php');
     ?>
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Zasób (surowiec):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                
+                <div class="col-md-3">
                     <select name="ResourceID2" class="form-control">
                         <?php
                         foreach($resource as $row_number => $row){
@@ -71,6 +72,7 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -81,13 +83,14 @@ include ('navbar.php');
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Nazwa współczynnika:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            
+                <div class="col-md-3">
                     <select name="FactorID2" class="form-control">
                         <?php
                         foreach($factor_names as $row_number => $row){
@@ -105,18 +108,20 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Źródło:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+           
+                <div class="col-md-3">
                     <select name="SourceID" class="form-control">
                         <?php
                         foreach($source as $row_number => $row){
@@ -134,18 +139,20 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Jednostka zasobu 1:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+               
+                <div class="col-md-3">
                     <select name="Unit1BID" class="form-control">
                         <?php
                         foreach($unit as $row_number => $row){
@@ -163,18 +170,20 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Jednostka zasobu 2:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <select name="Unit2ID" class="form-control">
                         <option value="0">(nie dotyczy)</option>
                         <?php
@@ -193,18 +202,20 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Jednostka współczynnika:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+         
+                <div class="col-md-3">
                     <select name="FactorUnitID" class="form-control">
                         <?php
                         foreach($unit as $row_number => $row){
@@ -222,41 +233,47 @@ include ('navbar.php');
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Współczynnik (liczba >=0):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+     
+                <div class="col-md-3">
                     <input type="text"  name="Factor" class="form-control" value="<?=$factor?>"/>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Niepewnosc [0..100]:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                
+                <div class="col-md-3">
                     <input type="text"  name="Uncertainty" class="form-control" value="<?=$uncertainty?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
@@ -264,9 +281,11 @@ include ('navbar.php');
     <div class="container">
         <a href="db_resources_showFactor.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

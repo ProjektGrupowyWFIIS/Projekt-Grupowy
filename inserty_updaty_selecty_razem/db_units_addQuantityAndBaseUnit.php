@@ -23,93 +23,98 @@
   ?>
 <h3 class="text-white text-center mt-3">Dodaj wielkość fizyczną i jej jednostkę podstawową</h3>
 
-
+<div class="text-center">
 <form method="post" action="">
 
     <div class="container">
         <div class="row mt-5">
-       
-          <div class="col-md-4">
+            <div class="col-md-3"></div>
+          <div class="col-md-3">
             <label class="text-white ">Nazwa wielkosci fizycznej PL</label>
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+   
+          <div class="col-md-3">
             <input name="QuantityNamePL" type="text" class="form-control"/>
               
           </div>
+          <div class="col-md-3"></div>
           
         </div>
     </div>
 
     <div class="container">
         <div class="row mt-5">
-       
-          <div class="col-md-4">
+            <div class="col-md-3"></div>
+          <div class="col-md-3">
             <label class="text-white ">Nazwa wielkosci fizycznej ENG</label>
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+       
+          <div class="col-md-3">
             <input name="QuantityNameENG" type="text" class="form-control"/>
               
           </div>
+          <div class="col-md-3"></div>
           
         </div>
     </div>
 
   <div class="container">
         <div class="row mt-5">
-       
-          <div class="col-md-4">
+            <div class="col-md-3"></div>
+          <div class="col-md-3">
             <label class="text-white ">Jednostka podstawowa</label>
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+        
+          <div class="col-md-3">
             <input name="Unit" type="text" class="form-control"/>
               
           </div>
+          <div class="col-md-3"></div>
           
         </div>
     </div>
 
     <div class="container">
         <div class="row mt-5">
-       
-          <div class="col-md-4">
+            <div class="col-md-3"></div>
+          <div class="col-md-3">
             <label class="text-white ">Pełna nazwa jednostki PL</label>
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+ 
+          <div class="col-md-3">
             <input name="UnitNamePL" type="text" class="form-control"/>
               
           </div>
-          
+          <div class="col-md-3"></div>
         </div>
     </div>
     <div class="container">
         <div class="row mt-5">
-       
-          <div class="col-md-4">
+            <div class="col-md-3"></div>
+          <div class="col-md-3">
             <label class="text-white ">Pełna nazwa jednostki ENG</label>
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+      
+          <div class="col-md-3">
             <input name="UnitNameENG" type="text" class="form-control"/>
               
           </div>
-          
+          <div class="col-md-3"></div>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
-          <div class="col-md-12">
-      <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+            <div class="col-md-3"></div>
+          <div class="col-md-6">
+      <input type="submit" value="Zapisz" class="btn btn-block btn-success  mt-5">
       </div>
+      <div class="col-md-3"></div>
       </div>
       </div>
             
 </form>
-
+</div>
 
 <?php
 require "db_functions.php";

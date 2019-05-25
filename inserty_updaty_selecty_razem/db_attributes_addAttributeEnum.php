@@ -28,15 +28,16 @@ close_database();
 ?>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label class="text-white">
 Atrybut (wyliczeniowy): 
 </label>
 </div>
 
-<div class="col-md-4"></div>
 
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="AttributeID" class="form-control">
 <?php
 foreach($attribute as $row_number => $row){
@@ -46,6 +47,7 @@ foreach($attribute as $row_number => $row){
 }
 ?>
 </div>
+<div class="col-md-3"></div>
 </select>
 </div>
 </div>
@@ -54,15 +56,17 @@ foreach($attribute as $row_number => $row){
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label class="text-white" >
 Wartość PL:
 </label>
 </div> 
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <input type="text"  name="ValuePL" class="form-control"/>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
@@ -71,48 +75,62 @@ Wartość PL:
 
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
   <label class="text-white" >
   Wartość ENG:
   </label>
   </div> 
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
+
+  <div class="col-md-3">
   <input type="text"  name="ValueENG" class="form-control"/>
   </div>
+  <div class="col-md-3"></div>
   </div>
   </div>
 
   <div class="container">
       <div class="row mt-5">
-        <div class="col-md-4">
+          <div class="col-md-3"></div>
+        <div class="col-md-3">
     <label class="text-white" >
     Opis PL:
     </label>
     </div> 
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+
+    <div class="col-md-3">
     <input type="text"  name="DescPL" class="form-control" />
     </div>
+    <div class="col-md-3"></div>
     </div>
     </div>
 
     <div class="container">
         <div class="row mt-5">
-          <div class="col-md-4">
+            <div class="col-md-3"></div>
+          <div class="col-md-3">
       <label class="text-white" >
       Opis ENG:
       </label>
       </div> 
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+   
+      <div class="col-md-3">
       <input type="text"  name="DescENG" class="form-control" />
       </div>
+      <div class="col-md-3"></div>
       </div>
       </div>
 
-<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
-            
+
+      <div class="container">
+        <div class="row mt-5">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<input type="submit" value="Zapisz" class="btn btn-block btn-success ">
+</div>
+<div class="col-md-3"></div>
+</div>
+      </div> 
 </form>
 
 

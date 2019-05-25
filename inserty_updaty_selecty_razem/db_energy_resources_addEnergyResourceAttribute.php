@@ -36,13 +36,14 @@ close_database();
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Zasób energetyczny (nośnik energii): 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="ResourceID" class="form-control">
 <?php
 foreach($resource as $row_number => $row){
@@ -53,6 +54,7 @@ foreach($resource as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
@@ -63,13 +65,14 @@ Należy uwzględnić wszystkie obowiązkowe atrybuty dla wszystkich kategorii, d
 
 <div class="container">
   <div class="row">
-<div class="col-md-4">
+      <div class="col-md-3"></div>
+<div class="col-md-3">
 <label>
 Atrybut: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="AttributeID" class="form-control">
 <?php
 foreach($attribute as $row_number => $row){
@@ -80,6 +83,7 @@ foreach($attribute as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
@@ -92,23 +96,27 @@ Jeśli atrybut jest typu swobodnego, to poniżej można wpisać dowolną wartoś
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Wartość:
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
  <input type="text"  name="Value" class="form-control" />
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-12">
-        <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <input type="submit" value="Zapisz" class="btn btn-block btn-success">
       </div> 
+      <div class="col-md-3"></div>
     </div>
     </div>
 

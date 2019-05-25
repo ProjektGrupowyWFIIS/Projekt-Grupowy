@@ -36,13 +36,14 @@ close_database();
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Kategoria zasobów:
 </label> 
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="CategoryID" class="form-control">
 <?php
 foreach($category as $row_number => $row){
@@ -53,19 +54,21 @@ foreach($category as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Obowiązkowy współczynnik (atrybut numeryczny) dla powyższej kategorii: 
 </label>
 </div>
-<div class='col-md-4'></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="FactorID" class="form-control">
 <?php
 foreach($factor as $row_number => $row){
@@ -76,15 +79,18 @@ foreach($factor as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
-  <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+  <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
   </div>
+  <div class="col-md-3"></div>
   </div>
   </div>
 

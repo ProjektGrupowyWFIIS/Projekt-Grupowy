@@ -38,13 +38,14 @@ close_database();
 ?>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label class="text-white">
 Wybierz kategorię: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="CatID" class="form-control">
 <?php
 foreach($categories as $row_number => $row){
@@ -55,19 +56,21 @@ foreach($categories as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label class="text-white">
 Wybierz kategorię nadrzędną: 
 </label>
 </div>
-<div class="col-md-4"></div>
 
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="ParentID" class="form-control">
 <?php
 foreach($categories as $row_number => $row){
@@ -78,14 +81,17 @@ foreach($categories as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
 <div class="row mt-5">
-  <div class="col-md-12">
-    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+    <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <input type="submit" value="Zapisz" class="btn btn-block btn-success">
   </div> 
+  <div class="col-md-3"></div>
 </div>
 </div>
 

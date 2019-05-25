@@ -22,7 +22,7 @@
   include ('navbar.php');
   ?>
 
-<h3 class="text-white text-center font-italic font-weight-bold mt-5">Strona główna.. TU coś może jeszcze będzie :)</h3>
+<h3 class="text-white text-center font-italic font-weight-bold mt-5">Strona główna projektu grupowego. W menu powyżej wybierz gdzie chcesz przejść</h3>
 
 </body>
 </html>

@@ -37,77 +37,92 @@ include ('navbar.php');
 ?>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Nazwa wielkosci fizycznej PL</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+           
+            <div class="col-md-3">
                 <input name="QuantityNamePL" type="text" class="form-control" value="<?=$quantity_name_pl?>"/>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Nazwa wielkosci fizycznej ENG</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+          
+            <div class="col-md-3">
                 <input name="QuantityNameENG" type="text" class="form-control" value="<?=$quantity_name_eng?>"/>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Jednostka podstawowa</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+           
+            <div class="col-md-3">
                 <input name="Unit" type="text" class="form-control" value="<?=$unit?>"/>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Pełna nazwa jednostki PL</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            
+            <div class="col-md-3">
                 <input name="UnitNamePL" type="text" class="form-control" value="<?=$unit_full_name_pl?>"/>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
     <div class="container">
+        
         <div class="row mt-5">
-            <div class="col-md-4">
+                <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <label class="text-white ">Pełna nazwa jednostki ENG</label>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+          
+            <div class="col-md-3">
                 <input name="UnitNameENG" type="text" class="form-control" value="<?=$unit_full_name_eng?>"/>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 </form>
     <div class="container">
         <a href="db_units_showQuantityAndBaseUnit.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

@@ -46,25 +46,28 @@
 ?>
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Nazwa</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+          
+                <div class="col-md-3">
                     <input name="Name" type="text" class="form-control" value="<?=$file_name?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Typ:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+          
+                <div class="col-md-3">
                     <select name="Type" class="form-control">
                             <option selected="selected"><?=$file_type?></option>
                             <?php
@@ -87,30 +90,34 @@
                             ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Sciezka na dysku</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                
+                <div class="col-md-3">
                     <input name="Path" type="text" class="form-control" value="<?=$hdd_file_path?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Katalog (folder):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <select name="FolderID" class="form-control">
                         <?php
                         foreach($folders as $row_number => $row){
@@ -128,23 +135,28 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
     <div class="container">
         <a href="db_files_showFile.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

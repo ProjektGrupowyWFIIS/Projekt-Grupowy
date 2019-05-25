@@ -43,13 +43,14 @@
         ?>
                 <div class="container">
                     <div class="row mt-5">
-                        <div class="col-md-4">
+                            <div class="col-md-3"></div>
+                        <div class="col-md-3">
                             <label class="text-white">
                                 Wybierz kategorię:
                             </label>
                         </div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
+                       
+                        <div class="col-md-3">
                             <select name="CatID2" class="form-control">
                                 <?php
                                 foreach($categories as $row_number => $row){
@@ -67,19 +68,21 @@
                                 ?>
                             </select>
                         </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
 
                 <div class="container">
                     <div class="row mt-5">
-                        <div class="col-md-4">
+                            <div class="col-md-3"></div>
+                        <div class="col-md-3">
                             <label class="text-white">
                                 Wybierz kategorię nadrzędną:
                             </label>
                         </div>
-                        <div class="col-md-4"></div>
+                      
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <select name="ParentID2" class="form-control">
                                 <?php
                                 foreach($categories as $row_number => $row){
@@ -97,14 +100,17 @@
                                 ?>
                             </select>
                         </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
 
                 <div class="container">
                     <div class="row mt-5">
-                        <div class="col-md-12">
-                            <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+                            <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Zapisz" class="btn btn-block btn-success">
                         </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
 
@@ -112,8 +118,9 @@
     <div class="container">
             <a href="db_categories_showHierarchy.php">
                 <div class="row mt-3">
-                    <div class="col-md-12">
-                        <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                        <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                     </div>
                 </div>
             </a>

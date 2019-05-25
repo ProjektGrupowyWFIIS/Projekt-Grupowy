@@ -36,15 +36,16 @@ close_database();
 
 <div class="container">
     <div class="row mt-5">
-   
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white ">Jednostka</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+
+      <div class="col-md-3">
         <input name="Unit" type="text" class="form-control"/>
           
       </div>
+      <div class="col-md-3"></div>
       
     </div>
 </div>
@@ -52,30 +53,32 @@ close_database();
 
 <div class="container">
     <div class="row mt-5">
-   
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white ">Pełna nazwa jednostki PL</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+  
+      <div class="col-md-3">
         <input name="UnitNamePL" type="text" class="form-control"/>
           
       </div>
+      <div class="col-md-3"></div>
       
     </div>
 </div>
 
 <div class="container">
     <div class="row mt-5">
-   
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white ">Pełna nazwa jednostki ENG</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+  
+      <div class="col-md-3">
         <input name="UnitNameENG" type="text" class="form-control"/>
           
       </div>
+      <div class="col-md-3"></div>
       
     </div>
 </div>
@@ -83,29 +86,30 @@ close_database();
 
 <div class="container">
     <div class="row mt-5">
-   
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white ">Stosunek do jednostki podstawowej</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+     
+      <div class="col-md-3">
         <input name="Ratio" type="text" class="form-control"/>
           
       </div>
-      
+      <div class="col-md-3"></div>
     </div>
 </div>
 
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Wielkość fizyczna: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="QuantityID" class="form-control">
 <?php
 foreach($quantities as $row_number => $row){
@@ -116,15 +120,18 @@ foreach($quantities as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
-  <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+  <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
   </div>
+  <div class="col-md-3"></div>
   </div>
   </div>
             

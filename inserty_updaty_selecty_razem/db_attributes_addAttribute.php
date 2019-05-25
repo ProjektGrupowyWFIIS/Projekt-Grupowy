@@ -35,82 +35,79 @@
         <div class="row mt-5">
 
              
-            <div class="col-md-4">
-              <label class="text-white ">Wybierz typ</label>
-            </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"><label class="text-white ">Wybierz typ</label></div>
+            <div class="col-md-3">
              <select name="Type" class="form-control">
                 <option value="free">swobodny</option>
                 <option value="enum">wyliczeniowy</option>
             </div>
+            <div class="col-md-3"></div>
             </select>
 
         </div>
       </div>
-
       <div class="container">
           <div class="row mt-5">
-         
-            <div class="col-md-4">
-              <label class="text-white ">Nazwa PL</label>
+            <div class="col-md-3"></div>
+              <div class="col-md-3"><label class="text-white">Nazwa PL</label></div>
+              <div class="col-md-3">
+                <input type="text" name="NameENG" class="form-control" />
+              </div>
+              <div class="col-md-3"></div>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <input name="NamePL" type="text" class="form-control"/>
-                
-            </div>
-            
-          </div>
       </div>
-
+             
 
 
         
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-4">
-          <label class="text-white">Nazwa ENG</label>
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+      <div class="col-md-3"></div>
+        <div class="col-md-3"><label class="text-white">Nazwa ENG</label></div>
+        <div class="col-md-3">
           <input type="text" name="NameENG" class="form-control" />
         </div>
+        <div class="col-md-3"></div>
       </div>
 </div>
        
 
-       <div class="container">
-        <div class="row mt-5">
-          <div class="col-md-4">
-          <label class="text-white ">Opis PL</label>
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+<div class="container">
+    <div class="row mt-5">
+      <div class="col-md-3"></div>
+        <div class="col-md-3"><label class="text-white">OpisPL</label></div>
+        <div class="col-md-3">
           <input type="text" name="DescPL" class="form-control" />
         </div>
+        <div class="col-md-3"></div>
+      </div>
+</div>
+       
+
+<div class="container">
+        <div class="row mt-5">
+       <div class="col-md-3"></div>
+        <div class="col-md-3"> <label class="text-white ">Opis ENG</label></div>
+        <div class="col-md-3">
+          <input type="text" name="DescENG" class="form-control"/>
+        </div>
+        <div class="col-md-3"></div>
         </div>
       </div>
-
 
 
 <div class="container">
         <div class="row mt-5">
-          <div class="col-md-4">
-          <label class="text-white ">Opis ENG</label>
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+          <input type="submit" value="Zapisz" class="btn btn-block btn-success">
         </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          <input type="text" name="DescENG" class="form-control"/>
-        </div>
-
-        </div>
+        <div class="col-md-3"></div>
+        </div> 
       </div>
 
-        <div class="row mt-5">
-          <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
-        </div> 
-
+      
       </form>
    
   </div>

@@ -49,13 +49,14 @@
 ?>
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white">
                         Zasób energetyczney (nośnik energii):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            
+                <div class="col-md-3">
                     <select name="ResourceID2" class="form-control">
                         <?php
                         foreach($resource as $row_number => $row){
@@ -73,6 +74,7 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -83,13 +85,14 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white mt-5">
                         Nazwa współczynnika:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+
+                <div class="col-md-3">
                     <select name="FactorID2" class="form-control mt-5">
                         <?php
                         foreach($factor_names as $row_number => $row){
@@ -107,18 +110,20 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white">
                         Źródło:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+          
+                <div class="col-md-3">
                     <select name="SourceID" class="form-control">
                         <?php
                         foreach($source as $row_number => $row){
@@ -141,13 +146,14 @@
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Jednostka zasobu:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+             
+                <div class="col-md-3">
                     <select name="UnitID2" class="form-control">
                         <?php
                         foreach($unit as $row_number => $row){
@@ -165,18 +171,20 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Jednostka współczynnika:
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+     
+                <div class="col-md-3">
                     <select name="FactorUnitID" class="form-control">
                         <?php
                         foreach($unit as $row_number => $row){
@@ -194,32 +202,36 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Współczynnik (liczba >=0):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+
+                <div class="col-md-3">
                     <input type="text"  name="Factor"  class="form-control" value="<?=$factor?>"/>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label>
                         Niepewność(0..100):
                     </label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+             
+                <div class="col-md-3">
                     <input type="text"  name="Uncertainty"  class="form-control" value="<?=$uncertainty?>"/>
                     <small class="text-white">Jak jestes nie pewny to zostaw puste pole</small>
                 </div>
@@ -228,9 +240,11 @@
 
         <div class="container">
             <div class="row mt-5">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
@@ -238,9 +252,11 @@
     <div class="container">
         <a href="db_energy_resources_showEnergyFactor.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

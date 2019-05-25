@@ -22,8 +22,9 @@
   include ('navbar.php');
   ?>
 
-<h3 class="text-white text-center mt-3">Przypisz podany zasób (surowiec) do kategorii</h3>
+<h3 class="text-white text-center mt-5">Przypisz podany zasób (surowiec) do kategorii</h3>
 
+<div class="text-center">
 <form method="post" action="">
 
 <?php
@@ -36,14 +37,15 @@ close_database();
 
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-4">
+  <div class="row mt-5">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Zasób (surowiec): 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="ResourceID" class="form-control">
 <?php
 foreach($resource as $row_number => $row){
@@ -54,18 +56,20 @@ foreach($resource as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Kategoria: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="CategoryID" class="form-control">
 <?php
 foreach($category as $row_number => $row){
@@ -76,20 +80,23 @@ foreach($category as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
-                <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+                <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
               </div>
+              <div class="col-md-3"></div>
               </div>
               </div>
 
 </form>
-
+</div>
 
 <?php
 

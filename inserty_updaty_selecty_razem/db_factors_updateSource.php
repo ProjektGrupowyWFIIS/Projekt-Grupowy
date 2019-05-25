@@ -41,12 +41,12 @@
 ?>
         <div class="container">
             <div class="row mt-5">
-
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Data (dd-mm-yyyy)</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+             
+                <div class="col-md-3">
                     <input name="Date" type="date" class="form-control" value="<?=$source_date?>"/>
                 </div>
 
@@ -55,12 +55,12 @@
 
         <div class="container">
             <div class="row mt-5">
-
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Opis</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input name="Desc" type="text" class="form-control" value="<?=$source_description?>"/>
                 </div>
 
@@ -69,40 +69,42 @@
 
         <div class="container">
             <div class="row mt-5">
-
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">DOI</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+              
+                <div class="col-md-3">
                     <input name="Doi" type="text" class="form-control" value="<?=$doi?>"/>
                 </div>
+                <div class="col-md-3"></div>
 
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">Bibtex</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+        
+                <div class="col-md-3">
                     <input name="Bibtex" type="text" class="form-control" value="<?=$bibtex?>"/>
                 </div>
+                <div class="col-md-3"></div>
 
             </div>
         </div>
 
         <div class="container">
             <div class="row mt-5">
-
-                <div class="col-md-4">
+                    <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <label class="text-white ">File</label>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+       
+                <div class="col-md-3">
                     <select name="File">
                         <?php
                         foreach($files as $row_number => $row){
@@ -120,15 +122,18 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-md-3"></div>
 
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </form>
@@ -136,9 +141,11 @@
     <div class="container">
         <a href="db_factors_showSource.php">
             <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="button" value="wróć" class="btn btn-block btn-secondary mt-3">
+                    <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <input type="button" value="wróć" class="btn btn-block btn-primary mt-3">
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </a>
     </div>

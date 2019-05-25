@@ -24,6 +24,7 @@
 
 <h3 class="text-white text-center mt-3">Dodaj alternatywną nazwę jednostki (tj. nazwę, która może pojawić się w źródłach)</h3>
 
+<div class="text-center">
 <form method="post" action="">
 
 <?php
@@ -35,29 +36,30 @@ close_database();
 
 <div class="container">
     <div class="row mt-5">
-   
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
         <label class="text-white ">Alternatywna nazwa jednostki</label>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+      
+      <div class="col-md-3">
         <input name="SourceUnitName" type="text" class="form-control"/>
           
       </div>
-      
+      <div class="col-md-3"></div>
     </div>
 </div>
 
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4">
+      <div class="col-md-3"></div>
+    <div class="col-md-3">
 <label>
 Jednostka 'kanoniczna': 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <select name="CanonicalUnitID" class="form-control">
 <?php
 foreach($units as $row_number => $row){
@@ -68,20 +70,22 @@ foreach($units as $row_number => $row){
 ?>
 </select>
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
-  <input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+  <input type="submit" value="Zapisz" class="btn btn-block btn-success mt-5">
   </div>
   </div>
   </div>
             
 </form>
-
+</div>
 <?php
 
 if($_POST)

@@ -20,16 +20,19 @@
 <form method="post" action="" class="form-group">
 
   <div class="container">
+    
     <div class="row mt-5">
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
 <label class="text-white">
 Nazwa PL: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <input type="text"  name="NamePL" class="form-control" />
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
@@ -39,15 +42,17 @@ Nazwa PL:
 
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
 <label class="text-white">
 Nazwa ENG: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <input type="text"  name="NameENG" class="form-control" />
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
@@ -57,37 +62,43 @@ Nazwa ENG:
 
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
 <label class="text-white">
 Opis PL: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <input type="text"  name="DescPL" class="form-control" />
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-4">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
 <label class="text-white">
 Opis ENG: 
 </label>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 <input type="text"  name="DescENG" class="form-control" />
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-<input type="submit" value="Zapisz" class="btn btn-block btn-secondary mt-5">
+  <div class="row mt-5">
+      <div class="col-md-3"></div>
+    <div class="col-md-6">
+<input type="submit" value="Zapisz" class="btn btn-block btn-success">
 </div>
+<div class="col-md-3"></div>
 </div>
 </div>
 </form>
@@ -109,9 +120,9 @@ if($_POST)
   close_database();	
 
   if (!$cat_id)
-    echo '<br><hr>Nie mogę zapisać kategorii!';
+    echo '<p style="color:white"><br><hr>Nie mogę zapisać kategorii!</p>';
   else
-    echo '<br><hr>Kategoria zapisana! ID='.$cat_id;
+    echo '<p style="color:white"><br><hr>Kategoria zapisana! ID=</p>'.$cat_id;
 }
 ?>
 </div>
