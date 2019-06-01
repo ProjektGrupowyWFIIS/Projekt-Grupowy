@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaz alternatywne nazwy jednostek</title>
+  <title>Pokaż plik</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,35 +20,43 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaz alternatywne nazwy jednostek (tj. nazwę, która może pojawić się w źródłach)</h3>
+<h3 class="text-white text-center mt-3">Pokaż plik</h3>
 
 <div class="container">
 <div class="row mt-5">
 <div class="col-md-4"></div>
 <div class="col-md-4">
+
+
 <?php
 
 require "db_functions.php";
 open_database();
-$atr = read_table("units.source_unit_names");
+$atr = read_table("files.files");
 
-    echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
+	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
 
-    echo "<tr>";
-    echo "<th style='color: white'> Jednostka Alternatywna: </th>";
-    echo "<th style='color: white'> ID Jednostki Kanonicznej: </th>";
+	echo "<tr>";
+	echo "<th style='color: white'> ID: </th>";
+	echo "<th style='color: white'> Nazwa: </th>";
+	echo "<th style='color: white'> Typ: </th>";
+	echo "<th style='color: white'> Ścieżka: </th>";
+	echo "<th style='color: white'> ID Folderu: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
-    echo "</tr>";
-
+	echo "</tr>";
+	
 foreach($atr as $row_number => $row)
 {
-
-    echo "<tr>";
-    echo '<th style=\'color: white\'>'.$row['unit_variant'].'</th>';
-    echo '<th style=\'color: white\'>'.$row['unit_canonical_id'].'</th>';
-	echo '<th>'.'<a href=db_units_updateSourceUnit.php?UnitVariant='.$row["unit_variant"].'&TempCanonicalUnitID='.$row["unit_canonical_id"].'>Edycja</a>'.'</td>';
-    echo "</tr>";
-
+  
+	echo "<tr>";
+	echo '<th style=\'color: white\'>'.$row['file_id'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['file_name'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['file_type'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['hdd_file_path'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['folder_id'].'</th>';
+	echo '<th>'.'<a href=db_files_updateFile.php?FileID='.$row["file_id"].'&TempFolderID='.$row["folder_id"].'>Edycja</a>'.'</td>';
+	echo "</tr>";
+ 
 }
 
 echo "</table>";
