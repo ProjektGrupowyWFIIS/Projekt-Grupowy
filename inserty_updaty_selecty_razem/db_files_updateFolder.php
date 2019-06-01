@@ -152,9 +152,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić folderu!';
+            echo "<br><p style='color: white'>Nie mogę zmienić folderu!</p>";
         else
-            echo '<br><hr>Folder zmieniony!';
+            echo "<br><p style='color: white'>Folder zmieniony!";
     }
 ?>
 

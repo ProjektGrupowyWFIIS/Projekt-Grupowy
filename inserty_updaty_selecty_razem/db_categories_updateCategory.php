@@ -130,9 +130,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić kategorii!';
+            echo "<br><p style='color: white'>Nie mogę zmienić kategorii!</p>";
         else
-            echo '<br><hr>Kategoria zmieniona!';
+            echo "<br><p style='color: white'>Kategoria zmieniona!";
     }
 ?>
 

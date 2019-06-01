@@ -139,9 +139,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać zasobu energetycznego!';
+    echo "<br><p style='color: white'>Nie mogę zapisać zasobu energetycznego!</p>";
   else
-    echo '<br><hr>Zasób energetyczny zapisany!';
+    echo "<br><p style='color: white'>Zasób energetyczny zapisany!</p>";
 }
 ?>
 

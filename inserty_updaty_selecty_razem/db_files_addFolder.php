@@ -135,9 +135,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać folderu!';
+    echo "<br><p style='color: white'>Nie mogę zapisać folderu!</p>";
   else
-    echo '<br><hr>Folder zapisany!';
+    echo "<br><p style='color: white'>Folder zapisany!</p>";
 }
 ?>
 

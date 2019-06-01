@@ -282,9 +282,9 @@
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić współczynnika energetycznego!';
+            echo "<br><p style='color: white'>Nie mogę zmienić współczynnika energetycznego!</p>";
         else
-            echo '<br><hr>Współczynnik energetyczny zmieniony!';
+            echo "<br><p style='color: white'>Współczynnik energetyczny zmieniony!</p>";
     }
 ?>
 

@@ -136,9 +136,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać wielkości fizycznej i jej jednostki podstawowej!';
+    echo "<br><p style='color: white'>Nie mogę zapisać wielkości fizycznej i jej jednostki podstawowej!</p>";
   else
-    echo '<br><hr>Wielkość fizyczna i jej jednostka podstawowa zapisana!';
+    echo "<br><p style='color: white'>Wielkość fizyczna i jej jednostka podstawowa zapisana!</p>";
 }
 ?>
 

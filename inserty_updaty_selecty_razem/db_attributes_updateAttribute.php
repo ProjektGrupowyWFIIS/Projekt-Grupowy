@@ -158,9 +158,9 @@
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić atrybutu!';
+            echo "<br><p style='color: white'>Nie mogę zmienić atrybutu!</p>";
         else
-            echo '<br><hr>Atrybut zmieniony!';
+            echo "<br><p style='color: white'>Atrybut zmieniony!</p>";
     }
 
 ?>

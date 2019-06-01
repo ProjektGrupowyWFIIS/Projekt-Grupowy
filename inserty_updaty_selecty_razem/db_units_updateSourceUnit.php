@@ -118,9 +118,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić jednostki alternatywnej!';
+            echo "<br><p style='color: white'>Nie mogę zmienić jednostki alternatywnej!</p>";
         else
-            echo '<br><hr>Jednostka alternatywna zmieniona!';
+            echo "<br><p style='color: white'>Jednostka alternatywna zmieniona!</p>";
     }
 ?>
 		

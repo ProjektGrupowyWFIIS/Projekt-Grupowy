@@ -108,9 +108,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać kategorii zasobu enegetycznego!';
+    echo "<br><p style='color: white'>Nie mogę zapisać kategorii zasobu enegetycznego!</p>";
   else
-    echo '<br><hr>Kategoria zasobu energetycznego zapisana!';
+    echo "<br><p style='color: white'>Kategoria zasobu energetycznego zapisana!</p>";
 }
 ?>
 </div>

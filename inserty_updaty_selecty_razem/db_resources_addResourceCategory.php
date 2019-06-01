@@ -110,9 +110,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać kategorii zasobu (surowca)!';
+    echo "<br><p style='color: white'>Nie mogę zapisać kategorii zasobu (surowca)!</p>";
   else
-    echo '<br><hr>Kategoria zasobu (surowca) zapisana!';
+    echo "<br><p style='color: white'>Kategoria zasobu (surowca) zapisana!</p>";
 }
 ?>
 

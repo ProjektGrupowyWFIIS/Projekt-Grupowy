@@ -127,9 +127,9 @@ if($_POST)
     close_database();
 
     if (!$result)
-        echo '<br><hr>Nie mogę zmienić atrybutu zasobu!';
+        echo "<br><p style='color: white'>Nie mogę zmienić atrybutu zasobu!</p>";
     else
-        echo '<br><hr>Atrybut zasobu zmieniony!';
+        echo "<br><p style='color: white'>Atrybut zasobu zmieniony!</p>";
 }
 ?>
 

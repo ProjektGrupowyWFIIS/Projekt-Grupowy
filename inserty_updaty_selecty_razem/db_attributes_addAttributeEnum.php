@@ -149,9 +149,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać możliwej wartości atrybutu wyliczeniowego!';
+    echo "<br><p style='color: white'>Nie mogę zapisać możliwej wartości atrybutu wyliczeniowego!</p>";
   else
-    echo '<br><hr>Możliwa wartość atrybutu wyliczeniowego zapisana!';
+    echo "<br><p style='color: white'>Możliwa wartość atrybutu wyliczeniowego zapisana!</p>";
 }
 ?>
 </div>

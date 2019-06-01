@@ -114,9 +114,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać zasobu (surowca)!';
+    echo "<br><p style='color: white'>Nie mogę zapisać zasobu (surowca)!</p>";
   else
-    echo '<br><hr>Zasób (surowiec) zapisany!';
+    echo "<br><p style='color: white'>Zasób (surowiec) zapisany!</p>";
 }
 ?>
 

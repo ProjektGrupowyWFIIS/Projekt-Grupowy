@@ -163,9 +163,9 @@
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić zasobu energetycznego!';
+            echo "<br><p style='color: white'>Nie mogę zmienić zasobu energetycznego!</p>";
         else
-            echo '<br><hr>Zasób energetyczny zmieniony!';
+            echo "<br><p style='color: white'>Zasób energetyczny zmieniony!</p>";
     }
 ?>
 

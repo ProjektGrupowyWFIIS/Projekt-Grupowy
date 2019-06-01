@@ -143,9 +143,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić wielkości fizycznej i jej jednostki podstawowej!';
+            echo "<br><p style='color: white'>Nie mogę zmienić wielkości fizycznej i jej jednostki podstawowej!</p>";
         else
-            echo '<br><hr>Wielkość fizyczna i jej jednostka podstawowa została zmieniona!';
+            echo "<br><p style='color: white'>Wielkość fizyczna i jej jednostka podstawowa została zmieniona!</p>";
     }
 ?>
 		

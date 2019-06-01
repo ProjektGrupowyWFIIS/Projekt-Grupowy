@@ -163,9 +163,9 @@
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić jednostki!';
+            echo "<br><p style='color: white'>Nie mogę zmienić jednostki!</p>";
         else
-            echo '<br><hr>Jednostka zmieniona!';
+            echo "<br><p style='color: white'>Jednostka zmieniona!</p>";
     }
 ?>
 

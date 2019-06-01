@@ -120,9 +120,9 @@ if($_POST)
   close_database();	
 
   if (!$cat_id)
-    echo '<p style="color:white"><br><hr>Nie mogę zapisać kategorii!</p>';
+    echo "<br><p style='color: white'>Nie mogę zapisać kategorii!</p>";
   else
-    echo '<p style="color:white"><br><hr>Kategoria zapisana! ID=</p>'.$cat_id;
+    echo "<br><p style='color: white'>Kategoria zapisana! ID=</p>".$cat_id;
 }
 ?>
 </div>

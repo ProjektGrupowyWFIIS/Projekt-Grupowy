@@ -141,9 +141,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać pliku!';
+    echo "<br><p style='color: white'>Nie mogę zapisać pliku!</p>";
   else
-    echo '<br><hr>Plik zapisany!';
+    echo "<br><p style='color: white'>Plik zapisany!</p>";
 }
 ?>    
 </div>

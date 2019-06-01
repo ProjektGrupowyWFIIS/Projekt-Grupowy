@@ -110,9 +110,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać obowiązkowego współczynnika!';
+    echo "<br><p style='color: white'>Nie mogę zapisać obowiązkowego współczynnika!</p>";
   else
-    echo '<br><hr>Obowiązkowy współczynnik zapisany!';
+    echo "<br><p style='color: white'>Obowiązkowy współczynnik zapisany!</p>";
 }
 ?>
 </div>

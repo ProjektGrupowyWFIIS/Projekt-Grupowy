@@ -137,9 +137,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać atrybutu zasobu energetycznego!';
+    echo "<br><p style='color: white'>Nie mogę zapisać atrybutu zasobu energetycznego!</p>";
   else
-    echo '<br><hr>Atrybut zasobu energetycznego zapisany!';
+    echo "<br><p style='color: white'>Atrybut zasobu energetycznego zapisany!</p>";
 }
 ?>
 </div>

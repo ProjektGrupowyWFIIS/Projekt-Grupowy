@@ -98,9 +98,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać jednostki alternatywnej!';
+    echo "<br><p style='color: white'>Nie mogę zapisać jednostki alternatywnej!</p>";
   else
-    echo '<br><hr>Jednostka alternatywna zapisana!';
+    echo "<br><p style='color: white'>Jednostka alternatywna zapisana!</p>";
 }
 ?>
 		

@@ -110,9 +110,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać hierarchii kategorii!';
+    echo "<br><p style='color: white'>Nie mogę zapisać hierarchii kategorii!</p>";
   else
-    echo '<br><hr>Hierarchia kategorii zapisana!';
+    echo "<br><p style='color: white'>Hierarchia kategorii zapisana!";
 }
 ?>
 

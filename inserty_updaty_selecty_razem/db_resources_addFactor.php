@@ -256,9 +256,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać współczynnika!';
+    echo "<br><p style='color: white'>Nie mogę zapisać współczynnika!</p>";
   else
-    echo '<br><hr>Współczynnik zapisany!';
+    echo "<br><p style='color: white'>Współczynnik zapisany!</p>";
 }
 ?>
 </div>

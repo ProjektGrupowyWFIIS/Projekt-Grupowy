@@ -237,9 +237,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać współczynnika energetycznego!';
+    echo "<br><p style='color: white'>Nie mogę zapisać współczynnika energetycznego!</p>";
   else
-    echo '<br><hr>Współczynnik energetyczny zapisany!';
+    echo "<br><p style='color: white'>Współczynnik energetyczny zapisany!</p>";
 }
 ?>
 </div>

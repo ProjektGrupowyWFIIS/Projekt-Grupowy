@@ -129,9 +129,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić atrybutu zasobu energetycznego!';
+            echo "<br><p style='color: white'>Nie mogę zmienić atrybutu zasobu energetycznego!</p>";
         else
-            echo '<br><hr>Atrybut zasobu energetycznego zmieniony!';
+            echo "<br><p style='color: white'>Atrybut zasobu energetycznego zmieniony!</p>";
     }
 ?>
 </body>

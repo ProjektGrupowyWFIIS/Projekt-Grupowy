@@ -174,9 +174,9 @@
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić pliku!';
+            echo "<br><p style='color: white'>Nie mogę zmienić pliku!</p>";
         else
-            echo '<br><hr>Plik zmieniony!';
+            echo "<br><p style='color: white'>Plik zmieniony!</p>";
     }
 ?>    
 </div>

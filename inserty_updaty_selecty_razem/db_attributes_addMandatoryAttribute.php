@@ -100,9 +100,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<p style="color:white">Nie mogę zapisać obowiązkowego atrybutu!</p>';
+    echo "<p style='color:white'>Nie mogę zapisać obowiązkowego atrybutu!</p>";
   else
-    echo '<br><hr>Obowiązkowy atrybut zapisany!';
+    echo "<br><p style='color: white'>Obowiązkowy atrybut zapisany!</p>";
 }
 ?>
 </div>

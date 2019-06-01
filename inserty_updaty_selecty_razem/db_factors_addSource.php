@@ -150,9 +150,9 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo '<br><hr>Nie mogę zapisać źródła!';
+    echo "<br><p style='color: white'>Nie mogę zapisać źródła!</p>";
   else
-    echo '<br><hr>Źródło zapisane!';
+    echo "<br><p style='color: white'>Źródło zapisane!</p>";
 }
 ?>
 </div>

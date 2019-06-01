@@ -137,9 +137,9 @@
         close_database();
 
         if (!$result)
-            echo '<br><hr>Nie mogę zmienić hierarchii kategorii!';
+            echo "<br><p style='color: white'>Nie mogę zmienić hierarchii kategorii!</p>";
         else
-            echo '<br><hr>Hierarchia kategorii zmieniona!';
+            echo "<br><p style='color: white'>Hierarchia kategorii zmieniona!</p>";
     }
 ?>
 
