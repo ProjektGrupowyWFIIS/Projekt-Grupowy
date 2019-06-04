@@ -250,6 +250,30 @@
                                     
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkTwo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Wykresy
+                  </a>
+                  <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                      
+            
+                      <li class="dropdown-submenu">
+                          <a  class="dropdown-item" tabindex="-1" href="#">Wykresy</a>
+                          <ul class="dropdown-menu">
+                          <li class="dropdown-item"><a tabindex="-1" href="charts.html">Wykresy</a></li>
+                           
+                
+                          
+                            
+                            
+                          </ul>
+                        </li>
+      
+                      
+  
+                                    
+                    </ul>
+                </li>
           </ul>
         </div>
         <!-- <ul class="nav navbar-nav navbar-right mr-5 h5">
