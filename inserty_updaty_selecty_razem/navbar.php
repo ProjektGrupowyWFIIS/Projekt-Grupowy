@@ -236,6 +236,7 @@
                       <li class="dropdown-submenu">
                           <a  class="dropdown-item" tabindex="-1" href="#">Moduł Out</a>
                           <ul class="dropdown-menu">
+                          <li class="dropdown-item"><a tabindex="-1" href="modul_in.php">Moduł In</a></li>
                             <li class="dropdown-item"><a tabindex="-1" href="modul_out.php">Moduł Out</a></li>
                 
                           
