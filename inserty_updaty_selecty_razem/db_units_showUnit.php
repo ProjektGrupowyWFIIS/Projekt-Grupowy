@@ -24,8 +24,8 @@ include("navbar.php");
 
 <div class="container">
 <div class="row mt-5">
-<div class="col-md-4"></div>
-<div class="col-md-4">
+<div class="col-md-3"></div>
+<div class="col-md-6">
 <?php
 
 require "db_functions.php";
@@ -65,7 +65,7 @@ close_database();
 
 ?>
 </div>
-<div class="col-md-4"></div>
+<div class="col-md-3"></div>
 </div>
 </div>
 <br>

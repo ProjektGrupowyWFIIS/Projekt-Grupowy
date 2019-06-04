@@ -24,8 +24,8 @@ include("navbar.php");
 
 <div class="container">
 <div class="row mt-5">
-<div class="col-md-4"></div>
-<div class="col-md-4">
+<div class="col-md-3"></div>
+<div class="col-md-6">
 <?php
 
 require "db_functions.php";
@@ -43,7 +43,7 @@ $atr = read_table("resources.factors");
 	echo "<th style='color: white'> ID Jednostki Surowca 1: </th>";
 	echo "<th style='color: white'> ID Jednostki Surowca 2: </th>";
 	echo "<th style='color: white'> ID Jednostki Współczynnika: </th>";
-	echo "<th style='color: white'> ID Współczynnika: </th>";
+	echo "<th style='color: white'> Współczynnik </th>";
 	echo "<th style='color: white'> Niepewność: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
@@ -71,7 +71,7 @@ close_database();
 
 ?>
 </div>
-<div class="col-md-4"></div>
+<div class="col-md-3"></div>
 </div>
 </div>
 <br>
