@@ -1,0 +1,18 @@
+NAZWA NOŚNIKA ENERGII;NAZWA ANGLIELSKA;KOD GUS;WARTOŚĆ OPAŁOWA;JEDNOSTKA OPAŁOWA;JEDNOSTKA SUROWCA;WSKAŻNIK EMISJII CO2;JEDNOSTKA CO2;JEDNOSTKA SUROWCA
+Węgiel kamienny energetyczny - gruby;Coal 1;060;27500;kJ;kg;2259;kg;t
+Węgiel kamienny energetyczny - średni i drobny;Coal 2;060;27000;kJ;kg;2259;kg;t
+Węgiel kamienny energetyczny - miał;Coal 3;060;22000;kJ;kg;2259;kg;t
+Węgiel kamienny koksujący;Coal 4;061;29600;kJ;kg;;;
+Brykiety z węgla kamiennego;Coal 5;002;23200;kJ;kg;92,71;kg;GJ
+Węgiel brunatny - gruby;Coal 6;003;10000;kJ;kg;;;
+Węgiel brunatny - średni;Coal 7;003;8000;kJ;kg;;;
+Węgiel brunatny - drobny, miał;Coal 8;003;9000;kJ;kg;;;
+Węgiel brunatny - niesort;Coal 9;003;7800;kJ;kg;;;
+Brykiety z węgla brunatnego;Coal 10;004;17500;kJ;kg;;;
+Gaz ziemny wysokometanowy;Gas 1;013;36000;kJ;m3;55,82;kg;GJ
+Gaz ziemny zaazotowany;Gas 2;014;24000;kJ;m3;55,82;kg;GJ
+Energia elektryczna;Energy;024;;;;739;kg;MWh
+benzyna silnikowa bezołowiowa;Gasoline;088;44,8;MJ;kg;3083;kg;t
+oleje napędowe do silników (Diesla);Diesel;064;43,33;MJ;kg;3177;kg;t
+gaz skroplony LPG;GAS LPG;012;47,31;MJ;kg;2954;kg;t
+ciepło w parze wodnej i gorącej wodzie;Heat;023;;;;63,5;kg;GJ

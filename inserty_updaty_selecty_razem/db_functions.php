@@ -68,6 +68,37 @@ function write_quantity_and_base_unit($quantity_name_pl, $quantity_name_eng, $un
 }
 
 
+function write_other_unit($unit, $unit_full_name_pl, $unit_full_name_eng, $ratio, $quantity_id)
+{
+  $query = "insert into units.units (unit, unit_full_name_pl, unit_full_name_eng, ratio, quantity_id) ".
+           "values('".$unit."', '".$unit_full_name_pl."','".$unit_full_name_eng."', ".$ratio.", ".$quantity_id.")  returning unit_id";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
+
+function write_source_unit_name($source_unit_name, $canonical_unit_id)  
+{
+  $query = "insert into units.source_unit_names (unit_variant, unit_canonical_id) ".
+           "values('".$source_unit_name."', ".$canonical_unit_id.")";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if (pg_query($query))
+    return $canonical_unit_id;
+  else
+    return 0;
+}
+
+
 function get_quantity_id($quantity_name_eng)  
 {
   $query = "select quantity_id from units.quantities where quantity_name_eng = '".$quantity_name_eng."'";
@@ -100,10 +131,9 @@ function get_unit_id($unit)
 }
 
 
-function write_other_unit($unit, $unit_full_name_pl, $unit_full_name_eng, $ratio, $quantity_id)
+function get_canonical_unit_id($unit_variant)  
 {
-  $query = "insert into units.units (unit, unit_full_name_pl, unit_full_name_eng, ratio, quantity_id) ".
-           "values('".$unit."', '".$unit_full_name_pl."','".$unit_full_name_eng."', ".$ratio.", ".$quantity_id.")  returning unit_id";
+  $query = "select unit_canonical_id from units.source_unit_names where unit_variant = '".$unit_variant."'";
 
   //echo "DEBUG: ".$query."<br><br>";
 
@@ -112,20 +142,6 @@ function write_other_unit($unit, $unit_full_name_pl, $unit_full_name_eng, $ratio
     $row = pg_fetch_row($result);
     return $row[0];
   }
-  else
-    return 0;
-}
-
-
-function write_source_unit_name($source_unit_name, $canonical_unit_id)  
-{
-  $query = "insert into units.source_unit_names (unit_variant, unit_canonical_id) ".
-           "values('".$source_unit_name."', ".$canonical_unit_id.")";
-
-  //echo "DEBUG: ".$query."<br><br>";
-
-  if (pg_query($query))
-    return $canonical_unit_id;
   else
     return 0;
 }
@@ -172,6 +188,37 @@ function write_file($file_name, $file_type, $hdd_file_path, $folder_id)
 }
 
 
+function get_folder_id($folder_name)  
+{
+  $query = "select folder_id from files.folders where folder_name = '".$folder_name."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
+
+function get_file_id($folder_id, $file_name)  
+{
+  $query = "select file_id from files.files where file_name = '".$file_name."' and folder_id=".$folder_id;
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
 
 //---------- categories: -------------
 
@@ -207,6 +254,21 @@ function write_hierarchy_of_categories($cat_id, $parent_id)
 }
 
 
+function get_category_id($category_name_pl)  
+{
+  $query = "select cat_id from categories.categories where cat_name_pl = '".$category_name_pl."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
 
 //-------- attributes: ---------------
 
@@ -230,10 +292,8 @@ function write_attribute($type_id, $attribute_name_pl, $attribute_name_eng, $att
 
 function write_attribute_enum($attribute_id,$attribute_value_pl,$attribute_value_eng,$attribute_value_description_pl,$attribute_value_description_eng) 
 {
-  $query = "insert into attributes.attribute_enums (attribute_id,attribute_value_pl,attribute_value_eng,
-            attribute_value_description_pl,attribute_value_description_eng) ".
-           "values(".$attribute_id.",'".$attribute_value_pl."','".$attribute_value_eng."','".$attribute_value_description_pl."',
-           '".$attribute_value_description_eng."')";
+  $query = "insert into attributes.attribute_enums (attribute_id,attribute_value_pl,attribute_value_eng,attribute_value_description_pl,attribute_value_description_eng) ".
+           "values(".$attribute_id.",'".$attribute_value_pl."','".$attribute_value_eng."','".$attribute_value_description_pl."','".$attribute_value_description_eng."')";
 
   //echo "DEBUG: ".$query."<br><br>";
 
@@ -253,6 +313,22 @@ function write_mandatory_attribute($cat_id, $attribute_id)
 
   if (pg_query($query))
     return $attribute_id;
+  else
+    return 0;
+}
+
+
+function get_attribute_id($attribute_name_pl)  
+{
+  $query = "select attribute_id from attributes.attributes where attribute_name_pl = '".$attribute_name_pl."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
   else
     return 0;
 }
@@ -309,6 +385,21 @@ function write_mandatory_factor($cat_id, $factor_id)
     return 0;
 }
 
+
+function get_factor_id($factor_name_pl)  
+{
+  $query = "select factor_id from factors.factor_names where factor_name_pl = '".$factor_name_pl."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
 
 
 //---------- resources: ----------------
@@ -396,6 +487,21 @@ function write_resource_category($resource_id, $cat_id)
 }
 
 
+function get_resource_id($name_pl)  
+{
+  $query = "select resource_id from resources.resources where resource_name_pl = '".$name_pl."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
 
 //---------- energy_resources: ----------------
 
@@ -470,6 +576,22 @@ function write_energy_resource_category($resource_id, $cat_id)
 }
 
 
+function get_energy_resource_id($name_pl)  
+{
+  $query = "select resource_id from energy_resources.energy_resources where resource_name_pl = '".$name_pl."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
+
 //----------- read table: ----------------
 
 function read_table($table_name, $where_clause="")
@@ -483,6 +605,7 @@ function read_table($table_name, $where_clause="")
 
   return $arr;
 }
+
 function get_ratio($unit)  
 {
   $query = "select ratio from units.units where unit = '".$unit."' or unit_full_name_pl = '".$unit."'  ";
@@ -495,5 +618,4 @@ function get_ratio($unit)
   else
     return 0;
 }
-
 ?>
