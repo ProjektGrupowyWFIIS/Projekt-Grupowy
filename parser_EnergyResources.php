@@ -21,7 +21,7 @@
   include ('navbar.php');
   ?>
     
-
+<div class="text-white">
 <?php
 
 if($_POST)
@@ -195,7 +195,7 @@ if($_POST)
 else
 {
 ?>
-      
+      </div>
 <form method="post" action="" enctype="multipart/form-data">
 <hr>
 
