@@ -21,7 +21,7 @@
 include("navbar.php");
 ?>
 <h3 class="text-white text-center mt-3">Atrybuty</h3>
-
+<div class="table-responsive table-lg">
 <div class="container">
 <div class="row mt-5">
 <div class="col-md-3"></div>
@@ -32,7 +32,8 @@ require "db_functions.php";
 open_database();
 $atr = read_table("attributes.attributes");
 
-  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" color = \"white\" >";
+  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" color = \"white\" class=\"table table-bordered\">";
+  
 
   echo "<tr>";
 	echo "<th style='color: white'> ID: </th>";
@@ -64,9 +65,10 @@ echo "</table>";
 close_database();
 
 ?>
-</div>
+<!-- </div>
 <div class="col-md-3"></div>
 </div>
+</div> -->
 </div>
 <br>
 

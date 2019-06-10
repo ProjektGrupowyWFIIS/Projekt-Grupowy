@@ -29,7 +29,7 @@
     <form action="modul_analityczny.php" method="post" enctype="multipart/form-data">
        <h3 class="text-white text-center">Upload a File:</h3> 
         <input type="file" name="myfile" id="fileToUpload" class="mt-5">
-        <button type="submit" name="submit" class="btn btn-success mt-5 text-center" >Upload Now</button>
+        <button type="submit" name="submit" class="btn btn-block btn-success mt-5 text-center" >Upload Now</button>
         
     </form>
 </div>

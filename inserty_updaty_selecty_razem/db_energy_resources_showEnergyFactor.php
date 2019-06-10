@@ -23,18 +23,22 @@ include("navbar.php");
 <h3 class="text-white text-center mt-3">Pokaż wartości współczynników dla podanego zasobu energetycznego (nośnika energii)</h3>
 
 
-<div class="container">
+<!-- <div class="container">
 <div class="row mt-5">
 <div class="col-md-3"></div>
-<div class="col-md-6">
+<div class="col-md-6"> -->
 
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 <?php
 
 require "db_functions.php";
 open_database();
 $atr = read_table("energy_resources.factors");
 
-	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
+	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
 	echo "<tr>";
 	echo "<th style='color: white'> ID: </th>";
@@ -68,8 +72,12 @@ echo "</table>";
 close_database();
 
 ?>
-</div>
+<!-- </div>
 <div class="col-md-3"></div>
+</div>
+</div> -->
+</div>
+<div class="col-md-2"></div>
 </div>
 </div>
 

@@ -33,8 +33,8 @@ require "db_functions.php";
 open_database();
 $atr = read_table("categories.categories");
 
-  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
-
+  echo "<table border = \"2\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\" >";
+	echo "<thead class=\"thead-light\"></thead>";
   echo "<tr>";
 	echo "<th style='color: white'> ID: </th>";
 	echo "<th style='color: white'> Nazwa: </th>";
@@ -43,6 +43,7 @@ $atr = read_table("categories.categories");
 	echo "<th style='color: white'> Opis (język angielski): </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
+	echo"</thead>";
 	
 foreach($atr as $row_number => $row)
 {

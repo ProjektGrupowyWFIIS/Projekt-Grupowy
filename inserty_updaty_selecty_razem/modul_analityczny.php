@@ -117,8 +117,8 @@ include('navbar.php');
 					require "db_functions.php";
 					open_database();
 					 
-					$output2 = "<ul><ul>";
-					$output2 .= "<h3>Produkty</h3>";
+					$output2 = "<ul class=\"list-group list-group-flush\"><ul>";
+					$output2 .= "<h1>Produkty</h1>";
 					 echo "<table border = \"2\" cellpading= \"10\" cellspacing=\"5\" color = \"black\">";
 						
 						
@@ -149,13 +149,13 @@ include('navbar.php');
 					 
 					 
 					foreach ($json['products'] as &$products) {
-						$output2 .= "<li>ID produktu:  " . $products['prod_id'] . "</li>";
-						$output2 .= "<li>Nazwa:  " . $products['name'] . "</li>";
-						$output2 .= "<li>Jednostkaa:  " . $products['unit'] . "</li>";
-						$output2 .= "<li>Ilość:  " . $products['ammount'] . "</li>";
+						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark \">ID produktu:  " . $products['prod_id'] . "</li>";
+						$output2 .= "<li  class=\"list-group-item font-weight-bold text-dark\">Nazwa:  " . $products['name'] . "</li>";
+						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $products['unit'] . "</li>";
+						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Ilość:  " . $products['ammount'] . "</li>";
 						$proc = ($products['ammount'] / $amountOfAllProds) * 100; //procenty kazdego
 					 
-						$output2 .= "<li>" . round($proc, 2) . " % / products</li>";
+						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">" . round($proc, 2) . " % / products</li>";
 						$num = sizeof($products['resources']); //ilosc produktow
 					 
 					 
@@ -169,10 +169,10 @@ include('navbar.php');
 								{
 					 
 									$output2 .= "<br>" . $flag . "</br>";
-									$output2 .= "<li>SUROWIEC</li>";
-									$output2 .= "<li>ID:  " . $resources['res_id'] . "</li>";
-									$output2 .= "<li>Jednostka:  " . $resources['unit'] . "</li>";
-									$output2 .= "<li>Ilość:  " . $resources['ammount'] . "</li>";
+									$output2 .= "<h5>SUROWIEC</h5>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">ID:  " . $resources['res_id'] . "</li>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $resources['unit'] . "</li>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Ilość:  " . $resources['ammount'] . "</li>";
 									$unit = get_ratio($resources['unit']);
 									if (in_array($id, $moreThanOneRes)) {
 										$proc = $proc / 100;
@@ -180,7 +180,7 @@ include('navbar.php');
 									} else
 										$eqco2OfRes[$nu] = $resources['ammount'] * $unit * 1; //dodac co2
 									$resources['eqco2']=$eqco2OfRes[$nu];
-									$output2 .= "<li>eqco2:  " . $eqco2OfRes[$nu] . "</li>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">eqco2:  " . $eqco2OfRes[$nu] . "</li>";
 									$total_eqco2 += $eqco2OfRes[$nu];
 									array_push($products['resources'], $resources);
 					 
@@ -211,10 +211,10 @@ include('navbar.php');
 								{
 					 
 									$output2 .= "<br></br>";
-									$output2 .= "<li>SUROWIEC ENERGETYCZNY</li>";
-									$output2 .= "<li>ID:  " . $energy_resources['gus'] . "</li>";
-									$output2 .= "<li>Jednostka:  " . $energy_resources['unit'] . "</li>";
-									$output2 .= "<li>Ilość:  " . $energy_resources['ammount'] . "</li>";
+									$output2 .= "<h5>SUROWIEC ENERGETYCZNY</h5>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">ID:  " . $energy_resources['gus'] . "</li>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $energy_resources['unit'] . "</li>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Ilość:  " . $energy_resources['ammount'] . "</li>";
 									$unit = get_ratio($energy_resources['unit']);
 									if (in_array($id, $moreThanOneERes)) {
 										$proc = $proc / 100;
@@ -223,7 +223,7 @@ include('navbar.php');
 										$eqco2OfRes[$nu] = $energy_resources['ammount'] * $unit * 1; //dodac co2
 									$energy_resources['eqco2']=$eqco2OfRes[$nu];
 					 
-									$output2 .= "<li>eqco2:  " . $eqco2OfRes[$nu] . "</li>";
+									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">eqco2:  " . $eqco2OfRes[$nu] . "</li>";
 									$total_eqco2 += $eqco2OfRes[$nu];
 									array_push($products['energy_resources'], $energy_resources);
 					 
@@ -235,11 +235,11 @@ include('navbar.php');
 					 
 						$products['total_eqco2']=$total_eqco2;
 					 
-						$output2 .= "<li>total_eqco2:  " . $total_eqco2 . "</li>";
+						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">total_eqco2:  " . $total_eqco2 . "</li>";
 						$eqco2_per_unit = $total_eqco2 / $products['ammount'];
 						$products['eqco2_per_unit']= $eqco2_per_unit ;
 					 
-						$output2 .= "<li>eqco2_per_unit:  " . round($eqco2_per_unit, 2) . "</li>";
+						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">eqco2_per_unit:  " . round($eqco2_per_unit, 2) . "</li>";
 					   // $output2 .= "<br>___________________________</br>";
 					 
 					 
@@ -267,10 +267,10 @@ include('navbar.php');
 						);
 					 
 						fwrite($fp, json_encode($energy, JSON_UNESCAPED_UNICODE)); //////////////////////////////
-						$output .= "<li>Numer GUS:  " . $energy_resources['gus'] . "</li>";
-						$output .= "<li>Nazwa:  " . $energy_resources['name'] . "</li>";
-						$output .= "<li>Jednostka:  " . $energy_resources['unit'] . "</li>";
-						$output .= "<li>Ilość:  " . $energy_resources['ammount'] . "</li>";
+						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Numer GUS:  " . $energy_resources['gus'] . "</li>";
+						$output .= "<li  class=\"list-group-item font-weight-bold text-dark \">Nazwa:  " . $energy_resources['name'] . "</li>";
+						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $energy_resources['unit'] . "</li>";
+						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Ilość:  " . $energy_resources['ammount'] . "</li>";
 					}
 					 
 					 
@@ -288,10 +288,10 @@ include('navbar.php');
 						);
 					 
 						fwrite($fp, json_encode($res, JSON_UNESCAPED_UNICODE));
-						$output .= "<li>Numer ID:  " . $resources['res_id'] . "</li>";
-						$output .= "<li>Nazwa:  " . $resources['name'] . "</li>";
-						$output .= "<li>Jednostka:  " . $resources['unit'] . "</li>";
-						$output .= "<li>Ilość:  " . $resources['ammount'] . "</li>";
+						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Numer ID:  " . $resources['res_id'] . "</li>";
+						$output .= "<li  class=\"list-group-item font-weight-bold text-dark\">Nazwa:  " . $resources['name'] . "</li>";
+						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $resources['unit'] . "</li>";
+						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Ilość:  " . $resources['ammount'] . "</li>";
 					}
 					 
 					fclose($fp);
@@ -313,6 +313,8 @@ include('navbar.php');
 
 
 ?>
+
+
 </div>
 </div>
 </div>

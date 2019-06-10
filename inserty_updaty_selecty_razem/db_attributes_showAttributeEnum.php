@@ -25,14 +25,14 @@ include("navbar.php");
 <div class="container">
 <div class="row mt-5">
 <div class="col-md-3"></div>
-<div class="col-md-6">
+<div class="col-md-6"> 
 <?php
 
 require "db_functions.php";
 open_database();
 $atr = read_table("attributes.attribute_enums");
 
-  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
+  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\" class=\"table table-bordered\">";
 
   echo "<tr>";
 	echo "<th style='color: white'> ID: </th>";

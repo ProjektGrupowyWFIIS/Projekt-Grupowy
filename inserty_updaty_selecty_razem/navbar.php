@@ -5,12 +5,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item ">
              
             </li>
             
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Dodaj
                 </button>
                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
@@ -234,15 +234,15 @@
                       
             
                       <li class="dropdown-submenu">
-                          <a  class="dropdown-item" tabindex="-1" href="#">Moduł Out</a>
-                          <ul class="dropdown-menu">
+                          <!-- <a  class="dropdown-item" tabindex="-1" href="#">Moduł Out</a> -->
+                          <!-- <ul class="dropdown-menu"> -->
                           <li class="dropdown-item"><a tabindex="-1" href="modul_in.php">Moduł In</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="modul_out.php">Moduł Out</a></li>
+                            <!-- <li class="dropdown-item"><a tabindex="-1" href="modul_out.php">Moduł Out</a></li> -->
                 
                           
                             
                             
-                          </ul>
+                          <!-- </ul> -->
                         </li>
       
                       
@@ -260,7 +260,7 @@
                       <li class="dropdown-submenu">
                           <a  class="dropdown-item" tabindex="-1" href="#">Wykresy</a>
                           <ul class="dropdown-menu">
-                          <li class="dropdown-item"><a tabindex="-1" href="charts.html">Wykresy</a></li>
+                          <li class="dropdown-item"><a tabindex="-1" href="charts.php">Wykresy</a></li>
                            
                 
                           

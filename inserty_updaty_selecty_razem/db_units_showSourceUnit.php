@@ -32,7 +32,7 @@ require "db_functions.php";
 open_database();
 $atr = read_table("units.source_unit_names");
 
-    echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" >";
+    echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
     echo "<tr>";
     echo "<th style='color: white'> Jednostka Alternatywna: </th>";
