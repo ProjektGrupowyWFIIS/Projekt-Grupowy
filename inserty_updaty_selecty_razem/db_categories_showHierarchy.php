@@ -56,7 +56,7 @@ $categories = $arr;
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
-foreach($categories as $row_number => $row)
+foreach($categories as $row_number => $row1)
 {
   
 	echo "<tr>";
