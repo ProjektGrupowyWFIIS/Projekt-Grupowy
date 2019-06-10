@@ -35,22 +35,34 @@ Hierarchia nie jest drzewem, lecz grafem acyklicznym, a zatem każda kategoria m
 
 require "db_functions.php";
 open_database();
-$atr = read_table("categories.hierarchy_of_categories");
+
+	  $arr = array();
+
+  $query = "select categories.categories.cat_id , categories.hierarchy_of_categories.parent_id ,categories.categories.cat_name_pl FROM categories.hierarchy_of_categories
+FULL JOIN categories.categories ON categories.categories.cat_id=categories.hierarchy_of_categories.cat_id";
+
+  if ($result = pg_query($query))
+    $arr = pg_fetch_all($result);
+
+
+$categories = $arr;
 
 	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
 	echo "<tr>";
 	echo "<th style='color: white'> ID Kategorii: </th>";
+	echo "<th style='color: white'> Nazwa Kategorii: </th>";
 	echo "<th style='color: white'> ID Rodzica : </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
-foreach($atr as $row_number => $row)
+foreach($categories as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['parent_id'].'</th>';
+	echo '<th style=\'color: white\'>'.$row1['cat_id'].'</th>';
+	echo '<th style=\'color: white\'>'.$row1['cat_name_pl'].'</th>';
+	echo '<th style=\'color: white\'>'.$row1['parent_id'].'</th>';
 	echo '<th>'.'<a href=db_categories_updateHierarchy.php?CatID='.$row["cat_id"].'&ParentID='.$row["parent_id"].'>Edycja</a>'.'</td>';
 	echo "</tr>";
  
