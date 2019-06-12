@@ -27,7 +27,7 @@
 if($_POST)
 {
   
-  $file_name = $_FILES['File']['name'];
+  $file_name = $_FILES['File']['tmp_name'];
   $header    = $_POST["Header"];
   $separator = $_POST["Separator"];
   $source_id = $_POST["SourceID"];
