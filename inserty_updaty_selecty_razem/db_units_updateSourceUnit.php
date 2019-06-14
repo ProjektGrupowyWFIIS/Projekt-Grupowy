@@ -107,6 +107,7 @@ include ('navbar.php');
     </div>
 </div>
 
+<div class="text-center">
 <?php
     if($_POST)
     {
@@ -118,11 +119,11 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić jednostki alternatywnej!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić jednostki alternatywnej!</p>";
         else
-            echo "<br><p style='color: white'>Jednostka alternatywna zmieniona!</p>";
+            echo "<br><p style='color: green;font-size:25px;'>Jednostka alternatywna zmieniona!</p>";
     }
 ?>
-		
+		</div>
 </body>
 </html>

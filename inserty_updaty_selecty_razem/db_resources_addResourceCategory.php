@@ -98,6 +98,8 @@ foreach($category as $row_number => $row){
 </form>
 </div>
 
+
+<div class="text-center">
 <?php
 
 if($_POST)
@@ -110,11 +112,11 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo "<br><p style='color: white'>Nie mogę zapisać kategorii zasobu (surowca)!</p>";
+    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać kategorii zasobu (surowca)!</p>";
   else
-    echo "<br><p style='color: white'>Kategoria zasobu (surowca) zapisana!</p>";
+    echo "<br><p style='color: green;font-size:25px;'>Kategoria zasobu (surowca) zapisana!</p>";
 }
 ?>
-
+</div>
 </body>
 </html>

@@ -314,9 +314,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić współczynnika!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić współczynnika!</p>";
         else
-            echo "<br><p style='color: white'>Współczynnik zmieniony!</p>";
+            echo "<br><p style='color: green;font-size:25px;'>Współczynnik zmieniony!</p>";
     }
 ?>
 </div>

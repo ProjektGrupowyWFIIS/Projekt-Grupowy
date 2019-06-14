@@ -126,6 +126,7 @@
             </a>
     </div>
 </div>
+<div class="text-white">
 <?php
     if($_POST)
     {
@@ -139,17 +140,17 @@
             close_database();
 
             if (!$result)
-                echo "<br><p style='color: white'>Nie mogę zmienić hierarchii kategorii!</p>";
+                echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić hierarchii kategorii!</p>";
             else
-                echo "<br><p style='color: white'>Hierarchia kategorii zmieniona!</p>";
+                echo "<br><p style='color: green;font-size:25px;'>Hierarchia kategorii zmieniona!</p>";
         }
         else
-            echo "<br><p style='color: white'>Błąd kategoria i kategoria nadrzędna są takie same!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Błąd kategoria i kategoria nadrzędna są takie same!</p>";
 
 
     }
 ?>
-
+</div>
 
 </body>
 </html>

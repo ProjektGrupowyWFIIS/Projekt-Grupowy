@@ -116,6 +116,8 @@
 </form>
 </div>
 
+
+<div class="text-center">
 <?php
 require "db_functions.php";
 
@@ -136,12 +138,12 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo "<br><p style='color: white'>Nie mogę zapisać wielkości fizycznej i jej jednostki podstawowej!</p>";
+    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać wielkości fizycznej i jej jednostki podstawowej!</p>";
   else
-    echo "<br><p style='color: white'>Wielkość fizyczna i jej jednostka podstawowa zapisana!</p>";
+    echo "<br><p style='color: green;font-size:25px;'>Wielkość fizyczna i jej jednostka podstawowa zapisana!</p>";
 }
 ?>
 
-		
+</div>
 </body>
 </html>

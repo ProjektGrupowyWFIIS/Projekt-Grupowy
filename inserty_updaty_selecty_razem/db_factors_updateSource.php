@@ -164,9 +164,9 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić źródła!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić źródła!</p>";
         else
-            echo "<br><p style='color: white'>Źródło zmienione!</p>";
+            echo "<br><p style='color: green;font-size:25px;'>Źródło zmienione!</p>";
     }
 ?>
 </div>

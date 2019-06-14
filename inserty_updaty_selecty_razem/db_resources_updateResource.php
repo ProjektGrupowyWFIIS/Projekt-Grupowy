@@ -114,6 +114,7 @@ include ('navbar.php');
     </a>
 </div>
 </div>
+<div class="text-center">
 <?php
     if($_POST)
     {
@@ -128,11 +129,11 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić zasobu (surowca)!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić zasobu (surowca)!</p>";
         else
-            echo "<br><p style='color: white'>Zasób (surowiec) zmieniony!</p>";
+            echo "<br><p style='color: green;font-size:25px;'>Zasób (surowiec) zmieniony!</p>";
     }
 ?>
-
+</div>
 </body>
 </html>

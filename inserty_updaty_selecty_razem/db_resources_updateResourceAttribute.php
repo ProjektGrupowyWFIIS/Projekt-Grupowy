@@ -117,6 +117,7 @@
         </a>
     </div>
 </div>
+<div class="text-center">
 <?php
 if($_POST)
 {
@@ -127,11 +128,11 @@ if($_POST)
     close_database();
 
     if (!$result)
-        echo "<br><p style='color: white'>Nie mogę zmienić atrybutu zasobu!</p>";
+        echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić atrybutu zasobu!</p>";
     else
-        echo "<br><p style='color: white'>Atrybut zasobu zmieniony!</p>";
+        echo "<br><p style='color: green;font-size:25px;'>Atrybut zasobu zmieniony!</p>";
 }
 ?>
-
+</div>
 </body>
 </html>

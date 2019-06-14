@@ -132,8 +132,8 @@ if($_POST)
   close_database();	
 
   if (!$result)
-    echo "<br><p style='color: white'>Nie mogę zapisać atrybutu!</p>";
+    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać atrybutu!</p>";
   else
-    echo "<br><p style='color: white'>Atrybut zapisany!</p>";
+    echo "<br><p style='color: green; font-size:25px;'>Atrybut zapisany!</p>";
 }
 ?>

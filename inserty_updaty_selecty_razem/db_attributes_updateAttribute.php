@@ -141,7 +141,7 @@
     </div>
 </div>
 
-
+<div class="text-center">
 <?php
     if($_POST)
     {
@@ -158,13 +158,13 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić atrybutu!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić atrybutu!</p>";
         else
-            echo "<br><p style='color: white'>Atrybut zmieniony!</p>";
+            echo "<br><p style='color: green;font-size:25px;'>Atrybut zmieniony!</p>";
     }
 
 ?>
-
+</div>
 
 </body>
 </html>

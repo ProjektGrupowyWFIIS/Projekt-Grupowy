@@ -151,9 +151,9 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić nazwy współczynnika!</p>";
+            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić nazwy współczynnika!</p>";
         else
-            echo "<br><p style='color: white'>Nazwa współczynnika zmieniona!</p>";
+            echo "<br><p style='color: green;font-size:25px;'>Nazwa współczynnika zmieniona!</p>";
     }
 ?>
 </div>
