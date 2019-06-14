@@ -190,7 +190,8 @@ if($_POST)
   }
   fclose($handle);
   close_database();
-
+    
+  echo "<a href='/parser_EnergyResources.php'>Powrót</a>";
 }
 else
 {
