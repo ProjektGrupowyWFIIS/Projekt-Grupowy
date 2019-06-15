@@ -52,7 +52,7 @@
                 </div>
           
                 <div class="col-md-3">
-                    <input name="Name" type="text" class="form-control" value="<?=$file_name?>"/>
+                    <input name="Name" type="text" class="form-control" value="<?=$file_name?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -102,7 +102,7 @@
                 </div>
                 
                 <div class="col-md-3">
-                    <input name="Path" type="text" class="form-control" value="<?=$hdd_file_path?>"/>
+                    <input name="Path" type="text" class="form-control" value="<?=$hdd_file_path?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -177,6 +177,22 @@
             echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić pliku!</p>";
         else
             echo "<br><p style='color: green;font-size:25px;'>Plik zmieniony!</p>";
+
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Plik ".$file_name." zmieniony.</span></center></h4>";
+        else
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_file_id($folder_id, $file_name);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Plik ".$file_name." już istnieje!</span></center></h4>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić pliku!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>    
 </div>
