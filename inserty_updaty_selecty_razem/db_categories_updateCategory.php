@@ -40,7 +40,7 @@ include ('navbar.php');
                 </div>
               
                 <div class="col-md-3">
-                    <input type="text"  name="NamePL" class="form-control" value="<?=$cat_name_pl?>"/>
+                    <input type="text"  name="NamePL" class="form-control" value="<?=$cat_name_pl?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -56,7 +56,7 @@ include ('navbar.php');
                 </div>
               
                 <div class="col-md-3">
-                    <input type="text"  name="NameENG" class="form-control" value="<?=$cat_name_eng?>"/>
+                    <input type="text"  name="NameENG" class="form-control" value="<?=$cat_name_eng?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -72,7 +72,7 @@ include ('navbar.php');
                 </div>
          
                 <div class="col-md-3">
-                    <input type="text"  name="DescPL" class="form-control" value="<?=$cat_description_pl?>"/>
+                    <input type="text"  name="DescPL" class="form-control" value="<?=$cat_description_pl?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -88,7 +88,7 @@ include ('navbar.php');
                 </div>
          
                 <div class="col-md-3">
-                    <input type="text"  name="DescENG" class="form-control" value="<?=$cat_description_eng?>"/>
+                    <input type="text"  name="DescENG" class="form-control" value="<?=$cat_description_eng?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -131,10 +131,21 @@ include ('navbar.php');
                                       $cat_description_eng, $cat_id);
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić kategorii!</p>";
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Kategoria ".$cat_name_pl." zmieniona.</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Kategoria zmieniona!";
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_category_id($cat_name_pl);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Kategoria ".$cat_name_pl." już istnieje!</span></center></h4>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić kategorii!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>
 </div>

@@ -51,7 +51,7 @@
                 </div>
               
                 <div class="col-md-3">
-                    <input type="text"  name="NamePL" class="form-control" value="<?=$resource_name_pl?>"/>
+                    <input type="text"  name="NamePL" class="form-control" value="<?=$resource_name_pl?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -68,7 +68,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="NameENG" class="form-control" value="<?=$resource_name_eng?>"/>
+                    <input type="text"  name="NameENG" class="form-control" value="<?=$resource_name_eng?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -84,7 +84,7 @@
                 </div>
                
                 <div class="col-md-3">
-                    <input type="text"  name="GUS" class="form-control" value="<?=$gus_id?>"/>
+                    <input type="number"  name="GUS" class="form-control" value="<?=$gus_id?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -101,7 +101,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescPL" class="form-control" value="<?=$resource_description_pl?>"/>
+                    <input type="text"  name="DescPL" class="form-control" value="<?=$resource_description_pl?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -118,7 +118,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescENG" class="form-control" value="<?=$resource_description_eng?>"/>
+                    <input type="text"  name="DescENG" class="form-control" value="<?=$resource_description_eng?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -164,10 +164,21 @@
                          $resource_description_pl, $resource_description_eng, $resource_id);
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić zasobu energetycznego!</p>";
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Zasób energetyczny ".$resource_name_pl." zmieniony.</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Zasób energetyczny zmieniony!</p>";
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_energy_resource_id($resource_name_pl);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Zasób energetyczny ".$resource_name_pl." już istnieje!</span></center></h4>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić zasobu energetycznego!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>
 </div>

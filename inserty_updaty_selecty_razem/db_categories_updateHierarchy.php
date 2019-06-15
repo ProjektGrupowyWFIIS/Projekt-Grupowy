@@ -136,18 +136,17 @@
         if($cat_id2 != $parent_id2)
         {
             open_database();
-            $result = update_hierarchy_of_categories($cat_id, $parent_id, $cat_id2, $parent_id2);
+                $result = update_hierarchy_of_categories($cat_id, $parent_id, $cat_id2, $parent_id2);
+//                $cat_name_pl = get_category_name_pl($cat_id);
             close_database();
 
             if (!$result)
-                echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić hierarchii kategorii!</p>";
+                echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić hierarchii kategorii!</center></h4>";
             else
-                echo "<br><p style='color: green;font-size:25px;'>Hierarchia kategorii zmieniona!</p>";
+                echo "<br><h4><center><span style='color: white; background-color: black'>Hierarchia kategorii zmieniona!</span></center></h4>";
         }
         else
-            echo "<br><p style='color: red;font-size:25px;'>Błąd kategoria i kategoria nadrzędna są takie same!</p>";
-
-
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Błąd kategoria i kategoria nadrzędna są takie same!</center></h4>";
     }
 ?>
 </div>

@@ -49,7 +49,7 @@ include ('navbar.php');
                 </div>
                
                 <div class="col-md-3">
-                    <input name="Name" type="text" class="form-control" value="<?=$folder_name?>"/>
+                    <input name="Name" type="text" class="form-control" value="<?=$folder_name?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -63,7 +63,7 @@ include ('navbar.php');
                 </div>
             
                 <div class="col-md-3">
-                    <input name="DescPL" type="text" class="form-control" value="<?=$folder_description_pl?>"/>
+                    <input name="DescPL" type="text" class="form-control" value="<?=$folder_description_pl?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -78,7 +78,7 @@ include ('navbar.php');
                 </div>
         
                 <div class="col-md-3">
-                    <input name="DescENG" type="text" class="form-control" value="<?=$folder_description_eng?>"/>
+                    <input name="DescENG" type="text" class="form-control" value="<?=$folder_description_eng?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -151,10 +151,21 @@ include ('navbar.php');
                                     $folder_description_eng, $parent_folder_id);
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić folderu!</p>";
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Folder ".$folder_name." zmieniony.</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Folder zmieniony!";
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_folder_id($folder_name);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Folder ".$folder_name." już istnieje!</span></center></h4>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić folderu!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>
 

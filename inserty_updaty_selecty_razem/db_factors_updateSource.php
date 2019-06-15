@@ -47,7 +47,7 @@
                 </div>
              
                 <div class="col-md-3">
-                    <input name="Date" type="date" class="form-control" value="<?=$source_date?>"/>
+                    <input name="Date" type="date" class="form-control" value="<?=$source_date?>" required/>
                 </div>
 
             </div>
@@ -61,7 +61,7 @@
                 </div>
               
                 <div class="col-md-3">
-                    <input name="Desc" type="text" class="form-control" value="<?=$source_description?>"/>
+                    <input name="Desc" type="text" class="form-control" value="<?=$source_description?>" required/>
                 </div>
 
             </div>
@@ -75,7 +75,7 @@
                 </div>
               
                 <div class="col-md-3">
-                    <input name="Doi" type="text" class="form-control" value="<?=$doi?>"/>
+                    <input name="Doi" type="text" class="form-control" value="<?=$doi?>" required/>
                 </div>
                 <div class="col-md-3"></div>
 
@@ -90,7 +90,7 @@
                 </div>
         
                 <div class="col-md-3">
-                    <input name="Bibtex" type="text" class="form-control" value="<?=$bibtex?>"/>
+                    <input name="Bibtex" type="text" class="form-control" value="<?=$bibtex?>" required/>
                 </div>
                 <div class="col-md-3"></div>
 
@@ -164,9 +164,9 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić źródła!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić źródła!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Źródło zmienione!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Źródło zmienione!</span></center></h4>";
     }
 ?>
 </div>

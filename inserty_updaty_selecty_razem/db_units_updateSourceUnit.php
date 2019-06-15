@@ -47,7 +47,7 @@ include ('navbar.php');
             </div>
      
             <div class="col-md-3">
-                <input name="UnitVariant2" type="text" class="form-control" value="<?=$unit_variant?>"/>
+                <input name="UnitVariant2" type="text" class="form-control" value="<?=$unit_variant?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -118,10 +118,22 @@ include ('navbar.php');
             $result = update_source_unit_name($unit_variant, $unit_variant2, $unit_canonical_id);
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić jednostki alternatywnej!</p>";
+
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka alternatywna ".$unit_variant2." zmieniona.</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Jednostka alternatywna zmieniona!</p>";
+        {
+            if($_POST)
+            {
+                open_database();
+                    $result = get_canonical_unit_id($unit_variant2);
+                    if ($result)
+                        echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Jednostka alternatywna ".$unit_variant2." już istnieje!</span></center></h4>";
+                    else
+                        echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić jednostki alternatywnej!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>
 		</div>

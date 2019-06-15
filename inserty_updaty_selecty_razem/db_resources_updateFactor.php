@@ -247,7 +247,7 @@ include ('navbar.php');
                 </div>
      
                 <div class="col-md-3">
-                    <input type="text"  name="Factor" class="form-control" value="<?=$factor?>"/>
+                    <input type="number" step="0.0000000001" min="0.0000000001"  name="Factor" class="form-control" value="<?=$factor?>" required/>
                 </div>
             </div>
         </div>
@@ -261,7 +261,7 @@ include ('navbar.php');
                 </div>
                 
                 <div class="col-md-3">
-                    <input type="text"  name="Uncertainty" class="form-control" value="<?=$uncertainty?>"/>
+                    <input type="number" step="0.0000000001" min="0.0000000001" max="100" name="Uncertainty" class="form-control" value="<?=$uncertainty?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -314,9 +314,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić współczynnika!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić współczynnika!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Współczynnik zmieniony!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Współczynnik zmieniony!</span></center></h4>";
     }
 ?>
 </div>

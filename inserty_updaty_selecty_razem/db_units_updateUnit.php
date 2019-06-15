@@ -46,7 +46,7 @@
             </div>
       
             <div class="col-md-3">
-                <input name="Unit" type="text" class="form-control" value="<?=$unit?>"/>
+                <input name="Unit" type="text" class="form-control" value="<?=$unit?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -60,7 +60,7 @@
             </div>
           
             <div class="col-md-3">
-                <input name="UnitNamePL" type="text" class="form-control" value="<?=$unit_full_name_pl?>"/>
+                <input name="UnitNamePL" type="text" class="form-control" value="<?=$unit_full_name_pl?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -74,7 +74,7 @@
             </div>
         
             <div class="col-md-3">
-                <input name="UnitNameENG" type="text" class="form-control" value="<?=$unit_full_name_eng?>"/>
+                <input name="UnitNameENG" type="text" class="form-control" value="<?=$unit_full_name_eng?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -88,7 +88,7 @@
             </div>
           
             <div class="col-md-3">
-                <input name="Ratio" type="text" class="form-control" value="<?=$ratio?>"/>
+                <input name="Ratio" type="number" step="0.0000000001" min="0.0000000001"  class="form-control" value="<?=$ratio?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -162,10 +162,22 @@
                                         $unit_full_name_eng, $ratio, $quantity_id);
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: white'>Nie mogę zmienić jednostki!</p>";
+
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka ".$unit." zmieniona.</span></center></h4>";
         else
-            echo "<br><p style='color: white'>Jednostka zmieniona!</p>";
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_unit_id($unit);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Jednostka ".$unit." już istnieje!</span></center></h4>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić jednostki!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>
 

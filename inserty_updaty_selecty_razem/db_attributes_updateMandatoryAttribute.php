@@ -130,9 +130,9 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić obowiązkowego atrybutu!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić wartości obowiązkowego atrybutu!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Obowiązkowy atrybut zmieniony!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Obowiązkowy atrybut zmieniony!</span></center></h4>";
     }
 ?>
 </div>

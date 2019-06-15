@@ -80,7 +80,7 @@
             </div>
            
             <div class="col-md-3">
-                <input type="text"  name="AttributeValuePL2" class="form-control" value="<?=$attribute_value_pl?>"/>
+                <input type="number" step="0.0000000001" min="0.0000000001" name="AttributeValuePL2" class="form-control" value="<?=$attribute_value_pl?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -96,7 +96,7 @@
             </div>
      
             <div class="col-md-3">
-                <input type="text"  name="ValueENG" class="form-control" value="<?=$attribute_value_eng?>"/>
+                <input type="number" step="0.0000000001" min="0.0000000001"  name="ValueENG" class="form-control" value="<?=$attribute_value_eng?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -112,7 +112,7 @@
             </div>
          
             <div class="col-md-3">
-                <input type="text"  name="DescPL" class="form-control" value="<?=$attribute_value_description_pl?>"/>
+                <input type="text"  name="DescPL" class="form-control" value="<?=$attribute_value_description_pl?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -128,7 +128,7 @@
             </div>
             
             <div class="col-md-3">
-                <input type="text"  name="DescENG" class="form-control" value="<?=$attribute_value_description_eng?>"/>
+                <input type="text"  name="DescENG" class="form-control" value="<?=$attribute_value_description_eng?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -173,9 +173,9 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;>Nie mogę zmienić możliwej wartości atrybutu wyliczeniowego!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić wartości atrybutu wyliczeniowego!</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Możliwa wartość atrybutu wyliczeniowego zmieniona!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Wartość atrybutu wyliczeniowego zmieniona!</span></center></h4>";
     }
 ?>
 </div>

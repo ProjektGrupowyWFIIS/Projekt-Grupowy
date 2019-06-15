@@ -73,7 +73,7 @@
             </div>
          
             <div class="col-md-3">
-                <input name="NamePL" type="text" class="form-control" value="<?=$attribute_name_pl?>"/>
+                <input name="NamePL" type="text" class="form-control" value="<?=$attribute_name_pl?>" required/>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
             </div>
           
             <div class="col-md-3">
-                <input type="text" name="NameENG" class="form-control" value="<?=$attribute_name_eng?>"/>
+                <input type="text" name="NameENG" class="form-control" value="<?=$attribute_name_eng?>" required/>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
             </div>
         
             <div class="col-md-3">
-                <input type="text" name="DescPL" class="form-control" value="<?=$attribute_description_pl?>"/>
+                <input type="text" name="DescPL" class="form-control" value="<?=$attribute_description_pl?>" required/>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
             </div>
         
             <div class="col-md-3">
-                <input type="text" name="DescENG" class="form-control" value="<?=$attribute_description_eng?>"/>
+                <input type="text" name="DescENG" class="form-control" value="<?=$attribute_description_eng?>" required/>
             </div>
         </div>
     </div>
@@ -154,13 +154,23 @@
         open_database();
             $result = update_attribute($type_id, $attribute_name_pl, $attribute_name_eng,
                                        $attribute_description_pl, $attribute_description_eng, $attribute_id);
-
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić atrybutu!</p>";
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Atrybut ".$attribute_name_pl." zmieniony.</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Atrybut zmieniony!</p>";
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_attribute_id($attribute_name_pl);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Atrybut ".$attribute_name_pl." już istnieje!</span></center></h4>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić atrybutu!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 
 ?>

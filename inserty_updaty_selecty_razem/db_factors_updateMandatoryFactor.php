@@ -136,9 +136,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić obowiązkowego współczynnika!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić obowiązkowego współczynnika!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Obowiązkowy współczynnik zmieniony!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Obowiązkowy współczynnik zmieniony!</span></center></h4>";
     }
 ?>
 </div>

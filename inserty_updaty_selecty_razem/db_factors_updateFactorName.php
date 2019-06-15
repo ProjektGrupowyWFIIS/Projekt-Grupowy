@@ -63,7 +63,7 @@
                 </div>
                
                 <div class="col-md-3">
-                    <input type="text"  name="NamePL" class="form-control" value="<?=$factor_name_pl?>"/>
+                    <input type="text"  name="NamePL" class="form-control" value="<?=$factor_name_pl?>" required/>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="NameENG" class="form-control" value="<?=$factor_name_eng?>"/>
+                    <input type="text"  name="NameENG" class="form-control" value="<?=$factor_name_eng?>" required/>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescPL" class="form-control" value="<?=$factor_description_pl?>"/>
+                    <input type="text"  name="DescPL" class="form-control" value="<?=$factor_description_pl?>" required/>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescENG" class="form-control" value="<?=$factor_description_eng?>"/>
+                    <input type="text"  name="DescENG" class="form-control" value="<?=$factor_description_eng?>" required/>
                 </div>
             </div>
         </div>
@@ -150,10 +150,21 @@
                                          $factor_description_pl, $factor_description_eng);
         close_database();
 
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić nazwy współczynnika!</p>";
+        if ($result)
+            echo "<br><h4><center><span style='color: white; background-color: black'>Nazwa współczynnika ".$factor_name_pl." zmieniona.</span></center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Nazwa współczynnika zmieniona!</p>";
+        {
+            if($_POST)
+            {
+                open_database();
+                $result = get_factor_id($factor_name_pl);
+                if ($result)
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Współczynnik o nazwie ".$factor_name_pl." już istnieje!</span></center>";
+                else
+                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić nazwy współczynnika!</span></center></h4>";
+                close_database();
+            }
+        }
     }
 ?>
 </div>

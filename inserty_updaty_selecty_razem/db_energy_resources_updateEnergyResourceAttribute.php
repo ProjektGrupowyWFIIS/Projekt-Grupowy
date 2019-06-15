@@ -89,7 +89,7 @@ include ('navbar.php');
                 </div>
            
                 <div class="col-md-3">
-                    <input type="text"  name="Value" class="form-control" value="<?=$attribute_value?>"/>
+                    <input type="number" step="0.0000000001" min="0.0000000001" name="Value" class="form-control" value="<?=$attribute_value?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -130,9 +130,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić atrybutu zasobu energetycznego!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić atrybutu zasobu energetycznego!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Atrybut zasobu energetycznego zmieniony!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Atrybut zasobu energetycznego zmieniony!</span></center></h4>";
     }
 ?>
 </div>

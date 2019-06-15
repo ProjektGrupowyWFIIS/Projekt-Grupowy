@@ -216,7 +216,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <input type="text"  name="Factor"  class="form-control" value="<?=$factor?>"/>
+                    <input type="number" name="Factor" step="0.0000000001" min="0.0000000001" class="form-control" value="<?=$factor?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -232,7 +232,7 @@
                 </div>
              
                 <div class="col-md-3">
-                    <input type="text"  name="Uncertainty"  class="form-control" value="<?=$uncertainty?>"/>
+                    <input type="number"  name="Uncertainty" step="0.0000000001" min="0.0000000001" max="100"  class="form-control" value="<?=$uncertainty?>" required/>
                     <small class="text-white">Jak jestes nie pewny to zostaw puste pole</small>
                 </div>
             </div>
@@ -283,9 +283,9 @@
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić współczynnika energetycznego!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić współczynnika energetycznego!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Współczynnik energetyczny zmieniony!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Współczynnik energetyczny zmieniony!</span></center></h4>";
     }
 ?>
 

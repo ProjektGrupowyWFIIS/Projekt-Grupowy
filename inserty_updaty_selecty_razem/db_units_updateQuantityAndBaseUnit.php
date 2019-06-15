@@ -43,7 +43,7 @@ include ('navbar.php');
             </div>
            
             <div class="col-md-3">
-                <input name="QuantityNamePL" type="text" class="form-control" value="<?=$quantity_name_pl?>"/>
+                <input name="QuantityNamePL" type="text" class="form-control" value="<?=$quantity_name_pl?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -57,7 +57,7 @@ include ('navbar.php');
             </div>
           
             <div class="col-md-3">
-                <input name="QuantityNameENG" type="text" class="form-control" value="<?=$quantity_name_eng?>"/>
+                <input name="QuantityNameENG" type="text" class="form-control" value="<?=$quantity_name_eng?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -71,7 +71,7 @@ include ('navbar.php');
             </div>
            
             <div class="col-md-3">
-                <input name="Unit" type="text" class="form-control" value="<?=$unit?>"/>
+                <input name="Unit" type="text" class="form-control" value="<?=$unit?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -85,7 +85,7 @@ include ('navbar.php');
             </div>
             
             <div class="col-md-3">
-                <input name="UnitNamePL" type="text" class="form-control" value="<?=$unit_full_name_pl?>"/>
+                <input name="UnitNamePL" type="text" class="form-control" value="<?=$unit_full_name_pl?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -99,7 +99,7 @@ include ('navbar.php');
             </div>
           
             <div class="col-md-3">
-                <input name="UnitNameENG" type="text" class="form-control" value="<?=$unit_full_name_eng?>"/>
+                <input name="UnitNameENG" type="text" class="form-control" value="<?=$unit_full_name_eng?>" required/>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -144,9 +144,9 @@ include ('navbar.php');
         close_database();
 
         if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić wielkości fizycznej i jej jednostki podstawowej!</p>";
+            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić wielkości fizycznej i jej jednostki podstawowej!</center></h4>";
         else
-            echo "<br><p style='color: green;font-size:25px;'>Wielkość fizyczna i jej jednostka podstawowa została zmieniona!</p>";
+            echo "<br><h4><center><span style='color: white; background-color: black'>Wielkość fizyczna i jej jednostka podstawowa została zmieniona!</span></center></h4>";
     }
 ?>
 		</div>
