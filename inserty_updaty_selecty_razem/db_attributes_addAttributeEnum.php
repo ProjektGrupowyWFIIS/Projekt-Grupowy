@@ -17,11 +17,40 @@
 <div class="container-fluid">
 <h3 class="text-white text-center mt-3">Zdefiniuj dopuszczalne wartości atrybutu wyliczeniowego</h3>
 
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $attribute_id = $_POST["AttributeID"];
+  $attribute_value_pl = $_POST["ValuePL"];
+  $attribute_value_eng = $_POST["ValueENG"];
+  $attribute_value_description_pl = $_POST["DescPL"];
+  $attribute_value_description_eng = $_POST["DescENG"];
+
+  open_database();
+  $result = write_attribute_enum($attribute_id,$attribute_value_pl,$attribute_value_eng,$attribute_value_description_pl,$attribute_value_description_eng) ;
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['AttributeID']);
+    unset ($_POST['ValuePL']);
+    unset ($_POST['ValueENG']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }
+
+}
+?>
+
+
 <div class="text-center">
 <form method="post" action="" class="form-group">
 
 <?php
-require "db_functions.php";
 open_database();
 $attribute = read_table("attributes.attributes","where type_id='enum'");
 close_database();
@@ -38,11 +67,12 @@ Atrybut (wyliczeniowy):
 
 
 <div class="col-md-3">
-<select name="AttributeID" class="form-control">
+<select name="AttributeID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($attribute as $row_number => $row){
 ?>
-<option value="<?=$row['attribute_id'];?>"><?=$row['attribute_name_pl'];?></option>
+<option value="<?=$row['attribute_id'];?>" <?php if($_POST['AttributeID']==$row['attribute_id']) echo 'selected="selected"';?> ><?=$row['attribute_name_pl'];?></option>
 <?php
 }
 ?>
@@ -64,7 +94,7 @@ Wartość PL:
 </div> 
 
 <div class="col-md-3">
-<input type="text"  name="ValuePL" class="form-control"/>
+<input type="text"  name="ValuePL" class="form-control" value="<?= isset($_POST['ValuePL']) ? $_POST['ValuePL'] : ''; ?>" required   />
 </div>
 <div class="col-md-3"></div>
 </div>
@@ -83,7 +113,7 @@ Wartość PL:
   </div> 
 
   <div class="col-md-3">
-  <input type="text"  name="ValueENG" class="form-control"/>
+  <input type="text"  name="ValueENG" class="form-control" value="<?= isset($_POST['ValueENG']) ? $_POST['ValueENG'] : ''; ?>" required />
   </div>
   <div class="col-md-3"></div>
   </div>
@@ -99,7 +129,7 @@ Wartość PL:
     </div> 
 
     <div class="col-md-3">
-    <input type="text"  name="DescPL" class="form-control" />
+    <input type="text"  name="DescPL" class="form-control" value="<?= isset($_POST['DescPL']) ? $_POST['DescPL'] : ''; ?>" />
     </div>
     <div class="col-md-3"></div>
     </div>
@@ -115,7 +145,7 @@ Wartość PL:
       </div> 
    
       <div class="col-md-3">
-      <input type="text"  name="DescENG" class="form-control" />
+      <input type="text"  name="DescENG" class="form-control" value="<?= isset($_POST['DescENG']) ? $_POST['DescENG'] : ''; ?>" />
       </div>
       <div class="col-md-3"></div>
       </div>
@@ -135,23 +165,18 @@ Wartość PL:
 
 
 <?php
-
-if($_POST)
+if ($result)
 {
-  $attribute_id = $_POST["AttributeID"];
-  $attribute_value_pl = $_POST["ValuePL"];
-  $attribute_value_eng = $_POST["ValueENG"];
-  $attribute_value_description_pl = $_POST["DescPL"];
-  $attribute_value_description_eng = $_POST["DescENG"];
-
-  open_database();
-  $result = write_attribute_enum($attribute_id,$attribute_value_pl,$attribute_value_eng,$attribute_value_description_pl,$attribute_value_description_eng) ;
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać możliwej wartości atrybutu wyliczeniowego!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Możliwa wartość atrybutu wyliczeniowego zapisana!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Możliwa wartość atrybutu wyliczeniowego zapisana.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Możliwa wartość atrybutu wyliczeniowego zapisana!</p>";
+}
+else
+{
+  if($_POST)
+  {
+    //echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zapisać - Nazwa polska lub angielska już istnieje.</span></center></h4>";
+    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać - nazwa polska lub angielska już istnieje.</p>";
+  }
 }
 ?>
 </div>

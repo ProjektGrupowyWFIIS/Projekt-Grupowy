@@ -23,11 +23,38 @@
   ?>
 <h3 class="text-white text-center mt-3">Dodaj jednostkę dodatkową</h3>
 
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $unit               = $_POST["Unit"];
+  $unit_full_name_pl  = $_POST["UnitNamePL"];
+  $unit_full_name_eng = $_POST["UnitNameENG"];
+  $ratio              = $_POST["Ratio"];
+  $quantity_id        = $_POST["QuantityID"];
+
+  open_database();
+  $result = write_other_unit($unit, $unit_full_name_pl, $unit_full_name_eng, $ratio, $quantity_id);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['Unit']);
+    unset ($_POST['UnitNamePL']);
+    unset ($_POST['UnitNameENG']);
+    unset ($_POST['Ratio']);
+    unset ($_POST['QuantityID']);
+  }
+}
+?>
+
 
 <form method="post" action="">
 
 <?php
-require "db_functions.php";
 open_database();
 $quantities = read_table("units.quantities");
 close_database();
@@ -42,8 +69,7 @@ close_database();
       </div>
 
       <div class="col-md-3">
-        <input name="Unit" type="text" class="form-control"/>
-          
+        <input name="Unit" type="text" class="form-control" value="<?= isset($_POST['Unit']) ? $_POST['Unit'] : ''; ?>" required  />
       </div>
       <div class="col-md-3"></div>
       
@@ -59,8 +85,7 @@ close_database();
       </div>
   
       <div class="col-md-3">
-        <input name="UnitNamePL" type="text" class="form-control"/>
-          
+        <input name="UnitNamePL" type="text" value="<?= isset($_POST['UnitNamePL']) ? $_POST['UnitNamePL'] : ''; ?>" class="form-control" required />
       </div>
       <div class="col-md-3"></div>
       
@@ -75,8 +100,7 @@ close_database();
       </div>
   
       <div class="col-md-3">
-        <input name="UnitNameENG" type="text" class="form-control"/>
-          
+        <input name="UnitNameENG" type="text" value="<?= isset($_POST['UnitNameENG']) ? $_POST['UnitNameENG'] : ''; ?>" class="form-control" required />
       </div>
       <div class="col-md-3"></div>
       
@@ -92,8 +116,7 @@ close_database();
       </div>
      
       <div class="col-md-3">
-        <input name="Ratio" type="text" class="form-control"/>
-          
+        <input name="Ratio" type="number" step="0.0000000001" min="0.0000000001" value="<?= isset($_POST['Ratio']) ? $_POST['Ratio'] : ''; ?>" class="form-control" required />
       </div>
       <div class="col-md-3"></div>
     </div>
@@ -110,11 +133,12 @@ Wielkość fizyczna:
 </div>
 
 <div class="col-md-3">
-<select name="QuantityID" class="form-control">
+<select name="QuantityID" class="form-control" required>
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($quantities as $row_number => $row){
 ?>
-<option value="<?=$row['quantity_id'];?>"><?=$row['quantity_name_pl'];?></option>
+<option value="<?=$row['quantity_id'];?>" <?php if($_POST['QuantityID']==$row['quantity_id']) echo 'selected="selected"';?> ><?=$row['quantity_name_pl'];?></option>
 <?php
 }
 ?>
@@ -139,23 +163,29 @@ foreach($quantities as $row_number => $row){
 
 <div class="text-center">
 <?php
-
-if($_POST)
+if ($result)
 {
-  $unit               = $_POST["Unit"];
-  $unit_full_name_pl  = $_POST["UnitNamePL"];
-  $unit_full_name_eng = $_POST["UnitNameENG"];
-  $ratio              = $_POST["Ratio"];
-  $quantity_id        = $_POST["QuantityID"];
-
-  open_database();
-  $result = write_other_unit($unit, $unit_full_name_pl, $unit_full_name_eng, $ratio, $quantity_id);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać jednostki!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Jednostka zapisana!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka ".$unit." zapisana.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Jednostka ".$unit." zapisana.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    open_database();
+    $result = get_unit_id($unit);
+    if ($result)
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Jednostka ".$unit." już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Jednostka ".$unit." już istnieje!</p>";
+    }
+    else
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zapisać jednostki!</span></center></h4>";
+      echo "<br><p style='color: red;font-size:25px;'>Z nieznanego powodu nie mogę zapisać jednostki!</p>";
+    }
+    close_database();	
+  }
 }
 ?>
 

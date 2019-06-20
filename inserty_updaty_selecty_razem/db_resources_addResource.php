@@ -23,6 +23,37 @@
   include ('navbar.php');
   ?>
 <h3 class="text-white text-center mt-3">Dodaj zasób (surowiec)</h3>
+
+
+<?php
+
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $resource_name_pl = $_POST["NamePL"];
+  $resource_name_eng = $_POST["NameENG"];
+  $resource_description_pl = $_POST["DescPL"];
+  $resource_description_eng = $_POST["DescENG"];
+
+  open_database();
+  $result = write_resource($resource_name_pl,$resource_name_eng,$resource_description_pl,$resource_description_eng);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['NamePL']);
+    unset ($_POST['NameENG']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }
+}
+?>
+
+
+
 <div class="text-center">
 <form method="post" action="">
 
@@ -34,7 +65,7 @@
       </div>
       
       <div class="col-md-3">
-        <input name="NamePL" type="text" class="form-control"/>
+        <input name="NamePL" type="text" value="<?= isset($_POST['NamePL']) ? $_POST['NamePL'] : ''; ?>" class="form-control" required />
           
       </div>
       <div class="col-md-3"></div>
@@ -51,7 +82,7 @@
       </div>
      
       <div class="col-md-3">
-        <input type="text" name="NameENG" class="form-control" />
+        <input name="NameENG" type="text" value="<?= isset($_POST['NameENG']) ? $_POST['NameENG'] : ''; ?>" class="form-control" required />
       </div>
       <div class="col-md-3"></div>
     </div>
@@ -65,7 +96,7 @@
   </div>
  
   <div class="col-md-3">
-    <input type="text" name="DescPL" class="form-control" />
+    <input name="DescPL" type="text" value="<?= isset($_POST['DescPL']) ? $_POST['DescPL'] : ''; ?>" class="form-control"  />
   </div>
   <div class="col-md-3"></div>
   </div>
@@ -80,7 +111,7 @@
   </div>
 
   <div class="col-md-3">
-    <input type="text" name="DescENG" class="form-control"/>
+    <input name="DescENG" type="text" value="<?= isset($_POST['DescENG']) ? $_POST['DescENG'] : ''; ?>" class="form-control"  />
   </div>
   <div class="col-md-3"></div>
   </div>
@@ -99,24 +130,29 @@
 <div class="col-md-3"></div>
 
 <?php
-
-require "db_functions.php";
-
-if($_POST)
+if ($result)
 {
-  $resource_name_pl = $_POST["NamePL"];
-  $resource_name_eng = $_POST["NameENG"];
-  $resource_description_pl = $_POST["DescPL"];
-  $resource_description_eng = $_POST["DescENG"];
-
-  open_database();
-  $result = write_resource($resource_name_pl,$resource_name_eng,$resource_description_pl,$resource_description_eng);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać zasobu (surowca)!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Zasób (surowiec) zapisany!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Zasób (surowiec) ".$resource_name_pl." zapisany.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Zasób (surowiec) ".$resource_name_pl." zapisany.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    open_database();
+    $result = get_resource_id($resource_name_pl);
+    if ($result)
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Polska nazwa ".$resource_name_pl." już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Polska nazwa ".$resource_name_pl." już istnieje!</p>";
+    }
+    else
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Angielska nazwa ".$resource_name_eng." już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Angielska nazwa ".$resource_name_eng." już istnieje!</p>";
+    }
+    close_database();	
+  }
 }
 ?>
 

@@ -24,11 +24,33 @@
 
 <h3 class="text-white text-center mt-5">Przypisz podany zasób (surowiec) do kategorii</h3>
 
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $resource_id = $_POST["ResourceID"];
+  $cat_id = $_POST["CategoryID"];
+
+  open_database();
+  $result = write_resource_category($resource_id, $cat_id);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['ResourceID']);
+    unset ($_POST['CategoryID']);
+  }
+}
+?>
+
+
 <div class="text-center">
 <form method="post" action="">
 
 <?php
-require "db_functions.php";
 open_database();
 $resource = read_table("resources.resources");;
 $category = read_table("categories.categories");
@@ -46,11 +68,12 @@ Zasób (surowiec):
 </div>
 
 <div class="col-md-3">
-<select name="ResourceID" class="form-control">
+<select name="ResourceID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($resource as $row_number => $row){
 ?>
-<option value="<?=$row['resource_id'];?>"><?=$row['resource_name_pl'];?></option>
+<option value="<?=$row['resource_id'];?>" <?php if($_POST['ResourceID']==$row['resource_id']) echo 'selected="selected"';?> ><?=$row['resource_name_pl'];?></option>
 <?php
 }
 ?>
@@ -70,11 +93,12 @@ Kategoria:
 </div>
 
 <div class="col-md-3">
-<select name="CategoryID" class="form-control">
+<select name="CategoryID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($category as $row_number => $row){
 ?>
-<option value="<?=$row['cat_id'];?>"><?=$row['cat_name_pl'];?></option>
+<option value="<?=$row['cat_id'];?>" <?php if($_POST['CategoryID']==$row['cat_id']) echo 'selected="selected"';?> ><?=$row['cat_name_pl'];?></option>
 <?php
 }
 ?>
@@ -101,20 +125,18 @@ foreach($category as $row_number => $row){
 
 <div class="text-center">
 <?php
-
-if($_POST)
+if ($result)
 {
-  $resource_id = $_POST["ResourceID"];
-  $cat_id = $_POST["CategoryID"];
-
-  open_database();
-  $result = write_resource_category($resource_id, $cat_id);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać kategorii zasobu (surowca)!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Kategoria zasobu (surowca) zapisana!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Kategoria zasobu (surowca) zapisana.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Kategoria zasobu (surowca) zapisana.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Taka kombinacja już istnieje!</span></center>";
+    echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Taka kombinacja już istnieje!</p>";
+  }
 }
 ?>
 </div>

@@ -23,6 +23,36 @@
   ?>
 <h3 class="text-white text-center mt-3">Dodaj wielkość fizyczną i jej jednostkę podstawową</h3>
 
+
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $quantity_name_pl   = $_POST["QuantityNamePL"];
+  $quantity_name_eng  = $_POST["QuantityNameENG"];
+  $unit               = $_POST["Unit"];
+  $unit_full_name_pl  = $_POST["UnitNamePL"];
+  $unit_full_name_eng = $_POST["UnitNameENG"];
+
+  open_database();
+  $result = write_quantity_and_base_unit($quantity_name_pl, $quantity_name_eng, $unit, $unit_full_name_pl, $unit_full_name_eng);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['QuantityNamePL']);
+    unset ($_POST['QuantityNameENG']);
+    unset ($_POST['Unit']);
+    unset ($_POST['UnitNamePL']);
+    unset ($_POST['UnitNameENG']);
+  }
+}
+?>
+
+
 <div class="text-center">
 <form method="post" action="">
 
@@ -34,8 +64,7 @@
           </div>
    
           <div class="col-md-3">
-            <input name="QuantityNamePL" type="text" class="form-control"/>
-              
+            <input name="QuantityNamePL" type="text" value="<?= isset($_POST['QuantityNamePL']) ? $_POST['QuantityNamePL'] : ''; ?>" class="form-control" required />
           </div>
           <div class="col-md-3"></div>
           
@@ -50,8 +79,7 @@
           </div>
        
           <div class="col-md-3">
-            <input name="QuantityNameENG" type="text" class="form-control"/>
-              
+            <input name="QuantityNameENG" type="text" value="<?= isset($_POST['QuantityNameENG']) ? $_POST['QuantityNameENG'] : ''; ?>" class="form-control" required />
           </div>
           <div class="col-md-3"></div>
           
@@ -66,7 +94,7 @@
           </div>
         
           <div class="col-md-3">
-            <input name="Unit" type="text" class="form-control"/>
+            <input name="Unit" type="text" value="<?= isset($_POST['Unit']) ? $_POST['Unit'] : ''; ?>" class="form-control" required />
               
           </div>
           <div class="col-md-3"></div>
@@ -82,8 +110,7 @@
           </div>
  
           <div class="col-md-3">
-            <input name="UnitNamePL" type="text" class="form-control"/>
-              
+            <input name="UnitNamePL" type="text" value="<?= isset($_POST['UnitNamePL']) ? $_POST['UnitNamePL'] : ''; ?>" class="form-control" required />
           </div>
           <div class="col-md-3"></div>
         </div>
@@ -96,8 +123,7 @@
           </div>
       
           <div class="col-md-3">
-            <input name="UnitNameENG" type="text" class="form-control"/>
-              
+            <input name="UnitNameENG" type="text" value="<?= isset($_POST['UnitNameENG']) ? $_POST['UnitNameENG'] : ''; ?>" class="form-control" required />
           </div>
           <div class="col-md-3"></div>
         </div>
@@ -119,28 +145,38 @@
 
 <div class="text-center">
 <?php
-require "db_functions.php";
-
-//echo "<pre>";
-//print_r($_POST);
-//echo "</pre>";
-
-if($_POST)
+if ($result)
 {
-  $quantity_name_pl   = $_POST["QuantityNamePL"];
-  $quantity_name_eng  = $_POST["QuantityNameENG"];
-  $unit               = $_POST["Unit"];
-  $unit_full_name_pl  = $_POST["UnitNamePL"];
-  $unit_full_name_eng = $_POST["UnitNameENG"];
-
-  open_database();
-  $result = write_quantity_and_base_unit($quantity_name_pl, $quantity_name_eng, $unit, $unit_full_name_pl, $unit_full_name_eng);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać wielkości fizycznej i jej jednostki podstawowej!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Wielkość fizyczna i jej jednostka podstawowa zapisana!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Wielkość fizyczna i jej jednostka podstawowa zapisana.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Wielkość fizyczna i jej jednostka podstawowa zapisana.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    open_database();
+    $result = get_quantity_id($quantity_name_eng);
+    if ($result)
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Wielkość fizyczna ".$quantity_name_eng." już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Wielkość fizyczna ".$quantity_name_eng." już istnieje!</p>";
+    }
+    else
+    {
+      $result = get_unit_id($unit);
+      if ($result)
+      {
+        //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Jednostka ".$unit." już istnieje!</span></center>";
+        echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Jednostka ".$unit." już istnieje!</p>";
+      }
+      else
+      {
+        //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Wielkość fizyczna ".$quantity_name_pl." już istnieje!</span></center>";
+        echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Wielkość fizyczna ".$quantity_name_pl." już istnieje!</p>";
+      }
+    }
+    close_database();	
+  }
 }
 ?>
 

@@ -23,12 +23,40 @@
   ?>
 
 <h3 class="text-white text-center mt-3">Dodaj plik</h3>
+
+
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $file_name = $_POST["Name"];
+  $file_type = $_POST["Type"];
+  $hdd_file_path = $_POST["Path"];
+  $folder_id = $_POST["FolderID"];
+
+  open_database();
+  $result = write_file($file_name, $file_type, $hdd_file_path, $folder_id);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['Name']);
+    unset ($_POST['Type']);
+    unset ($_POST['Path']);
+    unset ($_POST['FolderID']);
+  }
+}
+?>    
+
+
       
 <div class="text-center">
 <form method="post" action="">
 
 <?php
-require "db_functions.php";
 open_database();
 $folders = read_table("files.folders");
 close_database();
@@ -42,7 +70,7 @@ close_database();
       </div>
       
       <div class="col-md-3">
-        <input name="Name" type="text" class="form-control"/>
+        <input name="Name" type="text" value="<?= isset($_POST['Name']) ? $_POST['Name'] : ''; ?>" class="form-control" required />
           
       </div>
       <div class="col-md-3"></div>
@@ -59,14 +87,15 @@ Typ:
 </div>
 
 <div class="col-md-3">
-<select name="Type" class="form-control">
-<option value="pdf">pdf</option>
-<option value="xls">xls</option>
-<option value="csv">csv</option>
-<option value="doc">doc</option>
-<option value="txt">txt</option>
-<option value="png">png</option>
-<option value="jpg">jpg</option>
+<select name="Type" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
+<option value="pdf" <?php if($_POST['Type']=='pdf') echo 'selected="selected"';?> >pdf</option>
+<option value="xls" <?php if($_POST['Type']=='xls') echo 'selected="selected"';?> >xls</option>
+<option value="csv" <?php if($_POST['Type']=='csv') echo 'selected="selected"';?> >csv</option>
+<option value="doc" <?php if($_POST['Type']=='doc') echo 'selected="selected"';?> >doc</option>
+<option value="txt" <?php if($_POST['Type']=='txt') echo 'selected="selected"';?> >txt</option>
+<option value="png" <?php if($_POST['Type']=='png') echo 'selected="selected"';?> >png</option>
+<option value="jpg" <?php if($_POST['Type']=='jpg') echo 'selected="selected"';?> >jpg</option>
 </select>
 </div>
 <div class="col-md-3"></div>
@@ -81,7 +110,7 @@ Typ:
       </div>
       
       <div class="col-md-3">
-        <input name="Path" type="text" class="form-control"/>
+        <input name="Path" type="text" value="<?= isset($_POST['Path']) ? $_POST['Path'] : ''; ?>" class="form-control" required />
           
       </div>
       <div class="col-md-3"></div>
@@ -100,11 +129,13 @@ Katalog (folder):
 </div>
 
 <div class="col-md-3">
-<select name="FolderID" class="form-control">
+<select name="FolderID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($folders as $row_number => $row){
 ?>
-<option value="<?=$row['folder_id'];?>"><?=$row['folder_name'];?></option>
+<option value="<?=$row['folder_id'];?>" <?php if($_POST['FolderID']==$row['folder_id']) echo 'selected="selected"';?> ><?=$row['folder_name'];?></option>
+
 <?php
 }
 ?>
@@ -128,22 +159,29 @@ foreach($folders as $row_number => $row){
 		
     
 <?php
-
-if($_POST)
+if ($result)
 {
-  $file_name = $_POST["Name"];
-  $file_type = $_POST["Type"];
-  $hdd_file_path = $_POST["Path"];
-  $folder_id = $_POST["FolderID"];
-
-  open_database();
-  $result = write_file($file_name, $file_type, $hdd_file_path, $folder_id);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać pliku!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Plik zapisany!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Plik ".$file_name." zapisany.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Plik ".$file_name." zapisany.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    open_database();
+    $result = get_file_id($folder_id, $file_name);
+    if ($result)
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Plik ".$file_name." już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Plik ".$file_name." już istnieje!</p>";
+    }
+    else
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zapisać pliku!</span></center></h4>";
+      echo "<br><p style='color: red;font-size:25px;'>Z nieznanego powodu nie mogę zapisać pliku!</p>";
+    }
+    close_database();	
+  }
 }
 ?>    
 </div>

@@ -23,13 +23,51 @@
   ?>
 
 <h3 class="text-white text-center mt-3">Zdefiniuj wartości współczynników dla podanego zasobu (surowca)</h3>
+
+
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $resource_id = $_POST["ResourceID"];
+  $factor_id = $_POST["FactorID"];
+  $source_id = $_POST["SourceID"];
+  $resource_unit_1_id = $_POST["Unit1ID"];
+  $resource_unit_2_id = $_POST["Unit2ID"];
+  $factor_unit_id = $_POST["FactorUnitID"];
+  $factor = $_POST["Factor"];
+  $uncertainty = $_POST["Uncertainty"];
+
+  open_database();
+  if ($uncertainty == "")
+    $result = write_factor($resource_id, $factor_id, $source_id, $resource_unit_1_id, $resource_unit_2_id, $factor_unit_id, $factor);
+  else
+    $result = write_factor($resource_id, $factor_id, $source_id, $resource_unit_1_id, $resource_unit_2_id, $factor_unit_id, $factor, $uncertainty);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['ResourceID']);
+    unset ($_POST['FactorID']);
+    unset ($_POST['SourceID']);
+    unset ($_POST['Unit1ID']);
+    unset ($_POST['Unit2ID']);
+    unset ($_POST['FactorUnitID']);
+    unset ($_POST['Factor']);
+    unset ($_POST['Uncertainty']);
+  }
+}
+?>
+
       
 <div class="text-center">
 
 <form method="post" action="">
 
 <?php
-require "db_functions.php";
 open_database();
 $resource = read_table("resources.resources");;
 $factor = read_table("factors.factor_names");
@@ -48,11 +86,12 @@ Zasób (surowiec):
 </div>
 
 <div class="col-md-3">
-<select name="ResourceID" class="form-control">
+<select name="ResourceID" class="form-control" required>
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($resource as $row_number => $row){
 ?>
-<option value="<?=$row['resource_id'];?>"><?=$row['resource_name_pl'];?></option>
+<option value="<?=$row['resource_id'];?>" <?php if($_POST['ResourceID']==$row['resource_id']) echo 'selected="selected"';?> ><?=$row['resource_name_pl'];?></option>
 <?php
 }
 ?>
@@ -64,7 +103,6 @@ foreach($resource as $row_number => $row){
 
 <p class="text-white-50 font-italic mt-5">
 Należy uwzględnić wszystkie obowiązkowe współczynniki dla wszystkich kategorii, do których należy powyższy zasób. 
-<br>Oto lista tych współczynników: ... tu wyświetlić listę ....
 </p>
 
 
@@ -78,11 +116,12 @@ Nazwa współczynnika:
 </div>
 
 <div class="col-md-3">
-<select name="FactorID" class="form-control">
+<select name="FactorID" class="form-control" required>
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($factor as $row_number => $row){
 ?>
-<option value="<?=$row['factor_id'];?>"><?=$row['factor_name_pl'];?></option>
+<option value="<?=$row['factor_id'];?>" <?php if($_POST['FactorID']==$row['factor_id']) echo 'selected="selected"';?> ><?=$row['factor_name_pl'];?></option>
 <?php
 }
 ?>
@@ -102,11 +141,12 @@ foreach($factor as $row_number => $row){
 </div>
 
 <div class="col-md-3">
-<select name="SourceID" class="form-control">
+<select name="SourceID" class="form-control" required>
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($source as $row_number => $row){
 ?>
-<option value="<?=$row['source_id'];?>"><?=$row['source_description'];?></option>
+<option value="<?=$row['source_id'];?>" <?php if($_POST['SourceID']==$row['source_id']) echo 'selected="selected"';?> ><?=$row['source_description'];?></option>
 <?php
 }
 ?>
@@ -127,11 +167,12 @@ Jednostka zasobu 1:
 </div>
 
 <div class="col-md-3">
-<select name="Unit1ID" class="form-control">
+<select name="Unit1ID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($unit as $row_number => $row){
 ?>
-<option value="<?=$row['unit_id'];?>"><?=$row['unit'];?></option>
+<option value="<?=$row['unit_id'];?>" <?php if($_POST['Unit1ID']==$row['unit_id']) echo 'selected="selected"';?> ><?=$row['unit'];?></option>
 <?php
 }
 ?>
@@ -151,12 +192,12 @@ Jednostka zasobu 2:
 </div>
 
 <div class="col-md-3">
-<select name="Unit2ID" class="form-control">
+<select name="Unit2ID" class="form-control" >
 <option value="0">(nie dotyczy)</option>
 <?php
 foreach($unit as $row_number => $row){
 ?>
-<option value="<?=$row['unit_id'];?>"><?=$row['unit'];?></option>
+<option value="<?=$row['unit_id'];?>" <?php if($_POST['Unit2ID']==$row['unit_id']) echo 'selected="selected"';?> ><?=$row['unit'];?></option>
 <?php
 }
 ?>
@@ -176,11 +217,12 @@ Jednostka współczynnika:
 </div>
 
 <div class="col-md-3">
-<select name="FactorUnitID" class="form-control">
+<select name="FactorUnitID" class="form-control" required>
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($unit as $row_number => $row){
 ?>
-<option value="<?=$row['unit_id'];?>"><?=$row['unit'];?></option>
+<option value="<?=$row['unit_id'];?>" <?php if($_POST['FactorUnitID']==$row['unit_id']) echo 'selected="selected"';?> ><?=$row['unit'];?></option>
 <?php
 }
 ?>
@@ -200,7 +242,7 @@ Współczynnik (liczba >=0):
 </div>
 
 <div class="col-md-3">
- <input type="text"  name="Factor" class="form-control" />
+ <input name="Factor" type="number" step="0.0000000001" min="0.0000000000" value="<?= isset($_POST['Factor']) ? $_POST['Factor'] : ''; ?>" class="form-control" required />
 </div>
 <div class="col-md-3"></div>
 </div>
@@ -210,12 +252,12 @@ Współczynnik (liczba >=0):
         <div class="col-md-3"></div>
       <div class="col-md-3">
   <label>
-  Niepewnosc [0..100]:
+  Niepewność [0..100]:
   </label>
   </div>
 
   <div class="col-md-3">
-   <input type="text"  name="Uncertainty" class="form-control" />
+   <input name="Uncertainty" type="number" step="0.01" min="0.00" max="100.00" value="<?= isset($_POST['Uncertainty']) ? $_POST['Uncertainty'] : ''; ?>" class="form-control" />
   </div>
   <div class="col-md-3"></div>
   </div>
@@ -236,29 +278,18 @@ Współczynnik (liczba >=0):
 
 
 <?php
-
-if($_POST)
+if ($result)
 {
-  $resource_id = $_POST["ResourceID"];
-  $factor_id = $_POST["FactorID"];
-  $source_id = $_POST["SourceID"];
-  $resource_unit_1_id = $_POST["Unit1ID"];
-  $resource_unit_2_id = $_POST["Unit2ID"];
-  $factor_unit_id = $_POST["FactorUnitID"];
-  $factor = $_POST["Factor"];
-  $uncertainty = $_POST["Uncertainty"];
-
-  open_database();
-  if ($uncertainty == "")
-    $result = write_factor($resource_id, $factor_id, $source_id, $resource_unit_1_id, $resource_unit_2_id, $factor_unit_id, $factor);
-  else
-    $result = write_factor($resource_id, $factor_id, $source_id, $resource_unit_1_id, $resource_unit_2_id, $factor_unit_id, $factor, $uncertainty);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać współczynnika!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Współczynnik zapisany!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Współczynnik zapisany.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Współczynnik zapisany.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Taka kombinacja  Zasób/Nazwa współczynnika/Jednostka zasobu 1  już istnieje!</span></center>";
+    echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Taka kombinacja  Zasób/Nazwa współczynnika/Jednostka zasobu 1  już istnieje!</p>";
+  }
 }
 ?>
 </div>

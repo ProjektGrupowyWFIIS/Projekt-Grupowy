@@ -27,11 +27,43 @@ Zdefiniuj hierarchię kategorii zasobów.
 Hierarchia nie jest drzewem, lecz grafem acyklicznym, a zatem każda kategoria może mieć wiele kategorii nadrzędnych.
 </h3>
 
+
+<?php
+require "db_functions.php";
+
+$result=0;
+$the_same_cat=0;
+
+if($_POST)
+{
+  $cat_id    = $_POST["CatID"];
+  $parent_id = $_POST["ParentID"];
+
+  if ($cat_id==$parent_id)
+  {
+    $the_same_cat=1;
+  }
+  else
+  {
+    open_database();
+    $result = write_hierarchy_of_categories($cat_id, $parent_id);
+    close_database();	
+
+    if ($result)
+    {
+      unset ($_POST['CatID']);
+      unset ($_POST['ParentID']);
+    }
+  }
+}
+?>
+
+
+
 <div class="text-center">
 <form method="post" action="" class="form-group">
 
 <?php
-require "db_functions.php";
 open_database();
 $categories = read_table("categories.categories");
 close_database();
@@ -41,16 +73,17 @@ close_database();
       <div class="col-md-3"></div>
     <div class="col-md-3">
 <label class="text-white">
-Wybierz kategorię: 
+Kategoria: 
 </label>
 </div>
 
 <div class="col-md-3">
-<select name="CatID" class="form-control">
+<select name="CatID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($categories as $row_number => $row){
 ?>
-<option value="<?=$row['cat_id'];?>"><?=$row['cat_name_pl'];?></option>
+<option value="<?=$row['cat_id'];?>" <?php if($_POST['CatID']==$row['cat_id']) echo 'selected="selected"';?> ><?=$row['cat_name_pl'];?></option>
 <?php
 }
 ?>
@@ -65,17 +98,18 @@ foreach($categories as $row_number => $row){
       <div class="col-md-3"></div>
     <div class="col-md-3">
 <label class="text-white">
-Wybierz kategorię nadrzędną: 
+Kategoria nadrzędna: 
 </label>
 </div>
 
 
 <div class="col-md-3">
-<select name="ParentID" class="form-control">
+<select name="ParentID" class="form-control" required>
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($categories as $row_number => $row){
 ?>
-<option value="<?=$row['cat_id'];?>"><?=$row['cat_name_pl'];?></option>
+<option value="<?=$row['cat_id'];?>" <?php if($_POST['ParentID']==$row['cat_id']) echo 'selected="selected"';?> ><?=$row['cat_name_pl'];?></option>
 <?php
 }
 ?>
@@ -100,19 +134,26 @@ foreach($categories as $row_number => $row){
 
 <?php
 
-if($_POST)
+if ($the_same_cat)
 {
-  $cat_id    = $_POST["CatID"];
-  $parent_id = $_POST["ParentID"];
-
-  open_database();
-  $result = write_hierarchy_of_categories($cat_id, $parent_id);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać hierarchii kategorii!</p>";
+  //echo "<br><h4><center><span style='color: red; background-color: black'>Kategoria nadrzędna nie może być taka sama jak podrzędna!</span></center></h4>";
+  echo "<br><p style='color: red;font-size:25px;'>Kategoria nadrzędna nie może być taka sama jak podrzędna!</p>";
+}
+else
+{
+  if ($result)
+  {
+    //echo "<br><h4><center><span style='color: white; background-color: black'>Hierarchia kategorii zapisana.</span></center></h4>";
+    echo "<br><p style='color: green;font-size:25px;'>Hierarchia kategorii zapisana.</p>";
+  }
   else
-    echo "<br><p style='color: green;font-size:25px;'>Hierarchia kategorii zapisana!";
+  {
+    if($_POST)
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Taka kombinacja już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Taka kombinacja już istnieje!</p>";
+    }
+  }
 }
 ?>
 

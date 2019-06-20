@@ -24,11 +24,33 @@
 
 <h3 class="text-white text-center mt-3">Dodaj alternatywną nazwę jednostki (tj. nazwę, która może pojawić się w źródłach)</h3>
 
+<?php
+require "db_functions.php";
+
+$result=0;
+
+if($_POST)
+{
+  $source_unit_name   = $_POST["SourceUnitName"];
+  $canonical_unit_id  = $_POST["CanonicalUnitID"];
+
+  open_database();
+  $result = write_source_unit_name($source_unit_name, $canonical_unit_id);
+  close_database();	
+
+  if ($result)
+  {
+    unset ($_POST['SourceUnitName']);
+    unset ($_POST['CanonicalUnitID']);
+  }
+}
+?>
+
+
 <div class="text-center">
 <form method="post" action="">
 
 <?php
-require "db_functions.php";
 open_database();
 $units = read_table("units.units");
 close_database();
@@ -42,8 +64,7 @@ close_database();
       </div>
       
       <div class="col-md-3">
-        <input name="SourceUnitName" type="text" class="form-control"/>
-          
+        <input name="SourceUnitName" type="text" class="form-control" value="<?= isset($_POST['SourceUnitName']) ? $_POST['SourceUnitName'] : ''; ?>" required  />
       </div>
       <div class="col-md-3"></div>
     </div>
@@ -60,11 +81,12 @@ Jednostka 'kanoniczna':
 </div>
 
 <div class="col-md-3">
-<select name="CanonicalUnitID" class="form-control">
+<select name="CanonicalUnitID" class="form-control" required >
+<option value="" disabled selected >wybierz</option>
 <?php
 foreach($units as $row_number => $row){
 ?>
-<option value="<?=$row['unit_id'];?>"><?=$row['unit'];?></option>
+<option value="<?=$row['unit_id'];?>" <?php if($_POST['CanonicalUnitID']==$row['unit_id']) echo 'selected="selected"';?> ><?=$row['unit'];?></option>
 <?php
 }
 ?>
@@ -90,20 +112,29 @@ foreach($units as $row_number => $row){
 
 <div class="text-center">
 <?php
-
-if($_POST)
+if ($result)
 {
-  $source_unit_name   = $_POST["SourceUnitName"];
-  $canonical_unit_id  = $_POST["CanonicalUnitID"];
-
-  open_database();
-  $result = write_source_unit_name($source_unit_name, $canonical_unit_id);
-  close_database();	
-
-  if (!$result)
-    echo "<br><p style='color: red;font-size:25px;'>Nie mogę zapisać jednostki alternatywnej!</p>";
-  else
-    echo "<br><p style='color: green;font-size:25px;'>Jednostka alternatywna zapisana!</p>";
+  //echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka alternatywna ".$source_unit_name." zapisana.</span></center></h4>";
+  echo "<br><p style='color: green;font-size:25px;'>Jednostka alternatywna ".$source_unit_name." zapisana.</p>";
+}
+else
+{
+  if($_POST)
+  {
+    open_database();
+    $result = get_canonical_unit_id($source_unit_name);
+    if ($result)
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Zapis nieudany: Jednostka alternatywna ".$source_unit_name." już istnieje!</span></center>";
+      echo "<br><p style='color: red;font-size:25px;'>Zapis nieudany: Jednostka alternatywna ".$source_unit_name." już istnieje!</p>";
+    }
+    else
+    {
+      //echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zapisać jednostki alternatywnej!</span></center></h4>";
+      echo "<br><p style='color: red;font-size:25px;'>Z nieznanego powodu nie mogę zapisać jednostki alternatywnej!</p>";
+    }
+    close_database();	
+  }
 }
 ?>
 		</div>
