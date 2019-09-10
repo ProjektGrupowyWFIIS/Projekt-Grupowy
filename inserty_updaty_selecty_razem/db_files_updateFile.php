@@ -22,28 +22,56 @@
     include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Edytuj plik</h3>
 
-<div class="text-center">
-    <form method="post" action="">
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
 
+$result=0;
 
-    <?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-
-    if($_GET)
-    {
-        $file_id = $_GET["FileID"];
-        $temp_folder_id = $_GET["TempFolderID"];
-    }
+if($_GET)
+{
+    $file_id = $_GET["FileID"];
+    $temp_folder_id = $_GET["TempFolderID"];
 
     open_database();
         $folders = read_table("files.folders");
     close_database();
 
-    list($file_name, $hdd_file_path, $file_type) = get_file($file_id);
+  list($file_name, $hdd_file_path, $file_type) = get_file($file_id);
+}
+
+
+
+if($_POST)
+{
+  $file_name = $_POST["Name"];
+  $file_type = $_POST["Type"];
+  $hdd_file_path = $_POST["Path"];
+  $folder_id = $_POST["FolderID"];
+
+  open_database();
+      $result = update_file($file_id, $file_name, $file_type, $hdd_file_path, $folder_id);
+  close_database();
+
+  $temp_folder_id = $folder_id;
+
+  if ($result)
+  {
+    unset ($_POST['Name']);
+    unset ($_POST['Type']);
+    unset ($_POST['Path']);
+    unset ($_POST['FolderID']);
+  }  
+}      
 ?>
+
+
+<h3 class="text-white text-center mt-3">Edytuj plik</h3>
+
+<div class="text-center">
+    <form method="post" action="">
+
         <div class="container">
             <div class="row mt-5">
                     <div class="col-md-3"></div>
@@ -98,7 +126,7 @@
             <div class="row mt-5">
                     <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <label class="text-white ">Sciezka na dysku</label>
+                    <label class="text-white ">Ścieżka na dysku</label>
                 </div>
                 
                 <div class="col-md-3">
@@ -162,38 +190,22 @@
     </div>
     
 <?php
-    if($_POST)
-    {
-        $file_name = $_POST["Name"];
-        $file_type = $_POST["Type"];
-        $hdd_file_path = $_POST["Path"];
-        $folder_id = $_POST["FolderID"];
-
-        open_database();
-            $result = update_file($file_id, $file_name, $file_type, $hdd_file_path, $folder_id);
-        close_database();
-
-        if (!$result)
-            echo "<br><p style='color: red;font-size:25px;'>Nie mogę zmienić pliku!</p>";
-        else
-            echo "<br><p style='color: green;font-size:25px;'>Plik zmieniony!</p>";
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Plik ".$file_name." zmieniony.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_file_id($folder_id, $file_name);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Plik ".$file_name." już istnieje!</span></center></h4>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić pliku!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Plik ".$file_name." zmieniony.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    //echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić pliku!</span></center></h4>";
+    open_database();
+    $result = get_file_id($folder_id, $file_name);
+    if ($result)
+        echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Plik ".$file_name." już istnieje!</span></center></h4>";
+    else
+        echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić pliku!</span></center></h4>";
+    close_database();
+  }
+}
 ?>    
 </div>
 </body>

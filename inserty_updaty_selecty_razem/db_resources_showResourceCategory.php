@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż podane zasoby (surowiec)</title>
+  <title>Przypisanie zasobów (surowców) do kategorii</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,7 +20,7 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż podane zasóby (surowiec)</h3>
+<h3 class="text-white text-center mt-3">Przypisanie zasobów (surowców) do kategorii</h3>
 
 
 <div class="container">
@@ -31,13 +31,13 @@ include("navbar.php");
 
 require "db_functions.php";
 open_database();
-$atr = read_table("resources.resources_categories");
+$atr = read_table("resources.resources_categories","","order by cat_id,resource_id");
 
 	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
 	echo "<tr>";
-	echo "<th style='color: white'> ID Zasobu: </th>";
-	echo "<th style='color: white'> ID Kategorii: </th>";
+	echo "<th style='color: white'> Zasób (surowiec): </th>";
+	echo "<th style='color: white'> Kategoria: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
@@ -45,9 +45,9 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
-	echo '<th>'.'<a href=db_resources_updateResourceCategory.php?ResourceID='.$row["resource_id"].'&CatID='.$row["cat_id"].'>Edycja</a>'.'</td>';
+	echo '<th style=\'color: white\'>'.get_res_name_pl($row['resource_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_cat_name_pl($row['cat_id']).'</th>';
+	echo '<th>'.'<a href=db_resources_updateResourceCategory.php?ResourceID='.$row["resource_id"].'&CatID='.$row["cat_id"].'>Edycja</a>'.'</th>';
 
 	echo "</tr>";
  

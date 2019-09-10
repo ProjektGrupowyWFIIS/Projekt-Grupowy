@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż atrybut</title>
+  <title>Atrybuty</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -30,16 +30,16 @@ include("navbar.php");
 
 require "db_functions.php";
 open_database();
-$atr = read_table("attributes.attributes");
+$atr = read_table("attributes.attributes","","order by attribute_name_pl");
 
   echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" color = \"white\" class=\"table table-bordered\">";
   
 
   echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
-	echo "<th style='color: white'> Typ ID:</th>";
+	//echo "<th style='color: white'> ID atrybutu: </th>";
 	echo "<th style='color: white'> Nazwa atrybutu: </th>";
 	echo "<th style='color: white'> Nazwa atrybutu (język angielski): </th>";
+	echo "<th style='color: white'> Typ:</th>";
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Opis (język angielski): </th>";
 	echo "<th style='color: white'> Edycja: </th>";
@@ -49,13 +49,13 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['attribute_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['type_id'].'</th>';
+	//echo '<th style=\'color: white\'>'.$row['attribute_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_name_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_name_eng'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['type_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_description_eng'].'</th>';
-	echo '<th>'.'<a href=db_attributes_updateAttribute.php?AttributeID='.$row["attribute_id"].'>Edycja</a>'.'</td>';
+	echo '<th>'.'<a href=db_attributes_updateAttribute.php?AttributeID='.$row["attribute_id"].'>Edycja</a>'.'</th>';
   echo "</tr>";
  
 }

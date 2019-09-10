@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż nazwy współczynników</title>
+  <title>Nazwy współczynników</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,23 +20,23 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż współczynniki (czyli numeryczne cechy zasobu)</h3>
+<h3 class="text-white text-center mt-3">Nazwy współczynników (czyli numerycznych cech zasobu)</h3>
 
 <div class="container">
 <div class="row mt-5">
 <div class="col-md-3"></div>
-<div class="col-md-6">
+<div class="col-md-7">
 
 <?php
 
 require "db_functions.php";
 open_database();
-$atr = read_table("factors.factor_names");
+$atr = read_table("factors.factor_names", "", "order by factor_id");
 
 	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
 	echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
+	echo "<th style='color: white'> Identyfikator: </th>";
 	echo "<th style='color: white'> Nazwa: </th>";
 	echo "<th style='color: white'> Nazwa (język angielski): </th>";
 	echo "<th style='color: white'> Opis: </th>";
@@ -50,10 +50,10 @@ foreach($atr as $row_number => $row)
 	echo "<tr>";
 	echo '<th style=\'color: white\'>'.$row['factor_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor_name_pl'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['factor_name_pl'].'</th>';
+	echo '<th style=\'color: white\'>'.$row['factor_name_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor_description_pl'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['factor_description_pl'].'</th>';
-	echo '<th>'.'<a href=db_factors_updateFactorName.php?FactorID='.$row["factor_id"].'>Edycja</a>'.'</td>';
+	echo '<th style=\'color: white\'>'.$row['factor_description_eng'].'</th>';
+	echo '<th>'.'<a href=db_factors_updateFactorName.php?FactorID='.$row["factor_id"].'>Edycja</a>'.'</th>';
 	echo "</tr>";
  
 }

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż jednostkę dodatkowe</title>
+  <title>Jednostki dodatkowe</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,27 +20,29 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż jednostki dodatkowe</h3>
+<h3 class="text-white text-center mt-3">Jednostki dodatkowe</h3>
 
 <div class="container">
 <div class="row mt-5">
-/*<div class="col-md-2"></div>
-<div class="col-md-8">*/
+
+<div class="col-md-2"></div>
+<div class="col-md-8">
+
 <?php
 
 require "db_functions.php";
 open_database();
-$atr = read_table("units.units");
+$atr = read_table("units.units","where ratio<>1","order by unit");
 
     echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
     echo "<tr>";
-    echo "<th style='color: white'> ID: </th>";
+    //echo "<th style='color: white'> ID: </th>";
     echo "<th style='color: white'> Jednostka: </th>";
-    echo "<th style='color: white'> Nazwa Jednostki: </th>";
-    echo "<th style='color: white'> Nazwa Jednostki (język angielski): </th>";
-    echo "<th style='color: white'> Stosunek Do Jednostki Podstawowej </th>";
-    echo "<th style='color: white'> ID Wielkości Fizycznej: </th>";
+    echo "<th style='color: white'> Nazwa jednostki: </th>";
+    echo "<th style='color: white'> Nazwa jednostki (język angielski): </th>";
+    echo "<th style='color: white'> Stosunek do jednostki podstawowej </th>";
+    echo "<th style='color: white'> Wielkość fizyczna: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
     echo "</tr>";
 
@@ -48,13 +50,13 @@ foreach($atr as $row_number => $row)
 {
 
     echo "<tr>";
-    echo '<th style=\'color: white\'>'.$row['unit_id'].'</th>';
+    //echo '<th style=\'color: white\'>'.$row['unit_id'].'</th>';
     echo '<th style=\'color: white\'>'.$row['unit'].'</th>';
     echo '<th style=\'color: white\'>'.$row['unit_full_name_pl'].'</th>';
     echo '<th style=\'color: white\'>'.$row['unit_full_name_eng'].'</th>';
     echo '<th style=\'color: white\'>'.$row['ratio'].'</th>';
-    echo '<th style=\'color: white\'>'.$row['quantity_id'].'</th>';
-	echo '<th>'.'<a href=db_units_updateUnit.php?UnitID='.$row["unit_id"].'&TempQuantityID='.$row["quantity_id"].'>Edycja</a>'.'</td>';
+    echo '<th style=\'color: white\'>'.get_quantity_name_pl($row['quantity_id']).'</th>';
+	echo '<th>'.'<a href=db_units_updateUnit.php?UnitID='.$row["unit_id"].'&TempQuantityID='.$row["quantity_id"].'>Edycja</a>'.'</th>';
     echo "</tr>";
 
 }

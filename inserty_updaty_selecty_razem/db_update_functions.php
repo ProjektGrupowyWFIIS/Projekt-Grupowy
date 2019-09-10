@@ -33,7 +33,7 @@ function update_quantity_and_base_unit($quantity_id, $unit_id, $quantity_name_pl
 {
     $query1 = "update units.quantities 
                 set (quantity_name_pl, quantity_name_eng, base_unit_id)=
-                ('".$quantity_name_pl."','".$quantity_name_eng."', NULL)
+                ('".$quantity_name_pl."','".$quantity_name_eng."', " .$unit_id. ")
                 where quantity_id=$quantity_id;";
 
     //echo "DEBUG: ".$query1."<br>";
@@ -261,20 +261,20 @@ function get_attribute_enum($attribute_id, $attribute_value_pl)
 
 
 function update_attribute_enum($attribute_id, $attribute_value_pl,
-                               $attribute_id2, $attribute_value_pl2, $attribute_value_eng,
+                               $attribute_value_pl2, $attribute_value_eng,
                                $attribute_value_description_pl, $attribute_value_description_eng)
 {
 //    echo "test";
     $query = "update attributes.attribute_enums set 
-            (attribute_id,attribute_value_pl,attribute_value_eng,
+            (attribute_value_pl,attribute_value_eng,
             attribute_value_description_pl,attribute_value_description_eng)=
-            ('".$attribute_id2."','".$attribute_value_pl2."',
+            ('".$attribute_value_pl2."',
             '".$attribute_value_eng."','".$attribute_value_description_pl."',
             '".$attribute_value_description_eng."') where attribute_id=$attribute_id 
                                                     and attribute_value_pl='$attribute_value_pl';";
 
     //echo "DEBUG: ".$query."<br><br>";
-
+    
     if ($result = pg_query($query))
         return 1;
     else
@@ -423,7 +423,7 @@ function get_attribute_name_pl($attribute_id)
 function get_resource_name_pl($resource_id)
 {
     open_database();
-        $query = "select * from resources.resources where resource_id=$resource_id;";
+        $query = "select * from resources.resources where resource_id = $resource_id;";
         $result = pg_query($query);
     close_database();
     $row = pg_fetch_array($result);

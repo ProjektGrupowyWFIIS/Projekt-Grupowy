@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytuj atrybut (cechę nienumeryczną) dla zasobu energetycznego (nośnika energii)</title>
+    <title>Edytuj atrybut dla zasobu energetycznego</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -21,22 +21,45 @@
 include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Edytuj wartości atrybutów dla podanego zasobu energetycznego (nośnika energii)</h3>
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $attribute_id = $_GET["AttributeID"];
+  $resource_id = $_GET["ResourceID"];
+
+  open_database();
+  $attribute_value   = get_energy_resource_attribute_value($resource_id, $attribute_id);
+  $attribute_name_pl = get_attr_name_pl($attribute_id);
+  $resource_name_pl = get_energy_resource_name_pl($resource_id );
+  close_database();
+}
+
+if($_POST)
+{
+  $attribute_value = $_POST["Value"];
+
+  open_database();
+  $result = update_energy_resource_attribute($resource_id, $attribute_id, $attribute_value);
+  close_database();
+
+  if ($result)
+  {
+    unset ($_POST['Value']);
+  }  
+}      
+?>
+
+
+<h3 class="text-white text-center mt-3">Edytuj wartość atrybutu (cechy nienumerycznej) dla zasobu energetycznego (nośnika energii)</h3>
 
 <div class="text-center">
     <form method="post" action="">
-    <?php
-        require "db_update_functions.php";
-        require "db_functions.php";
-        if($_GET)
-        {
-            $resource_id = $_GET["ResourceID"];
-            $attribute_id = $_GET["AttributeID"];
-        }
-        $attribute_value = get_energy_resource_attribute($resource_id, $attribute_id);
-        $attribute_name_pl = get_attribute_name_pl($attribute_id);
-        $resource_name_pl = get_resource_name_pl($resource_id );
-    ?>
         <div class="container">
             <div class="row mt-5">
                     <div class="col-md-3"></div>
@@ -53,10 +76,6 @@ include ('navbar.php');
                     <div class="col-md-3"></div>
             </div>
         </div>
-
-        <p class="text-white-50 lead mt-5 font-italic font-weight-normal">
-            Należy uwzględnić wszystkie obowiązkowe atrybuty dla wszystkich kategorii, do których należy powyższy zasób.
-        </p>
 
         <div class="container">
             <div class="row">
@@ -89,7 +108,10 @@ include ('navbar.php');
                 </div>
            
                 <div class="col-md-3">
+<!--                
                     <input type="number" step="0.0000000001" min="0.0000000001" name="Value" class="form-control" value="<?=$attribute_value?>" required/>
+-->
+                    <input name="Value" type="text" value="<?=$attribute_value?>" class="form-control" required />
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -121,19 +143,17 @@ include ('navbar.php');
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $attribute_value = $_POST["Value"];
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Atrybut zasobu energetycznego zmieniony!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'></span>Nie mogę zmienić atrybutu zasobu energetycznego!</center></h4>";
+  }
+}
 
-        open_database();
-            $result = update_energy_resource_attribute($resource_id, $attribute_id, $attribute_value);
-        close_database();
 
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić atrybutu zasobu energetycznego!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Atrybut zasobu energetycznego zmieniony!</span></center></h4>";
-    }
 ?>
 </div>
 </body>

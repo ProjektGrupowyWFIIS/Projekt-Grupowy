@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż możliwe wartości atrybutu wyliczeniowego</title>
+  <title>Możliwe wartości atrybutów wyliczeniowych</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,7 +20,7 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż możliwe wartości atrybutu wyliczeniowego</h3>
+<h3 class="text-white text-center mt-3">Możliwe wartości atrybutów wyliczeniowych</h3>
 
 <div class="container">
 <div class="row mt-5">
@@ -30,12 +30,12 @@ include("navbar.php");
 
 require "db_functions.php";
 open_database();
-$atr = read_table("attributes.attribute_enums");
+$atr = read_table("attributes.attribute_enums","","order by attribute_id");
 
   echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\" class=\"table table-bordered\">";
 
   echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
+	echo "<th style='color: white'> Atrybut: </th>";
 	echo "<th style='color: white'> Wartość: </th>";
 	echo "<th style='color: white'> Wartość (język angielski): </th>";
 	echo "<th style='color: white'> Opis: </th>";
@@ -47,12 +47,12 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['attribute_id'].'</th>';
+	echo '<th style=\'color: white\'>'.get_attr_name_pl($row['attribute_id']).'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value_description_eng'].'</th>';
-	echo '<th>'.'<a href=db_attributes_updateAttributeEnum.php?AttributeID='.$row["attribute_id"].'&AttributeValuePL='.$row["attribute_value_pl"].'>Edycja</a>'.'</td>';
+	echo '<th>'.'<a href=db_attributes_updateAttributeEnum.php?AttributeID='.$row["attribute_id"].'&AttributeValuePL='.$row["attribute_value_pl"].'>Edycja</a>'.'</th>';
 	echo "</tr>";
  
 }

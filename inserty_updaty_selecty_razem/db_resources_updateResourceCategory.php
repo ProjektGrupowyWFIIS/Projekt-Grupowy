@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytuj podany zasób (surowiec) dla kategorii</title>
+    <title>Edytuj przypisanie zasobu do kategorii</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -22,23 +22,51 @@
 include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Edytuj podany zasób (surowiec) dla kategorii</h3>
+
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $resource_id = $_GET["ResourceID"];
+  $cat_id = $_GET["CatID"];
+
+  open_database();
+      $resource = read_table("resources.resources");
+      $category = read_table("categories.categories");
+  close_database();
+}
+
+
+if($_POST)
+{
+  $resource_id2 = $_POST["ResourceID2"];
+  $cat_id2 = $_POST["CatID2"];
+
+  open_database();
+      $result = update_resource_category($resource_id, $cat_id, $resource_id2, $cat_id2);
+  close_database();
+
+  $resource_id = $resource_id2;
+  $cat_id = $cat_id2;
+
+  if ($result)
+  {
+    unset ($_POST['ResourceID2']);
+    unset ($_POST['CatID2']);
+  }  
+}      
+?>
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj przypisanie zasobu (surowca) do kategorii</h3>
 
 <form method="post" action="">
-<?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-
-    if($_GET)
-    {
-        $resource_id = $_GET["ResourceID"];
-        $cat_id = $_GET["CatID"];
-    }
-    open_database();
-        $resource = read_table("resources.resources");
-        $category = read_table("categories.categories");
-    close_database();
-?>
 
     <div class="container">
         <div class="row">
@@ -127,20 +155,15 @@ include ('navbar.php');
 </div>
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $resource_id2 = $_POST["ResourceID2"];
-        $cat_id2 = $_POST["CatID2"];
-
-        open_database();
-            $result = update_resource_category($resource_id, $cat_id, $resource_id2, $cat_id2);
-        close_database();
-
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić kategorii zasobu (surowca)!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Kategoria zasobu (surowca) zmieniona!</span></center></h4>";
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Przypisanie zasobu do kategorii zmienione.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić przypisania zasobu do kategorii!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

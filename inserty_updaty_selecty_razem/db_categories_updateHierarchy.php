@@ -22,6 +22,49 @@
         include ('navbar.php');
     ?>
 
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+                $cat_id = $_GET["CatID"];
+                $parent_id = $_GET["ParentID"];
+
+            open_database();
+                $categories = read_table("categories.categories");
+            close_database();
+}
+
+
+if($_POST)
+{
+        $cat_id2    = $_POST["CatID2"];
+        $parent_id2 = $_POST["ParentID2"];
+
+        if($cat_id2 != $parent_id2)
+        {
+            open_database();
+                $result = update_hierarchy_of_categories($cat_id, $parent_id, $cat_id2, $parent_id2);
+            close_database();
+        }
+        $cat_id=$cat_id2;
+        $parent_id=$parent_id2;
+
+
+  if ($result)
+  {
+    unset ($_POST['CatID2']);
+    unset ($_POST['ParentID2']);
+  }  
+}      
+?>
+
+
+
 <h3 class="text-white text-center mt-3">
     Edytuj hierarchię kategorii zasobów.
     Hierarchia nie jest drzewem, lecz grafem acyklicznym, a zatem każda kategoria może mieć wiele kategorii nadrzędnych.
@@ -29,18 +72,6 @@
 
 <div class="text-center">
     <form method="post" action="" class="form-group">
-        <?php
-            require "db_update_functions.php";
-            require "db_functions.php";
-            if($_GET)
-            {
-                $cat_id = $_GET["CatID"];
-                $parent_id = $_GET["ParentID"];
-            }
-            open_database();
-                $categories = read_table("categories.categories");
-            close_database();
-        ?>
                 <div class="container">
                     <div class="row mt-5">
                             <div class="col-md-3"></div>
@@ -128,26 +159,18 @@
 </div>
 <div class="text-white">
 <?php
-    if($_POST)
-    {
-        $cat_id2    = $_POST["CatID2"];
-        $parent_id2 = $_POST["ParentID2"];
-
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Hierarchia kategorii zmieniona!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
         if($cat_id2 != $parent_id2)
-        {
-            open_database();
-                $result = update_hierarchy_of_categories($cat_id, $parent_id, $cat_id2, $parent_id2);
-//                $cat_name_pl = get_category_name_pl($cat_id);
-            close_database();
-
-            if (!$result)
-                echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić hierarchii kategorii!</center></h4>";
-            else
-                echo "<br><h4><center><span style='color: white; background-color: black'>Hierarchia kategorii zmieniona!</span></center></h4>";
-        }
+          echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić hierarchii kategorii!</span></center></h4>";
         else
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Błąd kategoria i kategoria nadrzędna są takie same!</center></h4>";
-    }
+          echo "<br><h4><center><span style='color: red; background-color: black'>Błąd: kategoria i kategoria nadrzędna są takie same!</span></center></h4>";
+  }
+}
 ?>
 </div>
 

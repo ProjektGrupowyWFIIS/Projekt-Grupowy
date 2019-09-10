@@ -115,6 +115,22 @@ function get_quantity_id($quantity_name_eng)
 }
 
 
+function get_quantity_name_pl($quantity_id)  
+{
+  $query = "select quantity_name_pl from units.quantities where quantity_id = '".$quantity_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
+
 function get_unit_id($unit)  
 {
   $query = "select unit_id from units.units where unit = '".$unit."'";
@@ -130,6 +146,21 @@ function get_unit_id($unit)
     return 0;
 }
 
+
+function get_unit($unit_id)  
+{
+  $query = "select unit from units.units where unit_id = '".$unit_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
 
 function get_canonical_unit_id($unit_variant)  
 {
@@ -203,6 +234,21 @@ function get_folder_id($folder_name)
     return 0;
 }
 
+function get_folder_name($folder_id)  
+{
+  $query = "select folder_name from files.folders where folder_id = '".$folder_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
 
 function get_file_id($folder_id, $file_name)  
 {
@@ -219,6 +265,20 @@ function get_file_id($folder_id, $file_name)
     return 0;
 }
 
+function get_file_name($file_id)  
+{
+  $query = "select file_name from files.files where file_id = ".$file_id;
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
 
 //---------- categories: -------------
 
@@ -267,6 +327,21 @@ function get_category_id($category_name_pl)
   }
   else
     return 0;
+}
+
+function get_cat_name_pl($category_id)  
+{
+  $query = "select cat_name_pl from categories.categories where cat_id = '".$category_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
 }
 
 
@@ -334,6 +409,39 @@ function get_attribute_id($attribute_name_pl)
 }
 
 
+function get_attribute_id_eng($attribute_name_eng)  
+{
+  $query = "select attribute_id from attributes.attributes where attribute_name_eng = '".$attribute_name_eng."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return 0;
+}
+
+
+function get_attr_name_pl($attribute_id)  
+{
+  $query = "select attribute_name_pl from attributes.attributes where attribute_id = '".$attribute_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
+
+
 //-------- factors: --------------
 
 
@@ -389,6 +497,36 @@ function write_mandatory_factor($cat_id, $factor_id)
 function get_factor_id($factor_name_pl)  
 {
   $query = "select factor_id from factors.factor_names where factor_name_pl = '".$factor_name_pl."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
+function get_factor_name_pl($factor_id)  
+{
+  $query = "select factor_name_pl from factors.factor_names where factor_id = '".$factor_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
+function get_source_description($source_id)  
+{
+  $query = "select source_description from factors.sources where source_id = '".$source_id."'";
 
   //echo "DEBUG: ".$query."<br><br>";
 
@@ -503,6 +641,22 @@ function get_resource_id($name_pl)
 }
 
 
+function get_res_name_pl($resource_id)  
+{
+  $query = "select resource_name_pl from resources.resources where resource_id = '".$resource_id."'";
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
+
 //---------- energy_resources: ----------------
 
 
@@ -592,13 +746,44 @@ function get_energy_resource_id($name_pl)
 }
 
 
+function get_energy_resource_name_pl($energy_resource_id)  
+{
+  $query = "select resource_name_pl from energy_resources.energy_resources where resource_id = ".$energy_resource_id;
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+}
+
+function get_energy_resource_attribute_value($resource_id, $attribute_id)
+{
+  $query = "select attribute_value from energy_resources.resources_attributes where resource_id = ".$resource_id." and attribute_id = ".$attribute_id;
+
+  //echo "DEBUG: ".$query."<br><br>";
+
+  if ($result = pg_query($query))
+  {
+    $row = pg_fetch_row($result);
+    return $row[0];
+  }
+  else
+    return "";
+
+}
+
 //----------- read table: ----------------
 
-function read_table($table_name, $where_clause="")
+function read_table($table_name, $where_clause="", $order_by="")
 {
   $arr = array();
 
-  $query = "select * from ".$table_name." ".$where_clause;
+  $query = "select * from ".$table_name." ".$where_clause." ".$order_by;
 
   if ($result = pg_query($query))
     $arr = pg_fetch_all($result);

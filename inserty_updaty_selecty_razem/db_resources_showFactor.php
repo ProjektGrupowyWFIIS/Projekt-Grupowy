@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaz współczynnik (cechę numeryczną) dla zasobów</title>
+  <title>Wartości współczynników dla zasobów</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,14 +20,14 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż wartości współczynników dla zasobów</h3>
+<h3 class="text-white text-center mt-3">Wartości współczynników (cech numerycznych) dla zasobów (surowców)</h3>
 
 
 
 <div class="container">
 	<div class="row mt-5">
 		<div class="col-md-1"></div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 <!-- <div class="container">
 <div class="row mt-5">
 <div class="col-md-3"></div>
@@ -38,18 +38,19 @@ require "db_functions.php";
 
 open_database();
 
-$atr = read_table("resources.factors");
+$atr = read_table("resources.factors","","order by resource_id, factor_id");
 
-	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
+	//echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
+  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" color = \"white\" class=\"table table-bordered\">";
 
 	echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
-	echo "<th style='color: white'> ID Współczynnika: </th>";
-	echo "<th style='color: white'> ID Źródła: </th>";
-	echo "<th style='color: white'> ID Jednostki Surowca 1: </th>";
-	echo "<th style='color: white'> ID Jednostki Surowca 2: </th>";
-	echo "<th style='color: white'> ID Jednostki Współczynnika: </th>";
-	echo "<th style='color: white'> Współczynnik </th>";
+	echo "<th style='color: white'> Zasób (surowiec): </th>";
+	echo "<th style='color: white'> Nazwa Współczynnika: </th>";
+	echo "<th style='color: white'> Źródło: </th>";
+	echo "<th style='color: white'> Jednostka Surowca 1: </th>";
+	echo "<th style='color: white'> Jednostka Surowca 2: </th>";
+	echo "<th style='color: white'> Jednostka Współczynnika: </th>";
+	echo "<th style='color: white'> Wartość Współczynnika </th>";
 	echo "<th style='color: white'> Niepewność: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
@@ -58,15 +59,15 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['factor_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['source_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_unit_1_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_unit_2_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['factor_unit_id'].'</th>';
+	echo '<th style=\'color: white\'>'.get_res_name_pl($row['resource_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_factor_name_pl($row['factor_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_source_description($row['source_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_unit($row['resource_unit_1_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_unit($row['resource_unit_2_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_unit($row['factor_unit_id']).'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['uncertainty'].'</th>';
-	echo '<th>'.'<a href=db_resources_updateFactor.php?ResourceID='.$row["resource_id"].'&FactorID='.$row["factor_id"].'&TempSourceID='.$row["source_id"].'&ResourceUnit1ID='.$row["resource_unit_1_id"].'>Edycja</a>'.'</td>';
+	echo '<th>'.'<a href=db_resources_updateFactor.php?ResourceID='.$row["resource_id"].'&FactorID='.$row["factor_id"].'&TempSourceID='.$row["source_id"].'&ResourceUnit1ID='.$row["resource_unit_1_id"].'&ResourceUnit2ID='.$row["resource_unit_2_id"].'&TempFactorUnitID='.$row["factor_unit_id"].'>Edycja</a>'.'</th>';
 	echo "</tr>";
  
 }
@@ -84,10 +85,15 @@ close_database();
 <div class="col-md-1"></div>
 </div>
 </div>
-<!-- </div>
+
+<!--
+</div>
 <div class="col-md-3"></div>
 </div>
-</div> -->
+</div>
+-->
+
+
 <br>
 
 </body>

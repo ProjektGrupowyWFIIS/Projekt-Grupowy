@@ -21,20 +21,55 @@
 <?php
 include ('navbar.php');
 ?>
+
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+    $quantity_id = $_GET["QuantityID"];
+    $unit_id = $_GET["UnitID"];
+
+    list($quantity_name_pl, $quantity_name_eng, $unit,
+         $unit_full_name_pl, $unit_full_name_eng) = get_quantity_and_base_unit($quantity_id, $unit_id);
+}
+
+
+if($_POST)
+{
+  $quantity_name_pl   = $_POST["QuantityNamePL"];
+  $quantity_name_eng  = $_POST["QuantityNameENG"];
+  $unit               = $_POST["Unit"];
+  $unit_full_name_pl  = $_POST["UnitNamePL"];
+  $unit_full_name_eng = $_POST["UnitNameENG"];
+
+  open_database();
+      $result = update_quantity_and_base_unit($quantity_id, $unit_id, $quantity_name_pl,
+                    $quantity_name_eng, $unit, $unit_full_name_pl, $unit_full_name_eng);
+  close_database();
+
+  if ($result)
+  {
+    unset ($_POST['QuantityNamePL']);
+    unset ($_POST['QuantityNameENG']);
+    unset ($_POST['Unit']);
+    unset ($_POST['UnitNamePL']);
+    unset ($_POST['UnitNameENG']);
+  }  
+}      
+?>
+
+
+
+
+
 <h3 class="text-white text-center mt-3">Edytuj wielkość fizyczną i jej jednostkę podstawową</h3>
 
 <form method="post" action="">
-<?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-    if($_GET)
-    {
-        $quantity_id = $_GET["QuantityID"];
-        $unit_id = $_GET["UnitID"];
-    }
-    list($quantity_name_pl, $quantity_name_eng, $unit,
-         $unit_full_name_pl, $unit_full_name_eng) = get_quantity_and_base_unit($quantity_id, $unit_id);
-?>
     <div class="container">
         <div class="row mt-5">
                 <div class="col-md-3"></div>
@@ -130,24 +165,15 @@ include ('navbar.php');
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $quantity_name_pl   = $_POST["QuantityNamePL"];
-        $quantity_name_eng  = $_POST["QuantityNameENG"];
-        $unit               = $_POST["Unit"];
-        $unit_full_name_pl  = $_POST["UnitNamePL"];
-        $unit_full_name_eng = $_POST["UnitNameENG"];
-
-        open_database();
-            $result = update_quantity_and_base_unit($quantity_id, $unit_id, $quantity_name_pl,
-                          $quantity_name_eng, $unit, $unit_full_name_pl, $unit_full_name_eng);
-        close_database();
-
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić wielkości fizycznej i jej jednostki podstawowej!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Wielkość fizyczna i jej jednostka podstawowa została zmieniona!</span></center></h4>";
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Wielkość fizyczna i jej jednostka podstawowa została zmieniona!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić wielkości fizycznej i jej jednostki podstawowej!</span></center></h4>";
+  }
+}
 ?>
 		</div>
 </body>

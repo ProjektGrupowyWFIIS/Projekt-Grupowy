@@ -14,21 +14,48 @@
 include ('navbar.php');
 ?>
 
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $cat_id = $_GET["CatID"];
+  list($cat_name_pl, $cat_name_eng,
+       $cat_description_pl, $cat_description_eng) = get_category($cat_id);
+}
+
+
+if($_POST)
+{
+        $cat_name_pl = $_POST["NamePL"];
+        $cat_name_eng = $_POST["NameENG"];
+        $cat_description_pl = $_POST["DescPL"];
+        $cat_description_eng = $_POST["DescENG"];
+
+        open_database();
+            $result = update_category($cat_name_pl, $cat_name_eng, $cat_description_pl,
+                                      $cat_description_eng, $cat_id);
+        close_database();
+
+  if ($result)
+  {
+    unset ($_POST['NamePL']);
+    unset ($_POST['NameENG']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }  
+}      
+?>
+
+
 <h3 class="text-white text-center mt-3">Edytuj kategorię zasobów (zarówno surowców jak i nośników energii)</h3>
 
 <div class="text-center">
     <form method="post" action="" class="form-group">
-
-<?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-    if($_GET)
-    {
-        $cat_id = $_GET["CatID"];
-    }
-    list($cat_name_pl, $cat_name_eng,
-         $cat_description_pl, $cat_description_eng) = get_category($cat_id);
-?>
 
         <div class="container">
             <div class="row mt-5">
@@ -119,34 +146,15 @@ include ('navbar.php');
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $cat_name_pl = $_POST["NamePL"];
-        $cat_name_eng = $_POST["NameENG"];
-        $cat_description_pl = $_POST["DescPL"];
-        $cat_description_eng = $_POST["DescENG"];
-
-        open_database();
-            $result = update_category($cat_name_pl, $cat_name_eng, $cat_description_pl,
-                                      $cat_description_eng, $cat_id);
-        close_database();
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Kategoria ".$cat_name_pl." zmieniona.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_category_id($cat_name_pl);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Kategoria ".$cat_name_pl." już istnieje!</span></center></h4>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić kategorii!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Kategoria ".$cat_name_pl." zmieniona.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić kategorii - prawdopodobnie taka nazwa (PL lub ENG) już istnieje!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

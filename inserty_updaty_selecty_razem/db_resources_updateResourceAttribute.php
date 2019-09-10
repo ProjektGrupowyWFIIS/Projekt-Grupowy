@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytuj atrybut (cechę nienumeryczną) dla zasobu (surowca)</title>
+    <title>Edytuj atrybut dla zasobu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,22 +20,44 @@
     <?php
     include ('navbar.php');
     ?>
-    <h3 class="text-white text-center mt-3">Edytuj wartości atrybutów dla podanego zasobu (surowca)</h3>
+    
+    
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $resource_id = $_GET["ResourceID"];
+  $attribute_id = $_GET["AttributeID"];
+
+  $attribute_value = get_resource_attribute($resource_id, $attribute_id);
+  $attribute_name_pl = get_attribute_name_pl($attribute_id);
+  $resource_name_pl = get_resource_name_pl($resource_id );
+}
+
+
+if($_POST)
+{
+  $attribute_value = $_POST["Value"];
+
+  open_database();
+      $result = update_resource_attribute($resource_id, $attribute_id, $attribute_value);
+  close_database();
+  
+  if ($result)
+  {
+    unset ($_POST['Value']);
+  }  
+}      
+?>
+    
+    
+    <h3 class="text-white text-center mt-3">Edytuj wartość atrybutu (cechy nienumerycznej) dla danego zasobu (surowca)</h3>
 
     <form method="post" action="">
-
-        <?php
-            require "db_update_functions.php";
-            require "db_functions.php";
-            if($_GET)
-            {
-                $resource_id = $_GET["ResourceID"];
-                $attribute_id = $_GET["AttributeID"];
-            }
-            $attribute_value = get_resource_attribute($resource_id, $attribute_id);
-            $attribute_name_pl = get_attribute_name_pl($attribute_id);
-            $resource_name_pl = get_resource_name_pl($resource_id );
-        ?>
 
         <div class="container">
             <div class="row mt-5">
@@ -89,7 +111,8 @@
                 </div>
               
                 <div class="col-md-3">
-                    <input type="number" step="0.0000000001" min="0.0000000001" name="Value" class="form-control" value="<?=$attribute_value?>" required/>
+                    <!--  <input type="number" step="0.0000000001" min="0.0000000001" name="Value" class="form-control" value="<?=$attribute_value?>" required/> -->
+                    <input type="text" name="Value" class="form-control" value="<?=$attribute_value?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -119,18 +142,15 @@
 </div>
 <div class="text-center">
 <?php
-if($_POST)
+
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Atrybut zasobu zmieniony!</span></center></h4>";
+else
 {
-    $attribute_value = $_POST["Value"];
-
-    open_database();
-        $result = update_resource_attribute($resource_id, $attribute_id, $attribute_value);
-    close_database();
-
-    if (!$result)
-        echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić atrybutu zasobu!</center></h4>";
-    else
-        echo "<br><h4><center><span style='color: white; background-color: black'>Atrybut zasobu zmieniony!</span></center></h4>";
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'></span>Nie mogę zmienić atrybutu zasobu!</center></h4>";
+  }
 }
 ?>
 </div>

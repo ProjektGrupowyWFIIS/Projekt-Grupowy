@@ -22,19 +22,47 @@
 <?php
 include ('navbar.php');
 ?>
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $resource_id = $_GET["ResourceID"];
+  list($resource_name_pl, $resource_name_eng,
+       $resource_description_pl, $resource_description_eng) = get_resource($resource_id);
+}
+
+
+if($_POST)
+{
+  $resource_name_pl = $_POST["NamePL"];
+  $resource_name_eng = $_POST["NameENG"];
+  $resource_description_pl = $_POST["DescPL"];
+  $resource_description_eng = $_POST["DescENG"];
+
+  open_database();
+      $result = update_resource($resource_id, $resource_name_pl, $resource_name_eng,
+                                $resource_description_pl, $resource_description_eng);
+  close_database();
+
+  if ($result)
+  {
+    unset ($_POST['NamePL']);
+    unset ($_POST['NameENG']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }  
+}      
+?>
+
+
 <h3 class="text-white text-center mt-3">Edytuj zasób (surowiec)</h3>
 
 <form method="post" action="">
-    <?php
-        require "db_update_functions.php";
-        require "db_functions.php";
-        if($_GET)
-        {
-            $resource_id = $_GET["ResourceID"];
-        }
-        list($resource_name_pl, $resource_name_eng,
-             $resource_description_pl, $resource_description_eng) = get_resource($resource_id);
-    ?>
 
     <div class="container">
         <div class="row mt-5">
@@ -72,7 +100,7 @@ include ('navbar.php');
             </div>
      
             <div class="col-md-3">
-                <input type="text" name="DescPL" class="form-control" value="<?=$resource_description_pl?>" required/>
+                <input type="text" name="DescPL" class="form-control" value="<?=$resource_description_pl?>" />
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -86,7 +114,7 @@ include ('navbar.php');
             </div>
  
             <div class="col-md-3">
-                <input type="text" name="DescENG" class="form-control" value="<?=$resource_description_eng?>" required/>
+                <input type="text" name="DescENG" class="form-control" value="<?=$resource_description_eng?>" />
             </div>
 
         </div>
@@ -116,34 +144,15 @@ include ('navbar.php');
 </div>
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $resource_name_pl = $_POST["NamePL"];
-        $resource_name_eng = $_POST["NameENG"];
-        $resource_description_pl = $_POST["DescPL"];
-        $resource_description_eng = $_POST["DescENG"];
-
-        open_database();
-            $result = update_resource($resource_id, $resource_name_pl, $resource_name_eng,
-                                      $resource_description_pl, $resource_description_eng);
-        close_database();
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Zasób ".$resource_name_pl." zmieniony.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_resource_id($resource_name_pl);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Zasób ".$resource_name_pl." już istnieje!</span></center></h4>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić zasobu!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Zasób ".$resource_name_pl." zmieniony.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić zasobu!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

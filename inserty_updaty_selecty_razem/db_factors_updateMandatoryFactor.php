@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytuj obowiązkowy współczynnik (atrybut numeryczny) dla podanej kategorii zasobów</title>
+    <title>Edytuj obowiązkowy współczynnik dla danej kategorii zasobów</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -21,25 +21,53 @@
 <?php
 include ('navbar.php');
 ?>
-<h3 class="text-white text-center mt-3">Edytuj zestaw obowiązkowych współczynników dla podanej kategorii zasobów</h3>
+
+
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+
+if($_GET)
+{
+  $cat_id = $_GET["CatID"];
+  $factor_id = $_GET["FactorID"];
+  open_database();
+      $factor = read_table("factors.factor_names");
+      $category = read_table("categories.categories");
+  close_database();
+}
+
+
+if($_POST)
+{
+  $cat_id2 = $_POST["CatID2"];
+  $factor_id2 = $_POST["FactorID2"];
+
+  open_database();
+      $result = update_mandatory_factor($cat_id, $factor_id ,$cat_id2, $factor_id2) ;
+  close_database();
+
+  $cat_id = $cat_id2;
+  $factor_id = $factor_id2;
+
+  if ($result)
+  {
+    unset ($_POST['CategoryID2']);
+    unset ($_POST['FactorID2']);
+  }  
+}      
+?>
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj obowiązkowy współczynnik (atrybut numeryczny) dla danej kategorii zasobów</h3>
 
 <div class="text-center">
     <form method="post" action="">
-
-    <?php
-        require "db_update_functions.php";
-        require "db_functions.php";
-
-        if($_GET)
-        {
-            $cat_id = $_GET["CatID"];
-            $factor_id = $_GET["FactorID"];
-        }
-        open_database();
-            $factor = read_table("factors.factor_names");
-            $category = read_table("categories.categories");
-        close_database();
-    ?>
 
         <div class="container">
             <div class="row mt-5">
@@ -126,20 +154,16 @@ include ('navbar.php');
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $cat_id2 = $_POST["CatID2"];
-        $factor_id2 = $_POST["FactorID2"];
 
-        open_database();
-            $result = update_mandatory_factor($cat_id, $factor_id ,$cat_id2, $factor_id2) ;
-        close_database();
-
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić obowiązkowego współczynnika!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Obowiązkowy współczynnik zmieniony!</span></center></h4>";
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Obowiązkowy współczynnik zmieniony!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić obowiązkowego współczynnika!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

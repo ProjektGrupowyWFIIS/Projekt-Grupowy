@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytuj zasób energetyczny (nośnik energii)</title>
+    <title>Edytuj zasób energetyczny</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -21,25 +21,51 @@
     include ('navbar.php');
 ?>
 
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $resource_id = $_GET["ResourceID"];
+  list($resource_name_pl, $resource_name_eng, $gus_id,
+       $resource_description_pl, $resource_description_eng) =
+                              get_energy_resource($resource_id);
+}
+
+
+if($_POST)
+{
+  $resource_name_pl = $_POST["NamePL"];
+  $resource_name_eng = $_POST["NameENG"];
+  $gus_id = $_POST["GUS"];
+  $resource_description_pl = $_POST["DescPL"];
+  $resource_description_eng = $_POST["DescENG"];
+
+  open_database();
+  $result = update_energy_resource($resource_name_pl, $resource_name_eng, $gus_id,
+               $resource_description_pl, $resource_description_eng, $resource_id);
+  close_database();
+
+  if ($result)
+  {
+    unset ($_POST['NamePL']);
+    unset ($_POST['NameENG']);
+    unset ($_POST['GUS']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }  
+}      
+?>
+
+
 <h3 class="text-white text-center mt-3">Edytuj zasób energetyczny (nośnik energii)</h3>
 
 <div class="text-center">
     <form method="post" action="">
-
-
-    <?php
-        require "db_update_functions.php";
-        require "db_functions.php";
-
-        if($_GET)
-        {
-            $resource_id = $_GET["ResourceID"];
-        }
-
-        list($resource_name_pl, $resource_name_eng, $gus_id,
-             $resource_description_pl, $resource_description_eng) =
-                                    get_energy_resource($resource_id);
-    ?>
 
         <div class="container">
             <div class="row mt-5">
@@ -84,7 +110,7 @@
                 </div>
                
                 <div class="col-md-3">
-                    <input type="number"  name="GUS" class="form-control" value="<?=$gus_id?>" required/>
+                    <input type="text"  name="GUS" class="form-control" value="<?=$gus_id?>" required/>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -101,7 +127,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescPL" class="form-control" value="<?=$resource_description_pl?>" required/>
+                    <input type="text"  name="DescPL" class="form-control" value="<?=$resource_description_pl?>" />
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -118,7 +144,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescENG" class="form-control" value="<?=$resource_description_eng?>" required/>
+                    <input type="text"  name="DescENG" class="form-control" value="<?=$resource_description_eng?>" />
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -151,35 +177,15 @@
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $resource_name_pl = $_POST["NamePL"];
-        $resource_name_eng = $_POST["NameENG"];
-        $gus_id = $_POST["GUS"];
-        $resource_description_pl = $_POST["DescPL"];
-        $resource_description_eng = $_POST["DescENG"];
-
-        open_database();
-            $result = update_energy_resource($resource_name_pl, $resource_name_eng, $gus_id,
-                         $resource_description_pl, $resource_description_eng, $resource_id);
-        close_database();
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Zasób energetyczny ".$resource_name_pl." zmieniony.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_energy_resource_id($resource_name_pl);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Zasób energetyczny ".$resource_name_pl." już istnieje!</span></center></h4>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić zasobu energetycznego!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Zasób energetyczny ".$resource_name_pl." zmieniony.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić zasobu energetycznego!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

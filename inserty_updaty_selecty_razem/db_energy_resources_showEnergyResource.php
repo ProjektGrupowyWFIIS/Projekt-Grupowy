@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż zasób energetyczny (nośnik energii)</title>
+  <title>Pokaż zasoby energetyczne</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,8 +20,8 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż zasób energetyczny (nośnik energii)</h3>
-
+<h3 class="text-white text-center mt-3">Pokaż zasoby energetyczne (nośniki energii)</h3>
+<div class="table-responsive table-lg">
 <div class="container">
 <div class="row mt-5">
 <div class="col-md-3"></div>
@@ -31,15 +31,16 @@ include("navbar.php");
 
 require "db_functions.php";
 open_database();
-$atr = read_table("energy_resources.energy_resources");
+$atr = read_table("energy_resources.energy_resources","","order by resource_name_pl");
 
-	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
+	//echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
+  echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" color = \"white\" class=\"table table-bordered\">";
 
 	echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
+	//echo "<th style='color: white'> ID: </th>";
 	echo "<th style='color: white'> Nazwa: </th>";
 	echo "<th style='color: white'> Nazwa (język angielski): </th>";
-	echo "<th style='color: white'> ID Kodu GUS: </th>";
+	echo "<th style='color: white'> Kod GUS: </th>";
 	echo "<th style='color: white'> Opis: </th>";
 	echo "<th style='color: white'> Opis (język angielski): </th>";
 	echo "<th style='color: white'> Edycja: </th>";
@@ -48,16 +49,15 @@ $atr = read_table("energy_resources.energy_resources");
 foreach($atr as $row_number => $row)
 {
   
-	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_name_pl'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_name_eng'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['gus_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_description_pl'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_description_eng'].'</th>';
-	echo '<th>'.'<a href=db_energy_resources_updateEnergyResource.php?ResourceID='.$row["resource_id"].'>Edycja</a>'.'</td>';
-	echo "</tr>";
- 
+	echo "<tr>\n";
+	//echo '<th style=\'color: white\'>'.$row['resource_id']."</th>\n";
+	echo '<th style=\'color: white\'>'.$row['resource_name_pl']."</th>\n";
+	echo '<th style=\'color: white\'>'.$row['resource_name_eng']."</th>\n";
+	echo '<th style=\'color: white\'>'.$row['gus_id']."</th>\n";
+	echo '<th style=\'color: white\'>'.$row['resource_description_pl']."</th>\n";
+	echo '<th style=\'color: white\'>'.$row['resource_description_eng']."</th>\n";
+	echo '<th>'.'<a href=db_energy_resources_updateEnergyResource.php?ResourceID='.$row["resource_id"].'>Edycja</a>'."</th>\n";
+	echo "</tr>\n";
 }
 
 echo "</table>";
@@ -65,9 +65,12 @@ echo "</table>";
 close_database();
 
 ?>
-</div>
+<!-- </div>
 <div class="col-md-3"></div>
 </div>
+</div> -->
+
+
 </div>
 <br>
 

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.php">LOGO</a>
+        <a class="navbar-brand" href="index.php">PROJEKT GRUPOWY</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,41 +15,40 @@
                 </button>
                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                     
+                                <li class="dropdown-submenu">
+                                    <a  class="dropdown-item" tabindex="-1" >Jednostki</a>
+                                    <ul class="dropdown-menu">
+                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_addQuantityAndBaseUnit.php">Wielkość fizyczna i jednostka bazowa</a></li>
+                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_addUnit.php">Jednostka dodatkowa</a></li>
+                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_addSourceUnit.php">Alternatywna nazwa jednostki</a></li>
+                                    </ul>
+                                  </li>
           
+                          <li class="dropdown-submenu">
+                              <a  class="dropdown-item" tabindex="-1" href="#">Pliki</a>
+                              <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a tabindex="-1" href="db_files_addFile.php">Plik</a></li>
+                                <li class="dropdown-item"><a tabindex="-1" href="db_files_addFolder.php">Folder</a></li>
+                              </ul>
+                            </li>
+    
+    
+                      <li class="dropdown-submenu">
+                        <a  class="dropdown-item" tabindex="-1" href="#">Kategorie</a>
+                        <ul class="dropdown-menu">
+                          <li class="dropdown-item"><a tabindex="-1" href="db_categories_addCategory.php">Kategoria</a></li>
+                          <li class="dropdown-item"><a tabindex="-1" href="db_categories_addHierarchy.php">Hierarchia</a></li>
+                        </ul>
+                      </li>
+    
                     <li class="dropdown-submenu">
                         <a  class="dropdown-item" tabindex="-1" href="#">Atrybuty</a>
                         <ul class="dropdown-menu">
                           <li class="dropdown-item"><a tabindex="-1" href="db_attributes_addAttribute.php">Atrybut</a></li>
                           <li class="dropdown-item"><a tabindex="-1" href="db_attributes_addAttributeEnum.php">Atrybut Wyliczeniowy</a></li>
                           <li class="dropdown-item"><a tabindex="-1" href="db_attributes_addMandatoryAttribute.php">Atrybut Obowiązkowy</a></li>
-                          
-                          
                         </ul>
                       </li>
-    
-                      <li class="dropdown-submenu">
-                        <a  class="dropdown-item" tabindex="-1" href="#">Kategorie</a>
-                        <ul class="dropdown-menu">
-                          <li class="dropdown-item"><a tabindex="-1" href="db_categories_addCategory.php">Kategorie</a></li>
-                          <li class="dropdown-item"><a tabindex="-1" href="db_categories_addHierarchy.php">Hierarchie</a></li>
-                          
-                          
-                          
-                        </ul>
-                      </li>
-    
-                      <li class="dropdown-submenu">
-                          <a  class="dropdown-item" tabindex="-1" href="#">Zasoby Energetyczne</a>
-                          <ul class="dropdown-menu">
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyFactor.php">Współczynnik Energetyczny</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyResource.php">Zasób Energetyczny</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyResourceAttribute.php">Atrybut Zasobu Energetycznego</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyResourceCategory.php">Kategoria Zasobu Energetycznego</a></li>
-                            
-                            
-                            
-                          </ul>
-                        </li>
     
                         <li class="dropdown-submenu">
                             <a  class="dropdown-item" tabindex="-1" href="#">Współczynniki</a>
@@ -57,50 +56,29 @@
                               <li class="dropdown-item"><a tabindex="-1" href="db_factors_addFactorName.php">Nazwa Współczynnika</a></li>
                               <li class="dropdown-item"><a tabindex="-1" href="db_factors_addMandatoryFactor.php">Współczynnik Obowiązkowy</a></li>
                               <li class="dropdown-item"><a tabindex="-1" href="db_factors_addSource.php">Źródło</a></li>
-                              
-                              
                             </ul>
                           </li>
-    
-    
-                          <li class="dropdown-submenu">
-                              <a  class="dropdown-item" tabindex="-1" href="#">Pliki</a>
-                              <ul class="dropdown-menu">
-                                <li class="dropdown-item"><a tabindex="-1" href="db_files_addFile.php">Plik</a></li>
-                                <li class="dropdown-item"><a tabindex="-1" href="db_files_addFolder.php">Folder</a></li>
-                               
-                                
-                                
-                              </ul>
-                            </li>
-    
     
                               <li class="dropdown-submenu">
                                   <a  class="dropdown-item" tabindex="-1" href="#">Zasoby</a>
                                   <ul class="dropdown-menu">
-                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_addFactor.php">Współczynnik</a></li>
                                     <li class="dropdown-item"><a tabindex="-1" href="db_resources_addResource.php">Zasób</a></li>
+                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_addFactor.php">Współczynnik</a></li>
                                     <li class="dropdown-item"><a tabindex="-1" href="db_resources_addResourceAttribute.php">Atrybut Zasobu</a></li>
                                     <li class="dropdown-item"><a tabindex="-1" href="db_resources_addResourceCategory.php">Kategoria Zasobu</a></li>
-                                    
-                                    
-                                    
                                   </ul>
                                 </li>
     
+                      <li class="dropdown-submenu">
+                          <a  class="dropdown-item" tabindex="-1" href="#">Zasoby Energetyczne</a>
+                          <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyResource.php">Zasób Energetyczny</a></li>
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyFactor.php">Współczynnik Energetyczny</a></li>
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyResourceAttribute.php">Atrybut Zasobu Energetycznego</a></li>
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_addEnergyResourceCategory.php">Kategoria Zasobu Energetycznego</a></li>
+                          </ul>
+                        </li>
     
-                                <li class="dropdown-submenu">
-                                    <a  class="dropdown-item" tabindex="-1" >Jednostki</a>
-                                    <ul class="dropdown-menu">
-                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_addUnit.php">Jednostka</a></li>
-                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_addQuantityAndBaseUnit.php">Wielkość Fizyczna i Jednostka Bazowa</a></li>
-                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_addSourceUnit.php">Alternatywna Nazwa Jednostki</a></li>
-                                     
-                                      
-                                      
-                                      
-                                    </ul>
-                                  </li>
                   </ul>
             </div>
     
@@ -111,92 +89,69 @@
                 </a>
                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                     
+                                <li class="dropdown-submenu">
+                                    <a  class="dropdown-item" tabindex="-1" >Jednostki</a>
+                                    <ul class="dropdown-menu">
+                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_showQuantityAndBaseUnit.php">Wielkości fizyczne i jednostki bazowe</a></li>
+                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_showUnit.php">Jednostki dodatkowe</a></li>
+                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_showSourceUnit.php">Alternatywne nazwy jednostek</a></li>
+                                    </ul>
+                                  </li>
           
-                    <li class="dropdown-submenu">
-                        <a  class="dropdown-item" tabindex="-1" href="#">Atrybuty</a>
-                        <ul class="dropdown-menu">
-                          <li class="dropdown-item"><a tabindex="-1" href="db_attributes_showAttribute.php">Atrybut</a></li>
-                          <li class="dropdown-item"><a tabindex="-1" href="db_attributes_showAttributeEnum.php">Atrybut Wyliczeniowy</a></li>
-                          <li class="dropdown-item"><a tabindex="-1" href="db_attributes_showMandatoryAttribute.php">Atrybut Obowiązkowy</a></li>
-                          
-                          
-                        </ul>
-                      </li>
+                          <li class="dropdown-submenu">
+                              <a  class="dropdown-item" tabindex="-1" href="#">Pliki</a>
+                              <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a tabindex="-1" href="db_files_showFile.php">Pliki</a></li>
+                                <li class="dropdown-item"><a tabindex="-1" href="db_files_showFolder.php">Foldery</a></li>
+                              </ul>
+                            </li>
     
                       <li class="dropdown-submenu">
                         <a  class="dropdown-item" tabindex="-1" href="#">Kategorie</a>
                         <ul class="dropdown-menu">
                           <li class="dropdown-item"><a tabindex="-1" href="db_categories_showCategory.php">Kategorie</a></li>
                           <li class="dropdown-item"><a tabindex="-1" href="db_categories_showHierarchy.php">Hierarchie</a></li>
-                          
-                          
-                          
                         </ul>
                       </li>
     
-                      <li class="dropdown-submenu">
-                          <a  class="dropdown-item" tabindex="-1" href="#">Zasoby Energetyczne</a>
-                          <ul class="dropdown-menu">
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyFactor.php">Współczynnik Energetyczny</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyResource.php">Zasób Energetyczny</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyResourceAttribute.php">Atrybut Zasobu Energetycznego</a></li>
-                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyResourceCategory.php">Kategoria Zasobu Energetycznego</a></li>
-                            
-                            
-                            
-                          </ul>
-                        </li>
+                    <li class="dropdown-submenu">
+                        <a  class="dropdown-item" tabindex="-1" href="#">Atrybuty</a>
+                        <ul class="dropdown-menu">
+                          <li class="dropdown-item"><a tabindex="-1" href="db_attributes_showAttribute.php">Atrybuty</a></li>
+                          <li class="dropdown-item"><a tabindex="-1" href="db_attributes_showAttributeEnum.php">Atrybuty Wyliczeniowe</a></li>
+                          <li class="dropdown-item"><a tabindex="-1" href="db_attributes_showMandatoryAttribute.php">Atrybuty Obowiązkowe</a></li>
+                        </ul>
+                      </li>
     
                         <li class="dropdown-submenu">
                             <a  class="dropdown-item" tabindex="-1" href="#">Współczynniki</a>
                             <ul class="dropdown-menu">
-                              <li class="dropdown-item"><a tabindex="-1" href="db_factors_showFactorName.php">Nazwa Współczynnika</a></li>
-                              <li class="dropdown-item"><a tabindex="-1" href="db_factors_showMandatoryFactor.php">Współczynnik Obowiązkowy</a></li>
-                              <li class="dropdown-item"><a tabindex="-1" href="db_factors_showSource.php">Źródło</a></li>
-                              
-                              
+                              <li class="dropdown-item"><a tabindex="-1" href="db_factors_showFactorName.php">Nazwy Współczynników</a></li>
+                              <li class="dropdown-item"><a tabindex="-1" href="db_factors_showMandatoryFactor.php">Współczynniki Obowiązkowe</a></li>
+                              <li class="dropdown-item"><a tabindex="-1" href="db_factors_showSource.php">Źródła</a></li>
                             </ul>
                           </li>
-    
-    
-                          <li class="dropdown-submenu">
-                              <a  class="dropdown-item" tabindex="-1" href="#">Pliki</a>
-                              <ul class="dropdown-menu">
-                                <li class="dropdown-item"><a tabindex="-1" href="db_files_showFile.php">Plik</a></li>
-                                <li class="dropdown-item"><a tabindex="-1" href="db_files_showFolder.php">Folder</a></li>
-                               
-                                
-                                
-                              </ul>
-                            </li>
-    
     
                               <li class="dropdown-submenu">
                                   <a  class="dropdown-item" tabindex="-1" href="#">Zasoby</a>
                                   <ul class="dropdown-menu">
-                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showFactor.php">Współczynnik</a></li>
-                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showResource.php">Zasób</a></li>
-                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showResourceAttribute.php">Atrybut Zasobu</a></li>
-                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showResourceCategory.php">Kategoria Zasobu</a></li>
-                                    
-                                    
-                                    
+                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showResource.php">Zasoby</a></li>
+                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showFactor.php">Współczynniki</a></li>
+                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showResourceAttribute.php">Atrybuty Zasobów</a></li>
+                                    <li class="dropdown-item"><a tabindex="-1" href="db_resources_showResourceCategory.php">Kategorie Zasobów</a></li>
                                   </ul>
                                 </li>
     
-    
-                                <li class="dropdown-submenu">
-                                    <a  class="dropdown-item" tabindex="-1" >Jednostki</a>
-                                    <ul class="dropdown-menu">
-                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_showUnit.php">Jednostka</a></li>
-                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_showQuantityAndBaseUnit.php">Wielkość Fizyczna i Jednostka Bazowa</a></li>
-                                      <li class="dropdown-item"><a tabindex="-1" href="db_units_showSourceUnit.php">Alternatywna Nazwa Jednostki</a></li>
-                                     
-                                      
-                                      
-                                      
-                                    </ul>
-                                  </li>
+                      <li class="dropdown-submenu">
+                          <a  class="dropdown-item" tabindex="-1" href="#">Zasoby Energetyczne</a>
+                          <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyResource.php">Zasoby Energetyczne</a></li>
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyFactor.php">Współczynniki Energetyczne</a></li>
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyResourceAttribute.php">Atrybuty Zasobów Energetycznych</a></li>
+                            <li class="dropdown-item"><a tabindex="-1" href="db_energy_resources_showEnergyResourceCategory.php">Kategorie Zasobów Energetycznych</a></li>
+                          </ul>
+                        </li>
+   
                   </ul>
               </li>
 			  

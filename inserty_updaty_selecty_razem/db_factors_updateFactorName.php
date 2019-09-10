@@ -21,34 +21,67 @@
     include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Edytuj współczynniki (czyli numeryczne cechy zasobu)</h3>
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $factor_id = $_GET["FactorID"];
+
+  list($factor_id, $factor_name_pl, $factor_name_eng, $factor_description_pl,
+       $factor_description_eng) = get_factor_name($factor_id);
+}
+
+
+if($_POST)
+{
+  $factor_id2 = $_POST["ID2"];
+  $factor_name_pl = $_POST["NamePL"];
+  $factor_name_eng = $_POST["NameENG"];
+  $factor_description_pl = $_POST["DescPL"];
+  $factor_description_eng = $_POST["DescENG"];
+
+  open_database();
+      $result = update_factor_name($factor_id, $factor_id2, $factor_name_pl, $factor_name_eng,
+                                   $factor_description_pl, $factor_description_eng);
+  close_database();
+
+  $factor_id=$factor_id2;
+
+  if ($result)
+  {
+    unset ($_POST['ID2']);
+    unset ($_POST['NamePL']);
+    unset ($_POST['NameENG']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }  
+}      
+?>
+
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj nazwę współczynnika</h3>
 
 <div class="text-center">
     <form method="post" action="">
 
-<?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-
-    if($_GET)
-    {
-        $factor_id = $_GET["FactorID"];
-    }
-
-    list($factor_id, $factor_name_pl, $factor_name_eng, $factor_description_pl,
-         $factor_description_eng) = get_factor_name($factor_id);
-?>
         <div class="container">
             <div class="row mt-5">
                     <div class="col-md-3"></div>
                 <div class="col-md-3">
                     <label class="text-white">
-                        Identyfikator(skrot)
+                        Identyfikator:
                     </label>
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="ID2" class="form-control" value="<?=$factor_id?>" readonly/>
+                    <input type="text"  name="ID2" class="form-control" value="<?=$factor_id?>" required/>
                 </div>
             </div>
         </div>
@@ -93,7 +126,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescPL" class="form-control" value="<?=$factor_description_pl?>" required/>
+                    <input type="text"  name="DescPL" class="form-control" value="<?=$factor_description_pl?>" />
                 </div>
             </div>
         </div>
@@ -108,7 +141,7 @@
                 </div>
             
                 <div class="col-md-3">
-                    <input type="text"  name="DescENG" class="form-control" value="<?=$factor_description_eng?>" required/>
+                    <input type="text"  name="DescENG" class="form-control" value="<?=$factor_description_eng?>" />
                 </div>
             </div>
         </div>
@@ -137,35 +170,15 @@
     </div>
 
 <?php
-    if($_POST)
-    {
-        $factor_id2 = $_POST["ID2"];
-        $factor_name_pl = $_POST["NamePL"];
-        $factor_name_eng = $_POST["NameENG"];
-        $factor_description_pl = $_POST["DescPL"];
-        $factor_description_eng = $_POST["DescENG"];
-
-        open_database();
-            $result = update_factor_name($factor_id, $factor_id2, $factor_name_pl, $factor_name_eng,
-                                         $factor_description_pl, $factor_description_eng);
-        close_database();
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Nazwa współczynnika ".$factor_name_pl." zmieniona.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_factor_id($factor_name_pl);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Współczynnik o nazwie ".$factor_name_pl." już istnieje!</span></center>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić nazwy współczynnika!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Nazwa współczynnika ".$factor_id." zmieniona.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić nazwy współczynnika (prawdopodobnie taki identyfikator lub polska lub anglielska nazwa już isnieje)!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

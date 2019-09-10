@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Przypisz podany zasób energetyczny (nośnik energii) do kategorii</title>
+    <title>Edytuj przypisanie zasobu energetycznego do kategorii</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -21,27 +21,50 @@
 include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Przypisz podany zasób energetyczny (nośnik energii) do kategorii</h3>
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $resource_id = $_GET["ResourceID"];
+  $cat_id = $_GET["CatID"];
+
+  open_database();
+      $resource = read_table("energy_resources.energy_resources");;
+      $category = read_table("categories.categories");
+  close_database();
+}
+
+
+if($_POST)
+{
+  $resource_id2 = $_POST["ResourceID2"];
+  $cat_id2 = $_POST["CatID2"];
+
+  open_database();
+    $result = update_energy_resource_category($resource_id, $cat_id, $resource_id2, $cat_id2);
+  close_database();
+
+  $resource_id = $resource_id2;
+  $cat_id = $cat_id2;
+
+  if ($result)
+  {
+    unset ($_POST['ResourceID2']);
+    unset ($_POST['CatID2']);
+  }  
+}      
+?>
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj przypisanie zasobu energetycznego (nośnika energii) do kategorii</h3>
 
 <div class="text-center">
     <form method="post" action="">
-
-<?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-    if($_GET)
-    {
-        $resource_id = $_GET["ResourceID"];
-        $cat_id = $_GET["CatID"];
-    }
-    $resource_name_pl = get_resource_name_pl($resource_id);
-    $cat_name_pl = get_category_name_pl($cat_id);
-
-    open_database();
-        $resource = read_table("energy_resources.energy_resources");;
-        $category = read_table("categories.categories");
-    close_database();
-?>
 
         <div class="container">
             <div class="row mt-5">
@@ -132,20 +155,15 @@ include ('navbar.php');
 </div>
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $resource_id2 = $_POST["ResourceID2"];
-        $cat_id2 = $_POST["CatID2"];
-
-        open_database();
-            $result = update_energy_resource_category($resource_id, $cat_id, $resource_id2, $cat_id2);
-        close_database();
-
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić kategorii zasobu enegetycznego!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Kategoria zasobu energetycznego zmieniona!</span></center></h4>";
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Przypisanie zasobu do kategorii zmienione.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić przypisania zasobu do kategorii!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

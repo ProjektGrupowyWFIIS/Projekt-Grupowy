@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż kategorię</title>
+  <title>Kategorie zasobów</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,7 +20,7 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Kategorie Zasobów (zarówno surowców jak i nośników energii)</h3>
+<h3 class="text-white text-center mt-3">Kategorie zasobów (zarówno surowców jak i nośników energii)</h3>
 
 
 <div class="container">
@@ -31,12 +31,12 @@ include("navbar.php");
 
 require "db_functions.php";
 open_database();
-$atr = read_table("categories.categories");
+$atr = read_table("categories.categories","","order by cat_name_pl");
 
   echo "<table border = \"2\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\" >";
 	echo "<thead class=\"thead-light\"></thead>";
   echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
+	//echo "<th style='color: white'> ID: </th>";
 	echo "<th style='color: white'> Nazwa: </th>";
 	echo "<th style='color: white'> Nazwa (język angielski): </th>";
 	echo "<th style='color: white'> Opis: </th>";
@@ -49,12 +49,12 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
+	//echo '<th style=\'color: white\'>'.$row['cat_id'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['cat_name_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['cat_name_eng'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['cat_description_pl'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['cat_description_eng'].'</th>';
-	echo '<th>'.'<a href=db_categories_updateCategory.php?CatID='.$row["cat_id"].'>Edycja</a>'.'</td>';
+	echo '<th>'.'<a href=db_categories_updateCategory.php?CatID='.$row["cat_id"].'>Edycja</a>'.'</th>';
   echo "</tr>";
  
 }

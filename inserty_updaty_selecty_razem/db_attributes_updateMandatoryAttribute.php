@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytut obowiązkowy atrybut dla podanej kategorii</title>
+    <title>Edytuj obowiązkowy atrybut dla podanej kategorii zasobów</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -14,25 +14,53 @@
     include ('navbar.php');
 ?>
 
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+
+if($_GET)
+{
+  $cat_id = $_GET["CatID"];
+  $attribute_id = $_GET["AttributeID"];
+
+  open_database();
+      $attribute = read_table("attributes.attributes");
+      $category = read_table("categories.categories");
+  close_database();
+}
+
+
+if($_POST)
+{
+        $cat_id2 = $_POST["CategoryID2"];
+        $attribute_id2 = $_POST["AttributeID2"];
+
+        open_database();
+            $result = update_mandatory_attribute($cat_id, $attribute_id, $cat_id2, $attribute_id2);
+        close_database();
+
+  $cat_id = $cat_id2;
+  $attribute_id = $attribute_id2;
+
+  if ($result)
+  {
+    unset ($_POST['CategoryID2']);
+    unset ($_POST['AttributeID2']);
+  }  
+}      
+?>
+
+
+
+
 <div class="container-fluid">
-    <h3 class="text-white text-center mt-5">Edytuj zestaw obowiązkowych atrybutów dla podanej kategorii zasobów</h3>
+    <h3 class="text-white text-center mt-5">Edytuj obowiązkowy atrybut dla podanej kategorii zasobów</h3>
     <div class="text-center">
         <form method="post" action="" class="form-group">
-        <?php
-            require "db_update_functions.php";
-            require "db_functions.php";
-
-            if($_GET)
-            {
-                $cat_id = $_GET["CatID"];
-                $attribute_id = $_GET["AttributeID"];
-            }
-
-            open_database();
-                $attribute = read_table("attributes.attributes");
-                $category = read_table("categories.categories");
-            close_database();
-        ?>
             <div class="container">
                 <div class="row mt-5">
                         <div class="col-md-3"></div>
@@ -120,20 +148,17 @@
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $cat_id2 = $_POST["CategoryID2"];
-        $attribute_id2 = $_POST["AttributeID2"];
 
-        open_database();
-            $result = update_mandatory_attribute($cat_id, $attribute_id, $cat_id2, $attribute_id2);
-        close_database();
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Obowiązkowy atrybut zmieniony!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić obowiązkowego atrybutu!</span></center></h4>";
+  }
+}
 
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić wartości obowiązkowego atrybutu!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Obowiązkowy atrybut zmieniony!</span></center></h4>";
-    }
 ?>
 </div>
 </body>

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Współczynniki</title>
+  <title>Wartości współczynników dla zasobów energetycznych</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,7 +20,7 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż wartości współczynników dla podanego zasobu energetycznego (nośnika energii)</h3>
+<h3 class="text-white text-center mt-3">Wartości współczynników (cech numerycznych) dla zasobów energetycznych (nośników energii)</h3>
 
 
 <!-- <div class="container">
@@ -30,23 +30,23 @@ include("navbar.php");
 
 <div class="container">
 	<div class="row mt-5">
-		/*<div class="col-md-2"></div>
-		<div class="col-md-8">*/
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 <?php
 
 require "db_functions.php";
 open_database();
-$atr = read_table("energy_resources.factors");
+$atr = read_table("energy_resources.factors","","order by resource_id, factor_id");
 
 	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
 	echo "<tr>";
-	echo "<th style='color: white'> ID: </th>";
-	echo "<th style='color: white'> ID Współczynnika: </th>";
-	echo "<th style='color: white'> ID Źródła: </th>";
-	echo "<th style='color: white'> ID Zasobu Jednostki: </th>";
-	echo "<th style='color: white'> ID Współczynnika Jednostki: </th>";
-	echo "<th style='color: white'> Współczynnik: </th>";
+	echo "<th style='color: white'> Zasób energetyczny (nośnik energii): </th>";
+	echo "<th style='color: white'> Nazwa Współczynnika: </th>";
+	echo "<th style='color: white'> Źródło: </th>";
+	echo "<th style='color: white'> Jednostka Zasobu: </th>";
+	echo "<th style='color: white'> Jednostka Współczynnika: </th>";
+	echo "<th style='color: white'> Wartość Współczynnika </th>";
 	echo "<th style='color: white'> Niepewność: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
@@ -55,14 +55,14 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['factor_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['source_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['resource_unit_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['factor_unit_id'].'</th>';
+	echo '<th style=\'color: white\'>'.get_energy_resource_name_pl($row['resource_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_factor_name_pl($row['factor_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_source_description($row['source_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_unit($row['resource_unit_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_unit($row['factor_unit_id']).'</th>';
 	echo '<th style=\'color: white\'>'.$row['factor'].'</th>';
 	echo '<th style=\'color: white\'>'.$row['uncertainty'].'</th>';
-	echo '<th>'.'<a href=db_energy_resources_updateEnergyFactor.php?ResourceID='.$row["resource_id"].'&FactorID='.$row["factor_id"].'&TempSourceID='.$row["source_id"].'&ResourceUnitID='.$row["resource_unit_id"].'>Edycja</a>'.'</td>';
+	echo '<th>'.'<a href=db_energy_resources_updateEnergyFactor.php?ResourceID='.$row["resource_id"].'&FactorID='.$row["factor_id"].'&TempSourceID='.$row["source_id"].'&ResourceUnitID='.$row["resource_unit_id"].'&TempFactorUnitID='.$row["factor_unit_id"].'>Edycja</a>'.'</th>';
 	echo "</tr>";
  
 }

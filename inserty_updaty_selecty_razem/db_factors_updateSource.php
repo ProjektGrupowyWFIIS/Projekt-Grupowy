@@ -21,29 +21,63 @@
 <?php
     include ('navbar.php');
 ?>
-<h3 class="text-white text-center mt-3">Edytuj źródło (np. dokument będący artykułem naukowym)</h3>
 
-<div class="text-center">
-    <form method="post" action="">
+
 <?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-    if($_GET)
-    {
-        $source_id = $_GET["SourceID"];
-        $temp_file_id = $_GET["TempFileID"];
-    }
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+    $source_id = $_GET["SourceID"];
+    $temp_file_id = $_GET["TempFileID"];
+
     open_database();
         $files = read_table("files.files");
     close_database();
 
     list($source_date, $source_description, $doi, $bibtex) = get_source($source_id);
+}
+
+
+if($_POST)
+{
+  $source_date = $_POST["Date"];
+  $source_description = $_POST["Desc"];
+  $doi = $_POST["Doi"];
+  $bibtex = $_POST["Bibtex"];
+  $file_id = $_POST["File"];
+
+  open_database();
+      $result = update_source($source_id, $source_date, $source_description, $doi, $bibtex, $file_id);
+  close_database();
+
+  $temp_file_id = $file_id;
+
+  if ($result)
+  {
+    unset ($_POST['Date']);
+    unset ($_POST['Desc']);
+    unset ($_POST['Doi']);
+    unset ($_POST['Bibtex']);
+    unset ($_POST['File']);
+  }  
+}      
 ?>
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj źródło (np. dokument będący artykułem naukowym)</h3>
+
+<div class="text-center">
+    <form method="post" action="">
         <div class="container">
             <div class="row mt-5">
                     <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <label class="text-white ">Data (dd-mm-yyyy)</label>
+                    <label class="text-white ">Data (rrrr-mm-dd)</label>
                 </div>
              
                 <div class="col-md-3">
@@ -75,7 +109,7 @@
                 </div>
               
                 <div class="col-md-3">
-                    <input name="Doi" type="text" class="form-control" value="<?=$doi?>" required/>
+                    <input name="Doi" type="text" class="form-control" value="<?=$doi?>" />
                 </div>
                 <div class="col-md-3"></div>
 
@@ -86,11 +120,11 @@
             <div class="row mt-5">
                     <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <label class="text-white ">Bibtex</label>
+                    <label class="text-white ">BIBTEX</label>
                 </div>
         
                 <div class="col-md-3">
-                    <input name="Bibtex" type="text" class="form-control" value="<?=$bibtex?>" required/>
+                    <input name="Bibtex" type="text" class="form-control" value="<?=$bibtex?>" />
                 </div>
                 <div class="col-md-3"></div>
 
@@ -101,12 +135,13 @@
             <div class="row mt-5">
                     <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <label class="text-white ">File</label>
+                    <label class="text-white ">Plik</label>
                 </div>
        
                 <div class="col-md-3">
                     <select name="File">
                         <?php
+                        open_database();
                         foreach($files as $row_number => $row){
                             if($row['file_id'] == $temp_file_id){
                                 $folder = read_table("files.folders","where folder_id=".$row['folder_id']);
@@ -119,6 +154,7 @@
                                     ' (w folderze '.$folder[0]["folder_name"].')</option>';
                             }
                         }
+                        close_database();
                         ?>
                     </select>
                 </div>
@@ -151,23 +187,16 @@
     </div>
 
 <?php
-    if($_POST)
-    {
-        $source_date = $_POST["Date"];
-        $source_description = $_POST["Desc"];
-        $doi = $_POST["Doi"];
-        $bibtex = $_POST["Bibtex"];
-        $file_id = $_POST["File"];
 
-        open_database();
-            $result = update_source($source_id, $source_date, $source_description, $doi, $bibtex, $file_id);
-        close_database();
-
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić źródła!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Źródło zmienione!</span></center></h4>";
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Źródło zmienione!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić źródła!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>

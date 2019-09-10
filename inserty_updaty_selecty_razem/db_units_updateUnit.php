@@ -21,23 +21,59 @@
 <?php
     include ('navbar.php');
 ?>
-<h3 class="text-white text-center mt-3">Edytuj jednostkę dodatkową</h3>
 
-<form method="post" action="">
+
+
 <?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-    if($_GET)
-    {
-        $unit_id = $_GET["UnitID"];
-        $temp_quantity_id = $_GET["TempQuantityID"];
-    }
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+    $unit_id = $_GET["UnitID"];
+    $temp_quantity_id = $_GET["TempQuantityID"];
     open_database();
-        $quantities = read_table("units.quantities");
+    $quantities = read_table("units.quantities");
     close_database();
 
     list($unit, $unit_full_name_pl, $unit_full_name_eng, $ratio) = get_other_unit($unit_id);
+}
+
+
+if($_POST)
+{
+  $unit               = $_POST["Unit"];
+  $unit_full_name_pl  = $_POST["UnitNamePL"];
+  $unit_full_name_eng = $_POST["UnitNameENG"];
+  $ratio              = $_POST["Ratio"];
+  $quantity_id        = $_POST["QuantityID"];
+
+  open_database();
+      $result = update_other_unit($unit_id, $unit, $unit_full_name_pl,
+                                  $unit_full_name_eng, $ratio, $quantity_id);
+  close_database();
+
+  $temp_quantity_id= $quantity_id;
+
+
+  if ($result)
+  {
+    unset ($_POST['Unit']);
+    unset ($_POST['UnitNamePL']);
+    unset ($_POST['UnitNameENG']);
+    unset ($_POST['Ratio']);
+    unset ($_POST['QuantityID']);
+  }  
+}      
 ?>
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj jednostkę dodatkową</h3>
+
+<form method="post" action="">
     <div class="container">
         <div class="row mt-5">
                 <div class="col-md-3"></div>
@@ -149,36 +185,15 @@
 </body>
 
 <?php
-    if($_POST)
-    {
-        $unit               = $_POST["Unit"];
-        $unit_full_name_pl  = $_POST["UnitNamePL"];
-        $unit_full_name_eng = $_POST["UnitNameENG"];
-        $ratio              = $_POST["Ratio"];
-        $quantity_id        = $_POST["QuantityID"];
-
-        open_database();
-            $result = update_other_unit($unit_id, $unit, $unit_full_name_pl,
-                                        $unit_full_name_eng, $ratio, $quantity_id);
-        close_database();
-
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka ".$unit." zmieniona.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_unit_id($unit);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Jednostka ".$unit." już istnieje!</span></center></h4>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić jednostki!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka ".$unit." zmieniona.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić jednostki!</span></center></h4>";
+  }
+}
 ?>
 
 		

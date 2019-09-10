@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Pokaż wielkość fizyczną i jej jednostkę podstawową</title>
+    <title>Wielkości fizyczne i ich jednostki podstawowe</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,7 +20,7 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż wielkość fizyczną i jej jednostkę podstawową</h3>
+<h3 class="text-white text-center mt-3">Wielkości fizyczne i ich jednostki podstawowe</h3>
 
 
 <div class="container">
@@ -30,52 +30,53 @@ include("navbar.php");
 <?php
 
 require "db_functions.php";
-open_database();
-$atr = read_table("units.quantities");
+require "db_update_functions.php";
 
-$atr2 = read_table("units.units");
-$counter = 0;
-	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\" >";
-	echo "<tr>";
-	echo "<th style='color: white'> ID Wielkości: </th>";
-	echo "<th style='color: white'> Nazwa Wielkości Fizycznej: </th>";
-	echo "<th style='color: white'> Nazwa Wielkości Fizycznej (język angielski): </th>";
-	echo "<th style='color: white'> ID Jednostki: </th>";
-	echo "<th style='color: white'> Jednostka: </th>";
-	echo "<th style='color: white'> Nazwa Jednostki: </th>";
-	echo "<th style='color: white'> Nazwa Jednostki (język angielski): </th>";
-	echo "<th style='color: white'> Edycja: </th>";
-	echo "</tr>";
-foreach($atr2 as $row_number => $row2)
+
+
+open_database();
+$q = read_table("units.quantities","","order by quantity_name_pl");
+close_database();
+echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\" >";
+
+echo "<tr>";
+//echo "<th style='color: white'> ID Wielkości: </th>";
+echo "<th style='color: white'> Nazwa Wielkości Fizycznej: </th>";
+echo "<th style='color: white'> Nazwa Wielkości Fizycznej (język angielski): </th>";
+//echo "<th style='color: white'> ID Jednostki: </th>";
+echo "<th style='color: white'> Jednostka: </th>";
+echo "<th style='color: white'> Nazwa Jednostki: </th>";
+echo "<th style='color: white'> Nazwa Jednostki (język angielski): </th>";
+echo "<th style='color: white'> Edycja: </th>";
+echo "</tr>";
+
+foreach($q as $row_number => $row)
 {
-    $counter2 = 0;
-foreach($atr as $row_number2 => $row)
-{
-    if($counter == $counter2)
-    {
-        echo "<tr>";
-        echo '<th style=\'color: white\'>'.$row['quantity_id'].'</th>';
-        echo '<th style=\'color: white\'>'.$row['quantity_name_pl'].'</th>';
-        echo '<th style=\'color: white\'>'.$row['quantity_name_eng'].'</th>';
-        echo '<th style=\'color: white\'>'.$row2['unit_id'].'</th>';
-        echo '<th style=\'color: white\'>'.$row2['unit'].'</th>';
-        echo '<th style=\'color: white\'>'.$row2['unit_full_name_pl'].'</th>';
-        echo '<th style=\'color: white\'>'.$row2['unit_full_name_eng'].'</th>';
-        echo '<th>'.'<a href=db_units_updateQuantityAndBaseUnit.php?QuantityID='.$row["quantity_id"].'&UnitID='.$row2["unit_id"].'>Edycja</a>'.'</td>';
-        echo "</tr>";
-    }
-    $counter2++;
-}
-    $counter++;
+  $row2=get_quantity_and_base_unit( $row['quantity_id'], $row['base_unit_id']);
+
+  echo "<tr>";
+  //echo '<th style=\'color: white\'>'.$row['quantity_id'].'</th>';
+  echo '<th style=\'color: white\'>'.$row['quantity_name_pl'].'</th>';
+  echo '<th style=\'color: white\'>'.$row['quantity_name_eng'].'</th>';
+  //echo '<th style=\'color: white\'>'.$row['base_unit_id'].'</th>';
+  echo '<th style=\'color: white\'>'.$row2[2].'</th>';
+  echo '<th style=\'color: white\'>'.$row2[3].'</th>';
+  echo '<th style=\'color: white\'>'.$row2[4].'</th>';
+  echo '<th>'.'<a href=db_units_updateQuantityAndBaseUnit.php?QuantityID='.$row["quantity_id"].'&UnitID='.$row["base_unit_id"].'>Edycja</a>'.'</th>';
+  echo "</tr>";
 }
 echo "</table>";
 
-close_database();
+
+
+
+
 ?>
+<!--
 </div>
 <div class="col-md-2"></div>
 </div>
-</div>
+</div> -->
 <br>
 
 </body>

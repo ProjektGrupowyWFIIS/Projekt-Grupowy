@@ -16,28 +16,62 @@
     include ('navbar.php');
 ?>
 
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $attribute_id = $_GET["AttributeID"];
+  $attribute_value_pl = $_GET["AttributeValuePL"];
+  open_database();
+  $attribute = read_table("attributes.attributes","where type_id='enum'");
+  close_database();
+  
+  list($attribute_value_pl, $attribute_value_eng,
+       $attribute_value_description_pl, $attribute_value_description_eng) =
+       get_attribute_enum($attribute_id, $attribute_value_pl);
+  
+}
+
+
+if($_POST)
+{
+  $attribute_value_pl2 = $_POST["ValuePL"];
+  $attribute_value_eng = $_POST["ValueENG"];
+  $attribute_value_description_pl = $_POST["DescPL"];
+  $attribute_value_description_eng = $_POST["DescENG"];
+
+  open_database();
+  $result = update_attribute_enum($attribute_id, $attribute_value_pl, $attribute_value_pl2,
+            $attribute_value_eng, $attribute_value_description_pl, $attribute_value_description_eng);
+  close_database();
+
+  $attribute_value_pl  = $attribute_value_pl2;
+
+
+  if ($result)
+  {
+    unset ($_POST['ValuePL']);
+    unset ($_POST['ValueENG']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+  }  
+
+}
+      
+?>
+
+
 <div class="container-fluid">
-    <h3 class="text-white text-center mt-3">Edytuj dopuszczalne wartości atrybutu wyliczeniowego</h3>
+    <h3 class="text-white text-center mt-3">Edytuj dopuszczalną wartość atrybutu wyliczeniowego</h3>
 
 <div class="text-center">
     <div class="container">
         <form method="post" action="" class="form-group">
-        <?php
-            require "db_update_functions.php";
-            require "db_functions.php";
-            if($_GET)
-            {
-                $attribute_id = $_GET["AttributeID"];
-                $attribute_value_pl = $_GET["AttributeValuePL"];
-            }
-            open_database();
-                $attribute = read_table("attributes.attributes","where type_id='enum'");
-            close_database();
-
-            list($attribute_value_pl, $attribute_value_eng,
-                 $attribute_value_description_pl, $attribute_value_description_eng) =
-                get_attribute_enum($attribute_id, $attribute_value_pl);
-        ?>
         <div class="row mt-5">
                 <div class="col-md-3"></div>
             <div class="col-md-3">
@@ -49,7 +83,7 @@
          
 
             <div class="col-md-3">
-                <select name="AttributeID2" class="form-control">
+                <select name="AttributeID2" class="form-control" disabled>
                     <?php
                     foreach($attribute as $row_number => $row){
                         if($row['attribute_id'] == $attribute_id){
@@ -78,10 +112,10 @@
                     Wartość PL:
                 </label>
             </div>
-           
             <div class="col-md-3">
-                <input type="number" step="0.0000000001" min="0.0000000001" name="AttributeValuePL2" class="form-control" value="<?=$attribute_value_pl?>" required/>
+                <input type="text"  name="ValuePL" class="form-control" value="<?=$attribute_value_pl?>" required/>
             </div>
+
             <div class="col-md-3"></div>
         </div>
     </div>
@@ -94,10 +128,12 @@
                     Wartość ENG:
                 </label>
             </div>
-     
             <div class="col-md-3">
-                <input type="number" step="0.0000000001" min="0.0000000001"  name="ValueENG" class="form-control" value="<?=$attribute_value_eng?>" required/>
+                <input type="text"  name="ValueENG" class="form-control" value="<?=$attribute_value_eng?>" required/>
             </div>
+
+
+
             <div class="col-md-3"></div>
         </div>
     </div>
@@ -159,24 +195,17 @@
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $attribute_id2 = $_POST["AttributeID2"];
-        $attribute_value_pl2 = $_POST["AttributeValuePL2"];
-        $attribute_value_eng = $_POST["ValueENG"];
-        $attribute_value_description_pl = $_POST["DescPL"];
-        $attribute_value_description_eng = $_POST["DescENG"];
 
-        open_database();
-            $result = update_attribute_enum($attribute_id, $attribute_value_pl, $attribute_id2, $attribute_value_pl2,
-                            $attribute_value_eng, $attribute_value_description_pl, $attribute_value_description_eng);
-        close_database();
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Możliwa wartość atrybutu wyliczeniowego zmieniona!</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić możliwej wartości atrybutu wyliczeniowego!</span></center></h4>";
+  }
+}
 
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić wartości atrybutu wyliczeniowego!</span></center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Wartość atrybutu wyliczeniowego zmieniona!</span></center></h4>";
-    }
 ?>
 </div>
 </body>

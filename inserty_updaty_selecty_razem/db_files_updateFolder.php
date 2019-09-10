@@ -22,24 +22,54 @@
 include ('navbar.php');
 ?>
 
+
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $folder_id = $_GET["FolderID"];
+
+  open_database();
+    $folders = read_table("files.folders");
+  close_database();
+
+  list($folder_name, $folder_description_pl, $folder_description_eng,
+       $parent_folder_id) = get_folder($folder_id);
+}
+
+
+if($_POST)
+{
+  $folder_name            = $_POST["Name"];
+  $folder_description_pl  = $_POST["DescPL"];
+  $folder_description_eng = $_POST["DescENG"];
+  $parent_folder_id       = $_POST["ParentID"];
+
+  open_database();
+      $result = update_folder($folder_id, $folder_name, $folder_description_pl,
+                              $folder_description_eng, $parent_folder_id);
+  close_database();
+
+  if ($result)
+  {
+    unset ($_POST['Name']);
+    unset ($_POST['DescPL']);
+    unset ($_POST['DescENG']);
+    unset ($_POST['ParentID']);
+  }  
+}      
+?>
+
+
+
 <h3 class="text-white text-center mt-3">Edytuj katalog (folder)</h3>
 
 <div class="text-center">
     <form method="post" action="">
-    <?php
-        require "db_update_functions.php";
-        require "db_functions.php";
-        if($_GET)
-        {
-            $folder_id = $_GET["FolderID"];
-        }
-        open_database();
-            $folders = read_table("files.folders");
-        close_database();
-
-        list($folder_name, $folder_description_pl, $folder_description_eng,
-             $parent_folder_id) = get_folder($folder_id);
-    ?>
 
         <div class="container">
             <div class="row mt-5">
@@ -98,7 +128,7 @@ include ('navbar.php');
                         <option value="0">(nie dotyczy)</option>
                         <?php
                         foreach($folders as $row_number => $row){
-                            if($row['folder_id'] == $folder_id){
+                            if($row['folder_id'] == $parent_folder_id){
                                 ?>
                                 <option selected="selected" value="<?=$row['folder_id'];?>"><?=$row['folder_name'];?></option>
                                 <?php
@@ -139,34 +169,22 @@ include ('navbar.php');
         </a>
     </div>
 <?php
-    if($_POST)
-    {
-        $folder_name            = $_POST["Name"];
-        $folder_description_pl  = $_POST["DescPL"];
-        $folder_description_eng = $_POST["DescENG"];
-        $parent_folder_id       = $_POST["ParentID"];
-
-        open_database();
-            $result = update_folder($folder_id, $folder_name, $folder_description_pl,
-                                    $folder_description_eng, $parent_folder_id);
-        close_database();
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Folder ".$folder_name." zmieniony.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                $result = get_folder_id($folder_name);
-                if ($result)
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Folder ".$folder_name." już istnieje!</span></center></h4>";
-                else
-                    echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić folderu!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Folder ".$folder_name." zmieniony.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    //echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić folderu!</span></center></h4>";
+    open_database();
+    $result = get_folder_id($folder_name);
+    if ($result)
+        echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Folder ".$folder_name." już istnieje!</span></center></h4>";
+    else
+        echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić folderu!</span></center></h4>";
+    close_database();
+  }
+}
 ?>
 
 </div>

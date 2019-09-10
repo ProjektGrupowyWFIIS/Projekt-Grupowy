@@ -22,23 +22,49 @@
 include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Edytuj alternatywną nazwę jednostki (tj. nazwę, która może pojawić się w źródłach)</h3>
 
-<form method="post" action="">
 <?php
-    require "db_update_functions.php";
-    require "db_functions.php";
-    if($_GET)
-    {
-        $unit_variant = $_GET["UnitVariant"];
-        $temp_canonical_unit_id = $_GET["TempCanonicalUnitID"];
-    }
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+    $unit_variant = $_GET["UnitVariant"];
+    $temp_canonical_unit_id = $_GET["TempCanonicalUnitID"];
+
     open_database();
         $units = read_table("units.units");
     close_database();
+}
 
-//    $unit_variant = get_source_unit_name($unit_variant);
+
+if($_POST)
+{
+  $unit_variant2   = $_POST["UnitVariant2"];
+  $unit_canonical_id  = $_POST["CanonicalUnitID"];
+
+  open_database();
+      $result = update_source_unit_name($unit_variant, $unit_variant2, $unit_canonical_id);
+  close_database();
+
+  $temp_canonical_unit_id=$unit_canonical_id;
+  $unit_variant=$unit_variant2;
+
+  if ($result)
+  {
+    unset ($_POST['UnitVariant2']);
+    unset ($_POST['CanonicalUnitID']);
+  }  
+}      
 ?>
+
+
+
+<h3 class="text-white text-center mt-3">Edytuj alternatywną nazwę jednostki (tj. nazwę, która może pojawić się w źródłach)</h3>
+
+<form method="post" action="">
     <div class="container">
         <div class="row mt-5">
                 <div class="col-md-3"></div>
@@ -109,32 +135,15 @@ include ('navbar.php');
 
 <div class="text-center">
 <?php
-    if($_POST)
-    {
-        $unit_variant2   = $_POST["UnitVariant2"];
-        $unit_canonical_id  = $_POST["CanonicalUnitID"];
-
-        open_database();
-            $result = update_source_unit_name($unit_variant, $unit_variant2, $unit_canonical_id);
-        close_database();
-
-
-        if ($result)
-            echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka alternatywna ".$unit_variant2." zmieniona.</span></center></h4>";
-        else
-        {
-            if($_POST)
-            {
-                open_database();
-                    $result = get_canonical_unit_id($unit_variant2);
-                    if ($result)
-                        echo "<br><h4><center><span style='color: red; background-color: black'>Edycja nieudana: Jednostka alternatywna ".$unit_variant2." już istnieje!</span></center></h4>";
-                    else
-                        echo "<br><h4><center><span style='color: red; background-color: black'>Z nieznanego powodu nie mogę zmienić jednostki alternatywnej!</span></center></h4>";
-                close_database();
-            }
-        }
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Jednostka alternatywna ".$unit_variant2." zmieniona.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić jednostki!</span></center></h4>";
+  }
+}
 ?>
 		</div>
 </body>

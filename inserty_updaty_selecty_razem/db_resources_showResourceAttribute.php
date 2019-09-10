@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Pokaż atrybut (cechę nienumeryczną) z zasobem (surowcem)</title>
+  <title>Wartości atrybutów dla zasobów</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,7 +20,8 @@
 <?php
 include("navbar.php");
 ?>
-<h3 class="text-white text-center mt-3">Pokaż wartości atrybutów z zasobem (surowcem)</h3>
+
+<h3 class="text-white text-center mt-3">Wartości atrybutów (cech nienumerycznych) dla zasobów (surowców)</h3>
 
 <div class="container">
 <div class="row mt-5">
@@ -31,14 +32,14 @@ include("navbar.php");
 
 require "db_functions.php";
 open_database();
-$atr = read_table("resources.resources_attributes");
+$atr = read_table("resources.resources_attributes","","order by resource_id,attribute_id");
 
 	echo "<table border = \"1\" cellpading= \"10\" cellspacing=\"0\" class=\"table table-bordered\">";
 
 	echo "<tr>";
-	echo "<th style='color: white'> ID Surowca: </th>";
-	echo "<th style='color: white'> ID Atrybutu : </th>";
-	echo "<th style='color: white'> Wartość Atrybutu: </th>";
+	echo "<th style='color: white'> Zasób (surowiec): </th>";
+	echo "<th style='color: white'> Atrybut : </th>";
+	echo "<th style='color: white'> Wartość atrybutu: </th>";
 	echo "<th style='color: white'> Edycja: </th>";
 	echo "</tr>";
 	
@@ -46,10 +47,10 @@ foreach($atr as $row_number => $row)
 {
   
 	echo "<tr>";
-	echo '<th style=\'color: white\'>'.$row['resource_id'].'</th>';
-	echo '<th style=\'color: white\'>'.$row['attribute_id'].'</th>';
+	echo '<th style=\'color: white\'>'.get_res_name_pl($row['resource_id']).'</th>';
+	echo '<th style=\'color: white\'>'.get_attr_name_pl($row['attribute_id']).'</th>';
 	echo '<th style=\'color: white\'>'.$row['attribute_value'].'</th>';
-	echo '<th>'.'<a href=db_resources_updateResourceAttribute.php?ResourceID='.$row["resource_id"].'&AttributeID='.$row["attribute_id"].'>Edycja</a>'.'</td>';
+	echo '<th>'.'<a href=db_resources_updateResourceAttribute.php?ResourceID='.$row["resource_id"].'&AttributeID='.$row["attribute_id"].'>Edycja</a>'.'</th>';
 	echo "</tr>";
  
 }

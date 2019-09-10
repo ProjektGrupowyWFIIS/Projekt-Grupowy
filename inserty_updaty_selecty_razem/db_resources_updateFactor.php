@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Edytuj współczynnik (cechę numeryczną) dla zasobu (surowca)</title>
+    <title>Edytuj współczynnik dla zasobu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -22,29 +22,86 @@
 include ('navbar.php');
 ?>
 
-<h3 class="text-white text-center mt-3">Edytuj wartości współczynników dla podanego zasobu (surowca)</h3>
+ 
+<?php
+require "db_functions.php";
+require "db_update_functions.php";
+
+$result=0;
+
+if($_GET)
+{
+  $resource_id = $_GET["ResourceID"];
+  $factor_id = $_GET["FactorID"];
+  $resource_unit_1_a_id = $_GET["ResourceUnit1ID"];
+  $resource_unit_2_a_id = $_GET["ResourceUnit2ID"];
+  $temp_factor_unit_id = $_GET["TempFactorUnitID"];
+  $temp_source_id = $_GET["TempSourceID"];
+
+  open_database();
+      $resource = read_table("resources.resources");;
+      $factor_names = read_table("factors.factor_names");
+      $source = read_table("factors.sources");
+      $unit = read_table("units.units");
+  close_database();
+
+  list($factor, $uncertainty) = get_factor($resource_id, $factor_id, $resource_unit_1_a_id);
+}
+
+
+if($_POST)
+{
+//$resource_id -> $resource_id2
+//$factor_id -> $factor_id2
+//$resource_unit_1_a_id -> $resource_unit_1_b_id
+
+  $resource_id2 = $_POST["ResourceID2"];
+  $factor_id2 = $_POST["FactorID2"];
+  $source_id = $_POST["SourceID"];
+  $resource_unit_1_b_id = $_POST["Unit1BID"];
+  $resource_unit_2_id = $_POST["Unit2ID"];
+  $factor_unit_id = $_POST["FactorUnitID"];
+  $factor = $_POST["Factor"];
+  $uncertainty = $_POST["Uncertainty"];
+
+  open_database();
+      if ($uncertainty == "")
+          $result = update_factor($resource_id, $factor_id, $resource_id2, $factor_id2,
+                                  $source_id, $resource_unit_1_a_id, $resource_unit_1_b_id,
+                                  $resource_unit_2_id, $factor_unit_id, $factor);
+      else
+          $result = update_factor($resource_id, $factor_id, $resource_id2, $factor_id2,
+                                  $source_id, $resource_unit_1_a_id, $resource_unit_1_b_id,
+                                  $resource_unit_2_id, $factor_unit_id, $factor, $uncertainty);
+  close_database();
+
+
+  $temp_source_id = $source_id;
+  $temp_factor_unit_id = $factor_unit_id;
+  $resource_id = $resource_id2;
+  $factor_id = $factor_id2;
+  $resource_unit_1_a_id = $resource_unit_1_b_id;
+  $resource_unit_2_a_id = $resource_unit_2_id;
+
+  if ($result)
+  {
+    unset ($_POST['ResourceID2']);
+    unset ($_POST['FactorID2']);
+    unset ($_POST['SourceID']);
+    unset ($_POST['Unit1BID']);
+    unset ($_POST['Unit2ID']);
+    unset ($_POST['FactorUnitID']);
+    unset ($_POST['Factor']);
+    unset ($_POST['Uncertainty']);
+  }  
+}      
+?>
+
+
+<h3 class="text-white text-center mt-3">Edytuj współczynnik (cechę numeryczną) dla zasobu (surowca)</h3>
 
 <div class="text-center">
     <form method="post" action="">
-    <?php
-        require "db_update_functions.php";
-        require "db_functions.php";
-        if($_GET)
-        {
-            $resource_id = $_GET["ResourceID"];
-            $factor_id = $_GET["FactorID"];
-            $resource_unit_1_a_id = $_GET["ResourceUnit1ID"];
-            $temp_source_id = $_GET["TempSourceID"];
-        }
-        open_database();
-            $resource = read_table("resources.resources");;
-            $factor_names = read_table("factors.factor_names");
-            $source = read_table("factors.sources");
-            $unit = read_table("units.units");
-        close_database();
-
-        list($factor, $uncertainty) = get_factor($resource_id, $factor_id, $resource_unit_1_a_id);
-    ?>
         <div class="container">
             <div class="row mt-5">
                     <div class="col-md-3"></div>
@@ -55,7 +112,7 @@ include ('navbar.php');
                 </div>
                 
                 <div class="col-md-3">
-                    <select name="ResourceID2" class="form-control">
+                    <select name="ResourceID2" class="form-control" >
                         <?php
                         foreach($resource as $row_number => $row){
                             if($row['resource_id'] == $resource_id){
@@ -78,7 +135,7 @@ include ('navbar.php');
 
         <p class="text-white-50 font-italic mt-5">
             Należy uwzględnić wszystkie obowiązkowe współczynniki dla wszystkich kategorii, do których należy powyższy zasób.
-            <br>Oto lista tych współczynników: ... tu wyświetlić listę ....
+            <br>
         </p>
 
         <div class="container">
@@ -188,7 +245,7 @@ include ('navbar.php');
                         <option value="0">(nie dotyczy)</option>
                         <?php
                         foreach($unit as $row_number => $row){
-                            if($row['unit_id'] == $resource_unit_1_a_id){
+                            if($row['unit_id'] == $resource_unit_2_a_id){
                                 ?>
                                 <option selected="selected" value="<?=$row['unit_id'];?>"><?=$row['unit'];?></option>
                                 <?php
@@ -219,7 +276,7 @@ include ('navbar.php');
                     <select name="FactorUnitID" class="form-control">
                         <?php
                         foreach($unit as $row_number => $row){
-                            if($row['unit_id'] == $resource_unit_1_a_id){
+                            if($row['unit_id'] == $temp_factor_unit_id){
                                 ?>
                                 <option selected="selected" value="<?=$row['unit_id'];?>"><?=$row['unit'];?></option>
                                 <?php
@@ -261,7 +318,8 @@ include ('navbar.php');
                 </div>
                 
                 <div class="col-md-3">
-                    <input type="number" step="0.0000000001" min="0.0000000001" max="100" name="Uncertainty" class="form-control" value="<?=$uncertainty?>" required/>
+                    <input type="number" step="0.0000000001" min="0" max="100" name="Uncertainty" class="form-control" value="<?=$uncertainty?>" />
+                    <small class="text-white">Jeśli nie jesteś pewny, zostaw puste pole</small>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -291,33 +349,16 @@ include ('navbar.php');
     </div>
 
 <?php
-    if($_POST)
-    {
-        $resource_id2 = $_POST["ResourceID2"];
-        $factor_id2 = $_POST["FactorID2"];
-        $source_id = $_POST["SourceID"];
-        $resource_unit_1_b_id = $_POST["Unit1BID"];
-        $resource_unit_2_id = $_POST["Unit2ID"];
-        $factor_unit_id = $_POST["FactorUnitID"];
-        $factor = $_POST["Factor"];
-        $uncertainty = $_POST["Uncertainty"];
 
-        open_database();
-            if ($uncertainty == "")
-                $result = update_factor($resource_id, $factor_id, $resource_id2, $factor_id2,
-                                        $source_id, $resource_unit_1_a_id, $resource_unit_1_b_id,
-                                        $resource_unit_2_id, $factor_unit_id, $factor);
-            else
-                $result = update_factor($resource_id, $factor_id, $resource_id2, $factor_id2,
-                                        $source_id, $resource_unit_1_a_id, $resource_unit_1_b_id,
-                                        $resource_unit_2_id, $factor_unit_id, $factor, $uncertainty);
-        close_database();
-
-        if (!$result)
-            echo "<br><h4><center><span style='color: red; background-color: black'></span>Z nieznanego powodu nie mogę zmienić współczynnika!</center></h4>";
-        else
-            echo "<br><h4><center><span style='color: white; background-color: black'>Współczynnik zmieniony!</span></center></h4>";
-    }
+if ($result)
+  echo "<br><h4><center><span style='color: white; background-color: black'>Współczynnik zmieniony.</span></center></h4>";
+else
+{
+  if($_POST)
+  {
+    echo "<br><h4><center><span style='color: red; background-color: black'>Nie mogę zmienić współczynnika!</span></center></h4>";
+  }
+}
 ?>
 </div>
 </body>
