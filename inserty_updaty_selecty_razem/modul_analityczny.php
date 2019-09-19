@@ -60,60 +60,8 @@ include('navbar.php');
 				echo "Rozpoczynam Obliczanie !";
 								echo "<br>";				echo "<br>";
 						$jsondata = file_get_contents($fileName);		
-						//$jsondata = file_get_contents("biostrateg_modul_analityczny_in.json");
 						$json = json_decode($jsondata, true);
-						/*
-					$output = "<ul>";
-					$output .= "<h3>Surowce energetyczne</h3>";
-					echo "<table border = \"2\" cellpading= \"10\" cellspacing=\"5\" color = \"black\">";
-					echo"<tr>";
-					echo"<th>";
-					foreach($json['energy_resources'] as $energy_resources)
-					{
-						$output .= "<li>Numer GUS:  ".$energy_resources['gus']."</li>";
-						$output .= "<li>Nazwa:  ".$energy_resources['name']."</li>";
-						$output .= "<li>Jednostka:  ".$energy_resources['unit']."</li>";
-						$output .= "<li>Ilość:  ".$energy_resources['ammount']."</li>";
-					}
-						$output .= "</ul>";
-							echo"<th>";
-						echo $output;
-						
-					echo"</th>";
-					echo"<th>";
-					
-					$output2 = "<ul>";
-					$output2 .= "<h3>Surowce</h3>";
-					foreach($json['resources'] as $resources)
-					{
-						$output2 .= "<li>ID surowca:  ".$resources['res_id']."</li>";
-						$output2 .= "<li>Nazwa:  ".$resources['name']."</li>";
-						$output2 .= "<li>Jednostka:  ".$resources['unit']."</li>";
-						$output2 .= "<li>Ilość:  ".$resources['ammount']."</li>";
-					}
-						$output2 .= "</ul>";
-						echo $output2;
-					echo"</th>";
-					echo"<th>";	
-					$output2 = "<ul>";
-					$output2 .= "<h3>Produkty</h3>";
-					foreach($json['products'] as $products)
-					{
-						$output2 .= "<li>ID produktu:  ".$products['prod_id']."</li>";
-						$output2 .= "<li>Nazwa:  ".$products['name']."</li>";
-						$output2 .= "<li>Jednostka:  ".$products['unit']."</li>";
-						$output2 .= "<li>Ilość:  ".$products['ammount']."</li>";
-						$output2 .= "<li>Surowiec:  ".$products['resources']."</li>";
-						$output2 .= "<li>Surowiec Energetyczny:  ".$products['energy_resources']."</li>";		
-					}
-						$output2 .= "</ul>";
-						echo $output2;
-					echo"</th>";
-						
-					echo"</table></tr>";
-					*/
-					//koniec wyswietlania jsona in
-					
+
 					require "db_functions.php";
 					open_database();
 					 
@@ -124,11 +72,11 @@ include('navbar.php');
 						
 					foreach ($json['products'] as $products) {
 						$amountOfAllProds = $amountOfAllProds + $products['ammount'];
-						$numres = sizeof($products['resources']); //ilosc produktow
+						$numres = sizeof($products['resources']);
 						for ($r = 0; $r < $numres; $r++) {
 							$resId[] = $products['resources'][$r];
 						}
-						$numeres = sizeof($products['energy_resources']); //ilosc produktow
+						$numeres = sizeof($products['energy_resources']);
 						for ($e = 0; $e < $numeres; $e++) {
 							$eresId[] = $products['energy_resources'][$e];
 						}
@@ -143,8 +91,7 @@ include('navbar.php');
 							$moreThanOneERes[] = $key;
 					}
 					 
-					$fp = fopen('out.json', 'w'); /////////////////////////////////
-					//$output2 .= "___________________________";
+					$fp = fopen('out.json', 'w');
 					 
 					 
 					 
@@ -153,19 +100,19 @@ include('navbar.php');
 						$output2 .= "<li  class=\"list-group-item font-weight-bold text-dark\">Nazwa:  " . $products['name'] . "</li>";
 						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $products['unit'] . "</li>";
 						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">Ilość:  " . $products['ammount'] . "</li>";
-						$proc = ($products['ammount'] / $amountOfAllProds) * 100; //procenty kazdego
+						$proc = ($products['ammount'] / $amountOfAllProds) * 100;
 					 
 						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">" . round($proc, 2) . " % / products</li>";
-						$num = sizeof($products['resources']); //ilosc produktow
+						$num = sizeof($products['resources']);
 					 
 					 
 					 
 						for ($i = $num-1; $i >=0; $i--) {
-							$id = $products['resources'][$i]; //id dla ktorego sprawdzamy i liczymy
+							$id = $products['resources'][$i];
 							unset($products['resources'][$i]);
 						   
 							foreach ($json['resources'] as $resources) {
-								if ($id == $resources['res_id']) //szukamy tego samego id jak nie to olewamy, nie liczymy, glupie max ale dziala
+								if ($id == $resources['res_id'])
 								{
 					 
 									$output2 .= "<br>" . $flag . "</br>";
@@ -176,9 +123,9 @@ include('navbar.php');
 									$unit = get_ratio($resources['unit']);
 									if (in_array($id, $moreThanOneRes)) {
 										$proc = $proc / 100;
-										$eqco2OfRes[$nu] = round(($resources['ammount'] * $proc) * $unit * 1, 2); //dodac co2
+										$eqco2OfRes[$nu] = round(($resources['ammount'] * $proc) * $unit * 1, 2);
 									} else
-										$eqco2OfRes[$nu] = $resources['ammount'] * $unit * 1; //dodac co2
+										$eqco2OfRes[$nu] = $resources['ammount'] * $unit * 1;
 									$resources['eqco2']=$eqco2OfRes[$nu];
 									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">eqco2:  " . $eqco2OfRes[$nu] . "</li>";
 									$total_eqco2 += $eqco2OfRes[$nu];
@@ -201,13 +148,13 @@ include('navbar.php');
 							$output2 .= "<br></br>";
 						}
 					 
-						$num2 = sizeof($products['energy_resources']); //ilosc produktow
+						$num2 = sizeof($products['energy_resources']);
 						for ($i = $num2-1; $i >= 0; $i--) {
-							$id = $products['energy_resources'][$i]; //id dla ktorego sprawdzamy i liczymy
+							$id = $products['energy_resources'][$i];
 							unset($products['energy_resources'][$i]);
 					 
 							foreach ($json['energy_resources'] as $energy_resources) {
-								if ($id == $energy_resources['gus']) //szukamy tego samego id jak nie to olewamy, nie liczymy
+								if ($id == $energy_resources['gus'])
 								{
 					 
 									$output2 .= "<br></br>";
@@ -218,9 +165,9 @@ include('navbar.php');
 									$unit = get_ratio($energy_resources['unit']);
 									if (in_array($id, $moreThanOneERes)) {
 										$proc = $proc / 100;
-										$eqco2OfRes[$nu] = round(($resources['ammount'] * $proc) * $unit * 1, 2); //dodac co2
+										$eqco2OfRes[$nu] = round(($resources['ammount'] * $proc) * $unit * 1, 2);
 									} else
-										$eqco2OfRes[$nu] = $energy_resources['ammount'] * $unit * 1; //dodac co2
+										$eqco2OfRes[$nu] = $energy_resources['ammount'] * $unit * 1;
 									$energy_resources['eqco2']=$eqco2OfRes[$nu];
 					 
 									$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">eqco2:  " . $eqco2OfRes[$nu] . "</li>";
@@ -240,7 +187,6 @@ include('navbar.php');
 						$products['eqco2_per_unit']= $eqco2_per_unit ;
 					 
 						$output2 .= "<li class=\"list-group-item font-weight-bold text-dark\">eqco2_per_unit:  " . round($eqco2_per_unit, 2) . "</li>";
-					   // $output2 .= "<br>___________________________</br>";
 					 
 					 
 						$pro[] = $a;
@@ -248,15 +194,14 @@ include('navbar.php');
 					 
 						$total_eqco2 = 0;
 					}
-					 
-					//print_r($pro);
+
 					 
 					fwrite($fp, json_encode($json,JSON_UNESCAPED_UNICODE));
 
 					echo $output2;
 
 					exit();
-					foreach ($json['energy_resources'] as $energy_resources) { ////////////////////////////////////////
+					foreach ($json['energy_resources'] as $energy_resources) {
 						$energy[] = array(
 							'energy_resources' => array(
 								'gus' => $energy_resources['gus'],
@@ -266,7 +211,7 @@ include('navbar.php');
 							)
 						);
 					 
-						fwrite($fp, json_encode($energy, JSON_UNESCAPED_UNICODE)); //////////////////////////////
+						fwrite($fp, json_encode($energy, JSON_UNESCAPED_UNICODE));
 						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Numer GUS:  " . $energy_resources['gus'] . "</li>";
 						$output .= "<li  class=\"list-group-item font-weight-bold text-dark \">Nazwa:  " . $energy_resources['name'] . "</li>";
 						$output .= "<li class=\"list-group-item font-weight-bold text-dark\">Jednostka:  " . $energy_resources['unit'] . "</li>";
